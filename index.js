@@ -9,9 +9,9 @@ app.use(cors());
 app.use(express.json());
 
 app.get('/', (req, res) => {
-    res.send('Smart village server is Running');
- });
- 
- app.listen(port, () => {
-    console.log('server is running in localhost:', port)
- })
+  res.send('Smart village server is Running');
+});
+
+app.listen(port, () => {
+  console.log('server is running in localhost:', port);
+});
