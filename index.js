@@ -9,7 +9,7 @@ app.use(cors());
 app.use(express.json());
 
 app.get('/', (req, res) => {
-    res.send('Smart village server is Running');
+    res.send('Smart village server Running');
  });
  
  app.listen(port, () => {
