@@ -2,17 +2,17 @@ const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
 require('dotenv').config();
-const usersHandaler = require('./handaler/usersHandaler');
-
-const port = process.env.PORT || 5000;
+const usersHandaler = require('./handler/usersHandler');
+const errorHandaler = require('./handler/errorHandler');
 
 // midlewire
 const app = express();
 app.use(cors());
 app.use(express.json());
+app.use(express.static('build'));
 
 // connection with mongoDB Atlas
-const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0.rolps.mongodb.net/myFirstDatabase?retryWrites=true&w=majoritymongodb+srv://<username>:<password>@cluster0.rolps.mongodb.net/myFirstDatabase?retryWrites=true&w=majority`;
+const uri = process.env.MONGODB_URI;
 
 mongoose
   .connect(uri, {
@@ -30,11 +30,10 @@ async function run() {
 
 run().catch(console.dir);
 
-// server running
-app.get('/', (req, res) => {
-  res.send('Digital village server is Running');
-});
+// use error handaler
+app.use(errorHandaler);
 
+const port = process.env.PORT;
 // app listner
 app.listen(port, () => {
   console.log('server is running in localhost:', port);
