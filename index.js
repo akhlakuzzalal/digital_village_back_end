@@ -5,8 +5,6 @@ require('dotenv').config();
 const usersHandaler = require('./handaler/usersHandaler');
 const errorHandaler = require('./handaler/errorHandaler');
 
-const port = process.env.PORT || 5000;
-
 // midlewire
 const app = express();
 app.use(cors());
@@ -31,14 +29,10 @@ async function run() {
 }
 run().catch(console.dir);
 
-// server running
-app.get('/', (req, res) => {
-  res.send('Digital village server is Running');
-});
-
 // use error handaler
 app.use(errorHandaler);
 
+const port = process.env.PORT;
 // app listner
 app.listen(port, () => {
   console.log('server is running in localhost:', port);
