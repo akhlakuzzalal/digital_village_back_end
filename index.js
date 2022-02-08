@@ -2,8 +2,8 @@ const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
 require('dotenv').config();
-const usersHandaler = require('./handaler/usersHandaler');
-const errorHandaler = require('./handaler/errorHandaler');
+const usersHandaler = require('./handler/usersHandler');
+const errorHandaler = require('./handler/errorHandler');
 
 // midlewire
 const app = express();
