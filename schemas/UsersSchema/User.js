@@ -7,7 +7,7 @@ const userSchema = new mongoose.Schema(
       required: true,
     },
     dateOfBirth: {
-      type: Date,
+      type: String,
       required: true,
     },
     yearlyIncome: {
@@ -21,7 +21,7 @@ const userSchema = new mongoose.Schema(
     meritialStatus: {
       type: String,
       required: true,
-      enum: ['married','unmarried'],
+      enum: ['married', 'unmarried'],
     },
 
     religion: String,
@@ -31,4 +31,10 @@ const userSchema = new mongoose.Schema(
   { versionKey: false }
 );
 
-module.exports = mongoose.model("User",userSchema);
+userSchema.methods = {
+  findMarriedUser: function () {
+    mongoose.model('User').find({ meritialStatus: 'unmarried' });
+  },
+};
+
+module.exports = mongoose.model('User', userSchema);

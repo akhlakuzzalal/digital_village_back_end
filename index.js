@@ -3,6 +3,7 @@ const mongoose = require('mongoose');
 const cors = require('cors');
 require('dotenv').config();
 const usersHandaler = require('./handaler/usersHandaler');
+const errorHandaler = require('./handaler/errorHandaler');
 
 const port = process.env.PORT || 5000;
 
@@ -12,7 +13,7 @@ app.use(cors());
 app.use(express.json());
 
 // connection with mongoDB Atlas
-const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0.rolps.mongodb.net/myFirstDatabase?retryWrites=true&w=majoritymongodb+srv://<username>:<password>@cluster0.rolps.mongodb.net/myFirstDatabase?retryWrites=true&w=majority`;
+const uri = process.env.MONGODB_URI;
 
 mongoose
   .connect(uri, {
@@ -33,6 +34,9 @@ run().catch(console.dir);
 app.get('/', (req, res) => {
   res.send('Digital village server is Running');
 });
+
+// use error handaler
+app.use(errorHandaler);
 
 // app listner
 app.listen(port, () => {
