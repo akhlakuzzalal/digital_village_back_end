@@ -1,23 +1,28 @@
 {
   "files": {
-    "main.css": "/static/css/main.85c557c9.css",
-    "main.js": "/static/js/main.1c8ae8c6.js",
+    "main.css": "/static/css/main.e3dc241e.css",
+    "main.js": "/static/js/main.fffc1257.js",
     "static/js/787.31f30833.chunk.js": "/static/js/787.31f30833.chunk.js",
-    "static/media/homeIcon.png": "/static/media/homeIcon.5fb08d501c9c3d1a7b7d.png",
+    "static/media/development.png": "/static/media/development.9acd07b04c49c9cf4a4e.png",
+    "static/media/education.png": "/static/media/education.03a436156380706a203a.png",
+    "static/media/medical.png": "/static/media/medical.2e95ef7180cdaa6a1c9f.png",
+    "static/media/market.png": "/static/media/market.ae07571215ac74e4f5af.png",
     "static/media/donate.png": "/static/media/donate.9235e29e7adca3b09676.png",
     "static/media/healthcare.png": "/static/media/healthcare.6f194f2ebff68f80b595.png",
     "static/media/banner.png": "/static/media/banner.b82873d480a3512b3139.png",
     "static/media/learn2.png": "/static/media/learn2.1548e6b383314d260026.png",
+    "static/media/bg.png": "/static/media/bg.09838344eb84d73098e4.png",
     "static/media/event.png": "/static/media/event.6a532e097c3856cded41.png",
     "static/media/learn.png": "/static/media/learn.3cd8fbc5375a6adb9c35.png",
+    "static/media/Capture.PNG": "/static/media/Capture.3a49f4f0e5ff2efeb0b8.PNG",
     "static/media/review.jpg": "/static/media/review.058940d89f72b3a25ee0.jpg",
     "index.html": "/index.html",
-    "main.85c557c9.css.map": "/static/css/main.85c557c9.css.map",
-    "main.1c8ae8c6.js.map": "/static/js/main.1c8ae8c6.js.map",
+    "main.e3dc241e.css.map": "/static/css/main.e3dc241e.css.map",
+    "main.fffc1257.js.map": "/static/js/main.fffc1257.js.map",
     "787.31f30833.chunk.js.map": "/static/js/787.31f30833.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.85c557c9.css",
-    "static/js/main.1c8ae8c6.js"
+    "static/css/main.e3dc241e.css",
+    "static/js/main.fffc1257.js"
   ]
 }
