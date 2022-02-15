@@ -32,6 +32,13 @@ run().catch(console.dir);
 // use error handaler
 app.use(errorHandaler);
 
+// use this after route not before route
+if (process.env.NODE_ENV === 'production') {
+  app.use(express.static(resolve(process.cwd(), 'client/build')));
+  app.get('*', (req, res) => {
+    res.sendFile(resolve(process.cwd(), 'client/build/index.html'));
+  });
+}
 const port = process.env.PORT;
 // app listner
 app.listen(port, () => {
