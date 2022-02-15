@@ -1,4 +1,5 @@
 const express = require('express');
+const path = require('path');
 const mongoose = require('mongoose');
 const cors = require('cors');
 require('dotenv').config();
@@ -9,7 +10,10 @@ const errorHandaler = require('./handler/errorHandler');
 const app = express();
 app.use(cors());
 app.use(express.json());
-app.use(express.static('build'));
+// app.use(express.static('build'));
+
+// Serve the static files from the React app
+app.use(express.static(path.join(__dirname, '/build')));
 
 // connection with mongoDB Atlas
 const uri = process.env.MONGODB_URI;
@@ -32,6 +36,11 @@ run().catch(console.dir);
 
 // use error handaler
 app.use(errorHandaler);
+
+// Handles any requests that don't match the ones above
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname + '/build/index.html'));
+});
 
 const port = process.env.PORT;
 // app listner
