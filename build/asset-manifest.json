@@ -1,28 +1,31 @@
 {
   "files": {
-    "main.css": "/static/css/main.d94d3c7e.css",
-    "main.js": "/static/js/main.fffc1257.js",
+    "main.css": "/static/css/main.1e443994.css",
+    "main.js": "/static/js/main.f5fdd96f.js",
     "static/js/787.31f30833.chunk.js": "/static/js/787.31f30833.chunk.js",
-    "static/media/development.png": "/static/media/development.9acd07b04c49c9cf4a4e.png",
-    "static/media/education.png": "/static/media/education.03a436156380706a203a.png",
-    "static/media/medical.png": "/static/media/medical.2e95ef7180cdaa6a1c9f.png",
+    "static/media/development.png": "/static/media/development.3cd8fbc5375a6adb9c35.png",
+    "static/media/education.png": "/static/media/education.1548e6b383314d260026.png",
+    "static/media/school.jpg": "/static/media/school.c797dfb1d04e303c5bad.jpg",
+    "static/media/medical.png": "/static/media/medical.6f194f2ebff68f80b595.png",
     "static/media/market.png": "/static/media/market.ae07571215ac74e4f5af.png",
     "static/media/donate.png": "/static/media/donate.9235e29e7adca3b09676.png",
-    "static/media/healthcare.png": "/static/media/healthcare.6f194f2ebff68f80b595.png",
     "static/media/banner.png": "/static/media/banner.b82873d480a3512b3139.png",
-    "static/media/learn2.png": "/static/media/learn2.1548e6b383314d260026.png",
-    "static/media/bg.png": "/static/media/bg.09838344eb84d73098e4.png",
+    "static/media/study.png": "/static/media/study.09838344eb84d73098e4.png",
+    "static/media/notification.png": "/static/media/notification.3e02ab34746eba3640c1.png",
     "static/media/event.png": "/static/media/event.6a532e097c3856cded41.png",
-    "static/media/learn.png": "/static/media/learn.3cd8fbc5375a6adb9c35.png",
-    "static/media/Capture.PNG": "/static/media/Capture.3a49f4f0e5ff2efeb0b8.PNG",
+    "static/media/events.png": "/static/media/events.6a532e097c3856cded41.png",
+    "static/media/calendar.png": "/static/media/calendar.3a49f4f0e5ff2efeb0b8.png",
     "static/media/review.jpg": "/static/media/review.058940d89f72b3a25ee0.jpg",
+    "static/media/icon-03.svg": "/static/media/icon-03.57348b905bd75e2820b84672017685dd.svg",
+    "static/media/icon-01.svg": "/static/media/icon-01.dbdf9f48860d30ce4990002aa3aabd25.svg",
+    "static/media/icon-02.svg": "/static/media/icon-02.01d99a9f30b2ca97c1fc228b67922207.svg",
     "index.html": "/index.html",
-    "main.d94d3c7e.css.map": "/static/css/main.d94d3c7e.css.map",
-    "main.fffc1257.js.map": "/static/js/main.fffc1257.js.map",
+    "main.1e443994.css.map": "/static/css/main.1e443994.css.map",
+    "main.f5fdd96f.js.map": "/static/js/main.f5fdd96f.js.map",
     "787.31f30833.chunk.js.map": "/static/js/787.31f30833.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.d94d3c7e.css",
-    "static/js/main.fffc1257.js"
+    "static/css/main.1e443994.css",
+    "static/js/main.f5fdd96f.js"
   ]
 }
