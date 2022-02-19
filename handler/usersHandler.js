@@ -3,9 +3,10 @@ const router = express.Router();
 const User = require('../schemas/UsersSchema/User');
 const hashPassword = require('../utilities/hashPassword');
 const jwt = require('jsonwebtoken');
+const validateUser = require('../middlewares/validateUser');
 
 // get all users who are applied for village member
-router.get('/allusers', async (req, res, next) => {
+router.get('/allusers', validateUser, async (req, res, next) => {
   try {
     const allusers = await User.find();
     res.json(allusers);
