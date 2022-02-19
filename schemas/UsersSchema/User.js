@@ -26,6 +26,7 @@ const userSchema = new mongoose.Schema(
     },
     religion: String,
     photo: String,
+    refreshToken: String,
   },
   { versionKey: false }
 );

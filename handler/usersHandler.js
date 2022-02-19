@@ -36,7 +36,7 @@ router.post('/register', async (req, res, next) => {
 });
 
 // LOGIN A USER
-router.post('/login', async (req, res, next) => {
+router.put('/login', async (req, res, next) => {
   try {
     const user = await User.find({ email: req.body.email });
     if (user && user.length > 0) {
@@ -44,21 +44,40 @@ router.post('/login', async (req, res, next) => {
         hashPassword(req.body.password) === user[0].password;
 
       if (isValidPassword) {
-        const token = jwt.sign(
+        const accessToken = jwt.sign(
           {
             userId: user[0]._id,
             name: user[0].name,
             dateOfBirth: user[0].dateOfBirth,
           },
-          process.env.JWT_SECRET,
+          process.env.ACCESS_TOKEN_SECRET,
           {
-            expiresIn: '2h',
+            expiresIn: '30s',
           }
         );
 
+        const refreshToken = jwt.sign(
+          {
+            userId: user[0]._id,
+            name: user[0].name,
+            dateOfBirth: user[0].dateOfBirth,
+          },
+          process.env.REFRESH_TOKEN_SECRET,
+          {
+            expiresIn: '1d',
+          }
+        );
+
+        await User.updateOne({ ...user, refreshToken });
+
+        res.cookie('jwt', refreshToken, {
+          httpOnly: true,
+          maxAge: 24 * 60 * 60 * 1000,
+        });
+
         res.json({
-          token,
-          message: 'Successfully logged in',
+          accessToken,
+          message: `${user.name} Successfully logged in`,
         });
       } else {
         res.status(401).json({
