@@ -10,10 +10,7 @@ const errorHandaler = require('./handler/errorHandler');
 const app = express();
 app.use(cors());
 app.use(express.json());
-// app.use(express.static('build'));
-
-// Serve the static files from the React app
-app.use(express.static(path.join(__dirname, '/build')));
+app.use(express.static(path.join(__dirname, '/build'))); // Serve the static files from the React app
 
 // connection with mongoDB Atlas
 const uri = process.env.MONGODB_URI;
@@ -43,6 +40,7 @@ app.get('*', (req, res) => {
 });
 
 const port = process.env.PORT;
+
 // app listner
 app.listen(port, () => {
   console.log('server is running in localhost:', port);
