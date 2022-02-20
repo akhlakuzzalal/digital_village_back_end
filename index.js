@@ -4,9 +4,8 @@ const mongoose = require('mongoose');
 const cookieParser = require('cookie-parser');
 const cors = require('cors');
 require('dotenv').config();
-const usersHandler = require('./handler/usersHandler');
 const authRoutes = require('./routes/authRoutes');
-const errorHandaler = require('./handler/errorHandler');
+const errorController = require('./controller/errorController');
 
 // midlewire
 const app = express();
@@ -28,7 +27,6 @@ mongoose
 
 async function run() {
   try {
-    app.use('/user', usersHandler);
     app.use('/auth', authRoutes);
   } catch (error) {
     console.log(error.message);
@@ -38,7 +36,7 @@ async function run() {
 run().catch(console.dir);
 
 // use error handaler
-app.use(errorHandaler);
+app.use(errorController);
 
 // Handles any requests that don't match the ones above
 app.get('*', (req, res) => {
