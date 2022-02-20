@@ -59,6 +59,8 @@ const handleLogin = async (req, res, next) => {
 
         res.cookie('jwt', refreshToken, {
           httpOnly: true,
+          sameSite: 'None',
+          secure: true,
           maxAge: 24 * 60 * 60 * 1000,
         });
 
@@ -90,22 +92,22 @@ const getAllUsers = async (req, res, next) => {
   }
 };
 
+// USE THE REFRESH TOKEN TO GENERATE A NEW ACCESS TOKEN
 const useRefreshToken = async (req, res, next) => {
-  console.log('entered');
   const cookies = req.cookies;
 
   if (!cookies?.jwt) return res.sendStatus(401);
   const refreshToken = cookies.jwt;
 
   try {
-    const user = User.find({ refreshToken });
+    const user = await User.find({ refreshToken });
 
     // verify jwt
     jwt.verify(
       refreshToken,
       process.env.REFRESH_TOKEN_SECRET,
       (err, decoded) => {
-        if (err || user.name !== decoded.name) return res.sendStatus(403);
+        if (err || user[0].name !== decoded.name) return res.sendStatus(403);
         const accessToken = jwt.sign(
           {
             name: decoded.name,
@@ -123,9 +125,41 @@ const useRefreshToken = async (req, res, next) => {
   }
 };
 
+const handleLogout = async (req, res, next) => {
+  const cookies = req.cookies;
+
+  if (!cookies?.jwt) return res.sendStatus(204);
+  const refreshToken = cookies.jwt;
+
+  try {
+    const user = await User.find({ refreshToken });
+    if (!user[0].name) {
+      res.clearCookie('jwt', {
+        httpOnly: true,
+        sameSite: 'None',
+        secure: true,
+      });
+      return res.sendStatus(403);
+    }
+
+    // delete the existing refresh token of the logged out user
+    await User.findOneAndUpdate({ refreshToken }, { refreshToken: '' });
+
+    res.clearCookie('jwt', {
+      httpOnly: true,
+      secure: true,
+    });
+
+    res.sendStatus(204);
+  } catch (error) {
+    next(error);
+  }
+};
+
 module.exports = {
   handleLogin,
   handleRegister,
+  handleLogout,
   getAllUsers,
   useRefreshToken,
 };
