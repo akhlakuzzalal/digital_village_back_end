@@ -1,5 +1,4 @@
 const express = require('express');
-const router = express.Router();
 const User = require('../schemas/UsersSchema/User');
 const hashPassword = require('../utilities/hashPassword');
 const jwt = require('jsonwebtoken');
@@ -9,10 +8,14 @@ const handleRegister = async (req, res, next) => {
   // secure the user password
   const hashedPassword = hashPassword(req.body.password);
 
-  const user = { ...req.body, password: hashedPassword };
+  const newUser = {
+    ...req.body,
+    roles: { User: 1000 },
+    password: hashedPassword,
+  };
 
   try {
-    await User.insertMany(user);
+    await User.insertMany(newUser);
     res.json({
       message: 'User have signed up successfully',
     });
@@ -31,11 +34,15 @@ const handleLogin = async (req, res, next) => {
         hashPassword(req.body.password) === user[0].password;
 
       if (isValidPassword) {
+        const roles = Object.values(user[0].roles);
         const accessToken = jwt.sign(
           {
-            userId: user[0]._id,
-            name: user[0].name,
-            dateOfBirth: user[0].dateOfBirth,
+            UserInfo: {
+              userId: user[0]._id,
+              roles,
+              name: user[0].name,
+              dateOfBirth: user[0].dateOfBirth,
+            },
           },
           process.env.ACCESS_TOKEN_SECRET,
           {
@@ -55,7 +62,7 @@ const handleLogin = async (req, res, next) => {
           }
         );
 
-        await User.updateOne({ ...user, refreshToken });
+        await User.updateOne({ ...user, refreshToken }); // logged in user will get refresh token
 
         res.cookie('jwt', refreshToken, {
           httpOnly: true,
@@ -108,15 +115,25 @@ const useRefreshToken = async (req, res, next) => {
       process.env.REFRESH_TOKEN_SECRET,
       (err, decoded) => {
         if (err || user[0].name !== decoded.name) return res.sendStatus(403);
+        const roles = Object.values(user[0].roles);
         const accessToken = jwt.sign(
           {
-            name: decoded.name,
-            userId: decoded._id,
-            dateOfBirth: decoded.dateOfBirth,
+            UserInfo: {
+              userId: user[0]._id,
+              roles,
+              name: user[0].name,
+              dateOfBirth: user[0].dateOfBirth,
+            },
           },
           process.env.ACCESS_TOKEN_SECRET,
           { expiresIn: '30s' }
         );
+        res.cookie('jwt', refreshToken, {
+          httpOnly: true,
+          sameSite: 'None',
+          // secure: true, // hide when testing
+          maxAge: 24 * 60 * 60 * 1000,
+        });
         res.json({ accessToken });
       }
     );

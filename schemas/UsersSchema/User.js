@@ -25,6 +25,7 @@ const userSchema = new mongoose.Schema(
       enum: ['married', 'unmarried'],
     },
     religion: String,
+    roles: Object,
     photo: String,
     refreshToken: String,
   },
