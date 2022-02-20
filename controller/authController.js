@@ -34,7 +34,9 @@ const handleLogin = async (req, res, next) => {
         hashPassword(req.body.password) === user[0].password;
 
       if (isValidPassword) {
-        const roles = Object.values(user[0].roles);
+        const roles = Object.values(user[0].roles).filter(Boolean);
+
+        // GIVE THE USE AN ACCESS TOKEN
         const accessToken = jwt.sign(
           {
             UserInfo: {
@@ -67,12 +69,13 @@ const handleLogin = async (req, res, next) => {
         res.cookie('jwt', refreshToken, {
           httpOnly: true,
           sameSite: 'None',
-          secure: true,
+          // secure: true,
           maxAge: 24 * 60 * 60 * 1000,
         });
 
         res.json({
           accessToken,
+          roles,
           message: `Successfully logged in`,
         });
       } else {
@@ -102,9 +105,11 @@ const getAllUsers = async (req, res, next) => {
 // USE THE REFRESH TOKEN TO GENERATE A NEW ACCESS TOKEN
 const useRefreshToken = async (req, res, next) => {
   const cookies = req.cookies;
-
+  console.log(cookies);
   if (!cookies?.jwt) return res.sendStatus(401);
   const refreshToken = cookies.jwt;
+
+  console.log(refreshToken);
 
   try {
     const user = await User.find({ refreshToken });
