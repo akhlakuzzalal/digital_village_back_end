@@ -1,15 +1,18 @@
 const express = require('express');
 const path = require('path');
 const mongoose = require('mongoose');
+const cookieParser = require('cookie-parser');
 const cors = require('cors');
 require('dotenv').config();
-const usersHandaler = require('./handler/usersHandler');
+const usersHandler = require('./handler/usersHandler');
+const authRoutes = require('./routes/authRoutes');
 const errorHandaler = require('./handler/errorHandler');
 
 // midlewire
 const app = express();
 app.use(cors());
 app.use(express.json());
+app.use(cookieParser()); // for cookies
 app.use(express.static(path.join(__dirname, '/build'))); // Serve the static files from the React app
 
 // connection with mongoDB Atlas
@@ -25,8 +28,11 @@ mongoose
 
 async function run() {
   try {
-    app.use('/user', usersHandaler);
-  } catch (error) {}
+    app.use('/user', usersHandler);
+    app.use('/auth', authRoutes);
+  } catch (error) {
+    console.log(error.message);
+  }
 }
 
 run().catch(console.dir);

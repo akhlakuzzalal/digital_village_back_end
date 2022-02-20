@@ -5,16 +5,6 @@ const hashPassword = require('../utilities/hashPassword');
 const jwt = require('jsonwebtoken');
 const validateUser = require('../middlewares/validateUser');
 
-// get all users who are applied for village member
-router.get('/allusers', validateUser, async (req, res, next) => {
-  try {
-    const allusers = await User.find();
-    res.json(allusers);
-  } catch (error) {
-    next(error);
-  }
-});
-
 // get a single users
 router.get('/:id', async (req, res, next) => {});
 
@@ -90,6 +80,55 @@ router.post('/login', async (req, res, next) => {
         error: 'Authentication failed!',
       });
     }
+  } catch (error) {
+    next(error);
+  }
+});
+
+// USE THE REFRESH TOKEN
+router.get('/refresh', async (req, res, next) => {
+  console.log('enter');
+  const cookies = req.cookies;
+
+  if (!cookies?.jwt) return res.sendStatus(401);
+  const refreshToken = cookies.jwt;
+
+  try {
+    const user = User.find({ refreshToken });
+
+    // verify jwt
+    jwt.verify(
+      refreshToken,
+      process.env.REFRESH_TOKEN_SECRET,
+      (err, decoded) => {
+        if (err || user.name !== decoded.name) return res.sendStatus(403);
+        const accessToken = jwt.sign(
+          {
+            name: decoded.name,
+            userId: decoded._id,
+            dateOfBirth: decoded.dateOfBirth,
+          },
+          process.env.ACCESS_TOKEN_SECRET,
+          { expiresIn: '30s' }
+        );
+        res.json({ accessToken });
+      }
+    );
+  } catch (error) {
+    next(error);
+  }
+});
+
+router.get('/get', (req, res) => {
+  console.log('route hitted');
+  res.json({ message: 'hello' });
+});
+
+// get all users who are applied for village member
+router.get('/allusers', validateUser, async (req, res, next) => {
+  try {
+    const allusers = await User.find();
+    res.json(allusers);
   } catch (error) {
     next(error);
   }
