@@ -36,9 +36,10 @@ router.post('/register', async (req, res, next) => {
 });
 
 // LOGIN A USER
-router.put('/login', async (req, res, next) => {
+router.post('/login', async (req, res, next) => {
   try {
     const user = await User.find({ email: req.body.email });
+
     if (user && user.length > 0) {
       const isValidPassword =
         hashPassword(req.body.password) === user[0].password;
@@ -77,7 +78,7 @@ router.put('/login', async (req, res, next) => {
 
         res.json({
           accessToken,
-          message: `${user.name} Successfully logged in`,
+          message: `Successfully logged in`,
         });
       } else {
         res.status(401).json({
