@@ -1,4 +1,3 @@
-const express = require('express');
 const User = require('../schemas/UsersSchema/User');
 const hashPassword = require('../utilities/hashPassword');
 const jwt = require('jsonwebtoken');
@@ -69,8 +68,14 @@ const handleLogin = async (req, res, next) => {
         res.cookie('jwt', refreshToken, {
           httpOnly: true,
           sameSite: 'None',
-          // secure: true,
+          secure: true,
           maxAge: 24 * 60 * 60 * 1000,
+        });
+
+        console.log({
+          accessToken,
+          roles,
+          message: `Successfully logged in`,
         });
 
         res.json({
