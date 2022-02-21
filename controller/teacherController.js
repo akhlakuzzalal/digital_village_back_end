@@ -11,5 +11,4 @@ const handleUploadVideo = async (req, res, next) => {
 
 module.exports = {
   handleUploadVideo,
-  handleGetFile,
 };

@@ -68,14 +68,8 @@ const handleLogin = async (req, res, next) => {
         res.cookie('jwt', refreshToken, {
           httpOnly: true,
           sameSite: 'None',
-          secure: true,
+          // secure: true,
           maxAge: 24 * 60 * 60 * 1000,
-        });
-
-        console.log({
-          accessToken,
-          roles,
-          message: `Successfully logged in`,
         });
 
         res.json({
@@ -110,7 +104,7 @@ const getAllUsers = async (req, res, next) => {
 // USE THE REFRESH TOKEN TO GENERATE A NEW ACCESS TOKEN
 const useRefreshToken = async (req, res, next) => {
   const cookies = req.cookies;
-  console.log(cookies);
+  console.log('error here');
   if (!cookies?.jwt) return res.sendStatus(401);
   const refreshToken = cookies.jwt;
 
@@ -164,7 +158,7 @@ const handleLogout = async (req, res, next) => {
       res.clearCookie('jwt', {
         httpOnly: true,
         sameSite: 'None',
-        secure: true,
+        // secure: true,
       });
       return res.sendStatus(403);
     }
@@ -174,7 +168,7 @@ const handleLogout = async (req, res, next) => {
 
     res.clearCookie('jwt', {
       httpOnly: true,
-      secure: true,
+      // secure: true,
     });
 
     res.sendStatus(204);
