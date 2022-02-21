@@ -6,27 +6,28 @@ const userSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+    email: {
+      type: String,
+      required: true,
+    },
     dateOfBirth: {
       type: String,
       required: true,
     },
-    yearlyIncome: {
+    password: {
       type: String,
       required: true,
     },
-    employmentStatus: {
-      type: String,
-      required: true,
-    },
+    yearlyIncome: String,
+    employmentStatus: String,
     meritialStatus: {
       type: String,
-      required: true,
       enum: ['married', 'unmarried'],
     },
-
     religion: String,
-
+    roles: Object,
     photo: String,
+    refreshToken: String,
   },
   { versionKey: false }
 );
