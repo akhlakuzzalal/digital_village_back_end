@@ -2,10 +2,8 @@ const mongoose = require('mongoose');
 
 const videoSchema = new mongoose.Schema(
   {
-    name: {
-      type: String,
-      required: true,
-    },
+    title: String,
+    email: String,
     videoName: {
       type: String,
       required: true,
