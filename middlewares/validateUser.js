@@ -6,23 +6,19 @@ const validateUser = (req, res, next) => {
   try {
     const token = authorization.split(' ')[1];
 
-    const decoded = jwt.verify(
-      token,
-      process.env.ACCESS_TOKEN_SECRET,
-      (err, decoded) => {
-        if (err) {
-          return res.sendStatus(403); // invalid token
-        }
-        const {
-          UserInfo: { userId, name, dateOfBirth, roles },
-        } = decoded;
-        req.name = name;
-        req.userId = userId;
-        req.roles = roles;
-        req.dateOfBirth = dateOfBirth;
-        next();
+    jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, decoded) => {
+      if (err) {
+        return res.sendStatus(403); // invalid token
       }
-    );
+      const {
+        UserInfo: { userId, name, dateOfBirth, roles },
+      } = decoded;
+      req.name = name;
+      req.userId = userId;
+      req.roles = roles;
+      req.dateOfBirth = dateOfBirth;
+      next();
+    });
   } catch (error) {
     next(error);
   }

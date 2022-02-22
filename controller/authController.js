@@ -1,4 +1,3 @@
-const express = require('express');
 const User = require('../schemas/UsersSchema/User');
 const hashPassword = require('../utilities/hashPassword');
 const jwt = require('jsonwebtoken');
@@ -105,7 +104,7 @@ const getAllUsers = async (req, res, next) => {
 // USE THE REFRESH TOKEN TO GENERATE A NEW ACCESS TOKEN
 const useRefreshToken = async (req, res, next) => {
   const cookies = req.cookies;
-  console.log(cookies);
+  console.log('error here');
   if (!cookies?.jwt) return res.sendStatus(401);
   const refreshToken = cookies.jwt;
 
@@ -159,7 +158,7 @@ const handleLogout = async (req, res, next) => {
       res.clearCookie('jwt', {
         httpOnly: true,
         sameSite: 'None',
-        secure: true,
+        // secure: true,
       });
       return res.sendStatus(403);
     }
@@ -169,7 +168,7 @@ const handleLogout = async (req, res, next) => {
 
     res.clearCookie('jwt', {
       httpOnly: true,
-      secure: true,
+      // secure: true,
     });
 
     res.sendStatus(204);
