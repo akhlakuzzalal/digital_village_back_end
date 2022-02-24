@@ -8,6 +8,7 @@ const credentials = require('./middlewares/credentials');
 const corsOptions = require('./config/corsOptions');
 const authRoutes = require('./routes/authRoutes');
 const teacherRoutes = require('./routes/teacherRoutes');
+const paymentRoute = require('./routes/paymentRoute');
 const errorhandler = require('./middlewares/errorhandler');
 
 // midlewire
@@ -34,6 +35,7 @@ async function run() {
   try {
     app.use('/auth', authRoutes);
     app.use('/teacher', teacherRoutes);
+    app.use('/payment', paymentRoute);
   } catch (error) {
     console.log(error.message);
   }
