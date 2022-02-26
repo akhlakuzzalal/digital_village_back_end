@@ -1,7 +1,9 @@
 const jwt = require('jsonwebtoken');
 
 const validateUser = (req, res, next) => {
+  console.log(req.headers);
   const { authorization } = req.headers;
+  console.log(authorization);
   if (!authorization?.startsWith('Bearer ')) return res.sendStatus(401);
   try {
     const token = authorization.split(' ')[1];
@@ -11,12 +13,11 @@ const validateUser = (req, res, next) => {
         return res.sendStatus(403); // invalid token
       }
       const {
-        UserInfo: { userId, name, dateOfBirth, roles },
+        UserInfo: { name, dateOfBirth, roles },
       } = decoded;
       req.name = name;
-      req.userId = userId;
-      req.roles = roles;
       req.dateOfBirth = dateOfBirth;
+      req.roles = roles;
       next();
     });
   } catch (error) {

@@ -7,16 +7,57 @@ const handleRegister = async (req, res, next) => {
   // secure the user password
   const hashedPassword = hashPassword(req.body.password);
 
+  const roles = { User: 1000 };
+
+  // GIVE THE USE A REFRESH TOKEN
+  const refreshToken = jwt.sign(
+    {
+      name: req.body.name,
+      dateOfBirth: req.body.dateOfBirth,
+      roles,
+    },
+    process.env.REFRESH_TOKEN_SECRET,
+    {
+      expiresIn: '30d',
+    }
+  );
+
   const newUser = {
     ...req.body,
-    roles: { User: 1000 },
+    roles,
     password: hashedPassword,
+    refreshToken,
   };
 
   try {
     await User.insertMany(newUser);
+
+    // GIVE THE USER AN ACCESS TOKEN
+    const accessToken = jwt.sign(
+      {
+        UserInfo: {
+          name: req.body.name,
+          dateOfBirth: req.body.dateOfBirth,
+          roles,
+        },
+      },
+      process.env.ACCESS_TOKEN_SECRET,
+      {
+        expiresIn: '30m',
+      }
+    );
+
+    res.cookie('jwt', refreshToken, {
+      httpOnly: true,
+      sameSite: 'None',
+      // secure: true,
+      maxAge: 24 * 60 * 60 * 1000,
+    });
+
     res.json({
-      message: 'User have signed up successfully',
+      accessToken,
+      roles,
+      message: `${newUser.name}, You have signed up successfully`,
     });
   } catch (error) {
     next(error);
@@ -27,6 +68,7 @@ const handleRegister = async (req, res, next) => {
 const handleLogin = async (req, res, next) => {
   try {
     const user = await User.find({ email: req.body.email });
+    console.log(user);
 
     if (user && user.length > 0) {
       const isValidPassword =
@@ -39,23 +81,23 @@ const handleLogin = async (req, res, next) => {
         const accessToken = jwt.sign(
           {
             UserInfo: {
-              userId: user[0]._id,
-              roles,
               name: user[0].name,
               dateOfBirth: user[0].dateOfBirth,
+              roles,
             },
           },
           process.env.ACCESS_TOKEN_SECRET,
           {
-            expiresIn: '1h',
+            expiresIn: '30m',
           }
         );
 
+        // GIVE THE USE A REFRESH TOKEN
         const refreshToken = jwt.sign(
           {
-            userId: user[0]._id,
             name: user[0].name,
             dateOfBirth: user[0].dateOfBirth,
+            roles,
           },
           process.env.REFRESH_TOKEN_SECRET,
           {
@@ -78,7 +120,7 @@ const handleLogin = async (req, res, next) => {
           message: `Successfully logged in`,
         });
       } else {
-        res.status(401).json({
+        res.sendStatus(401).json({
           error: 'Authentication failed!',
         });
       }
@@ -88,6 +130,7 @@ const handleLogin = async (req, res, next) => {
       });
     }
   } catch (error) {
+    console.log('error here');
     next(error);
   }
 };
@@ -104,7 +147,7 @@ const getAllUsers = async (req, res, next) => {
 // USE THE REFRESH TOKEN TO GENERATE A NEW ACCESS TOKEN
 const useRefreshToken = async (req, res, next) => {
   const cookies = req.cookies;
-  console.log('error here');
+  console.log(cookies);
   if (!cookies?.jwt) return res.sendStatus(401);
   const refreshToken = cookies.jwt;
 
@@ -131,7 +174,7 @@ const useRefreshToken = async (req, res, next) => {
             },
           },
           process.env.ACCESS_TOKEN_SECRET,
-          { expiresIn: '1h' }
+          { expiresIn: '30m' }
         );
 
         // SEND THE COOKIE
@@ -167,7 +210,7 @@ const handleLogout = async (req, res, next) => {
       return res.sendStatus(403);
     }
 
-    // delete the existing refresh token of the logged out user
+    // DELETE THE PREVIOUS REFRESH TOKEN OF USER
     await User.findOneAndUpdate({ refreshToken }, { refreshToken: '' });
 
     res.clearCookie('jwt', {
@@ -175,7 +218,9 @@ const handleLogout = async (req, res, next) => {
       // secure: true,
     });
 
-    res.sendStatus(204);
+    res.sendStatus(204).json({
+      message: 'Successfully logged out',
+    });
   } catch (error) {
     next(error);
   }
