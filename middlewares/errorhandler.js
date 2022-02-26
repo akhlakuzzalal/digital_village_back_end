@@ -1,6 +1,6 @@
 const multer = require('multer');
 
-const errorControler = (error, request, response, next) => {
+const errorhandler = (error, request, response, next) => {
   // handling error (needs more update)
   if (error.name === 'CastError')
     return response.status(400).json({ error: 'malformated id' });
@@ -13,4 +13,4 @@ const errorControler = (error, request, response, next) => {
   next(error);
 };
 
-module.exports = errorControler;
+module.exports = errorhandler;

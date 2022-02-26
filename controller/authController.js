@@ -68,7 +68,6 @@ const handleRegister = async (req, res, next) => {
 const handleLogin = async (req, res, next) => {
   try {
     const user = await User.find({ email: req.body.email });
-    console.log(user);
 
     if (user && user.length > 0) {
       const isValidPassword =
@@ -135,6 +134,41 @@ const handleLogin = async (req, res, next) => {
   }
 };
 
+const handleLogout = async (req, res, next) => {
+  const cookies = req.cookies;
+
+  if (!cookies?.jwt) return res.status(204).json({ message: 'logout failed' });
+  const refreshToken = cookies.jwt;
+  try {
+    const user = await User.find({ refreshToken });
+
+    if (!user[0].name) {
+      res.clearCookie('jwt', {
+        httpOnly: true,
+        sameSite: 'None',
+        // secure: true,
+      });
+      return res.status(403).json({
+        message: 'logout failed',
+      });
+    }
+
+    // DELETE THE PREVIOUS REFRESH TOKEN OF USER
+    await User.findOneAndUpdate({ refreshToken }, { refreshToken: '' });
+
+    res.clearCookie('jwt', {
+      httpOnly: true,
+      // secure: true,
+    });
+
+    res.status(204).json({
+      message: 'Successfully logged out',
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+
 const getAllUsers = async (req, res, next) => {
   try {
     const allusers = await User.find();
@@ -188,39 +222,6 @@ const useRefreshToken = async (req, res, next) => {
         res.json({ accessToken });
       }
     );
-  } catch (error) {
-    next(error);
-  }
-};
-
-const handleLogout = async (req, res, next) => {
-  const cookies = req.cookies;
-
-  if (!cookies?.jwt) return res.sendStatus(204);
-  const refreshToken = cookies.jwt;
-
-  try {
-    const user = await User.find({ refreshToken });
-    if (!user[0].name) {
-      res.clearCookie('jwt', {
-        httpOnly: true,
-        sameSite: 'None',
-        // secure: true,
-      });
-      return res.sendStatus(403);
-    }
-
-    // DELETE THE PREVIOUS REFRESH TOKEN OF USER
-    await User.findOneAndUpdate({ refreshToken }, { refreshToken: '' });
-
-    res.clearCookie('jwt', {
-      httpOnly: true,
-      // secure: true,
-    });
-
-    res.sendStatus(204).json({
-      message: 'Successfully logged out',
-    });
   } catch (error) {
     next(error);
   }
