@@ -47,7 +47,7 @@ const handleLogin = async (req, res, next) => {
           },
           process.env.ACCESS_TOKEN_SECRET,
           {
-            expiresIn: '30s',
+            expiresIn: '1h',
           }
         );
 
@@ -59,7 +59,7 @@ const handleLogin = async (req, res, next) => {
           },
           process.env.REFRESH_TOKEN_SECRET,
           {
-            expiresIn: '1d',
+            expiresIn: '30d',
           }
         );
 
@@ -120,6 +120,7 @@ const useRefreshToken = async (req, res, next) => {
       (err, decoded) => {
         if (err || user[0].name !== decoded.name) return res.sendStatus(403);
         const roles = Object.values(user[0].roles);
+
         const accessToken = jwt.sign(
           {
             UserInfo: {
@@ -130,14 +131,17 @@ const useRefreshToken = async (req, res, next) => {
             },
           },
           process.env.ACCESS_TOKEN_SECRET,
-          { expiresIn: '30s' }
+          { expiresIn: '1h' }
         );
+
+        // SEND THE COOKIE
         res.cookie('jwt', refreshToken, {
           httpOnly: true,
           sameSite: 'None',
           // secure: true, // hide when testing
           maxAge: 24 * 60 * 60 * 1000,
         });
+
         res.json({ accessToken });
       }
     );
