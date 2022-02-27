@@ -34,10 +34,20 @@ const getUpcomingEvents = async (req, res, next) => {
     next(error);
   }
 };
+const handleDeleteEvents = async (req, res, next) => {
+  try {
+    const { id } = req.query;
+    const response = await Event.deleteOne({ id });
+    res.json(response);
+  } catch (error) {
+    next(error);
+  }
+};
 
 module.exports = {
   handleAddEvent,
   getAllEvent,
   getArchivedEvents,
   getUpcomingEvents,
+  handleDeleteEvents,
 };
