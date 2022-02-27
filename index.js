@@ -8,6 +8,7 @@ const credentials = require('./middlewares/credentials');
 const corsOptions = require('./config/corsOptions');
 const authRoutes = require('./routes/authRoutes');
 const teacherRoutes = require('./routes/teacherRoutes');
+const paymentRoute = require('./routes/paymentRoute');
 const notificationRoutes = require('./routes/NotificationRoutes');
 const errorhandler = require('./middlewares/errorhandler');
 
@@ -36,6 +37,7 @@ async function run() {
     app.use('/auth', authRoutes);
     app.use('/teacher', teacherRoutes);
     app.use('/notification', notificationRoutes);
+    app.use('/payment', paymentRoute);
   } catch (error) {
     console.log(error.message);
   }
