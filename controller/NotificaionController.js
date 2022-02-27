@@ -1,6 +1,7 @@
 const Notification = require('../schemas/NotificationsSchema/NotificationsSchema');
 
 const getAllNotification = async (req, res, next) => {
+  console.log('api hitted');
   try {
     const response = await Notification.find();
     res.json(response);
