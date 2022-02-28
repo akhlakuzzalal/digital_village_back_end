@@ -1,0 +1,11 @@
+[
+  {
+    "id": 1,
+    "name": "MD A ",
+    "fatherName": "MD B ",
+    "MotherName": "Mrs. C ",
+    "birthDate": "02/02/1976",
+    "nidNo": "12345678",
+    "place": "abc"
+  }
+]
