@@ -50,7 +50,7 @@ const handleRegister = async (req, res, next) => {
     res.cookie('jwt', refreshToken, {
       httpOnly: true,
       sameSite: 'None',
-      // secure: true,
+      secure: true,
       maxAge: 24 * 60 * 60 * 1000,
     });
 
@@ -68,7 +68,7 @@ const handleRegister = async (req, res, next) => {
 const handleLogin = async (req, res, next) => {
   try {
     const user = await User.find({ email: req.body.email });
-
+    console.log(user);
     if (user && user.length > 0) {
       const isValidPassword =
         hashPassword(req.body.password) === user[0].password;
@@ -109,7 +109,7 @@ const handleLogin = async (req, res, next) => {
         res.cookie('jwt', refreshToken, {
           httpOnly: true,
           sameSite: 'None',
-          // secure: true,
+          secure: true,
           maxAge: 24 * 60 * 60 * 1000,
         });
 
@@ -129,37 +129,41 @@ const handleLogin = async (req, res, next) => {
       });
     }
   } catch (error) {
-    console.log('error here');
     next(error);
   }
 };
 
+// *********** the problem is it is finding just the first user that has refresh token and removes from it. same for other api as well ******//
 const handleLogout = async (req, res, next) => {
   const cookies = req.cookies;
-
+  console.log('step 1');
   if (!cookies?.jwt) return res.status(204).json({ message: 'logout failed' });
+  console.log('step 2');
   const refreshToken = cookies.jwt;
+
   try {
     const user = await User.find({ refreshToken });
-
+    console.log(user, 'working');
     if (!user[0].name) {
       res.clearCookie('jwt', {
         httpOnly: true,
         sameSite: 'None',
-        // secure: true,
+        secure: true,
       });
       return res.status(403).json({
         message: 'logout failed',
       });
     }
-
+    console.log('step 3', user);
     // DELETE THE PREVIOUS REFRESH TOKEN OF USER
     await User.findOneAndUpdate({ refreshToken }, { refreshToken: '' });
 
     res.clearCookie('jwt', {
       httpOnly: true,
-      // secure: true,
+      secure: true,
     });
+
+    console.log('step 4');
 
     res.status(204).json({
       message: 'Successfully logged out',
@@ -181,21 +185,23 @@ const getAllUsers = async (req, res, next) => {
 // USE THE REFRESH TOKEN TO GENERATE A NEW ACCESS TOKEN
 const useRefreshToken = async (req, res, next) => {
   const cookies = req.cookies;
-  console.log(cookies);
+
   if (!cookies?.jwt) return res.sendStatus(401);
   const refreshToken = cookies.jwt;
 
-  console.log(refreshToken);
+  const user = await User.find({ refreshToken });
+
+  if (!user && !(user.length > 0)) return res.sendStatus(403);
 
   try {
-    const user = await User.find({ refreshToken });
-
     // verify jwt
     jwt.verify(
       refreshToken,
       process.env.REFRESH_TOKEN_SECRET,
       (err, decoded) => {
+        console.log(err, user, decoded);
         if (err || user[0].name !== decoded.name) return res.sendStatus(403);
+
         const roles = Object.values(user[0].roles);
 
         const accessToken = jwt.sign(
@@ -215,11 +221,11 @@ const useRefreshToken = async (req, res, next) => {
         res.cookie('jwt', refreshToken, {
           httpOnly: true,
           sameSite: 'None',
-          // secure: true, // hide when testing
+          secure: true,
           maxAge: 24 * 60 * 60 * 1000,
         });
 
-        res.json({ accessToken });
+        res.json({ accessToken, roles });
       }
     );
   } catch (error) {
