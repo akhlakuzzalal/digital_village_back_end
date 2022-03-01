@@ -1,45 +1,53 @@
-const express = require('express');
-const mongoose = require('mongoose');
-const cors = require('cors');
 require('dotenv').config();
-const usersHandaler = require('./handaler/usersHandaler');
-
-const port = process.env.PORT || 5000;
+const express = require('express');
+const path = require('path');
+const mongoose = require('mongoose');
+const cookieParser = require('cookie-parser');
+const cors = require('cors');
+const credentials = require('./middlewares/credentials');
+const authRoutes = require('./routes/authRoutes');
+const errorhandler = require('./middlewares/errorhandler');
 
 // midlewire
 const app = express();
+app.use(credentials);
 app.use(cors());
 app.use(express.json());
+app.use(cookieParser()); // for cookies
+app.use(express.static(path.join(__dirname, '/build'))); // Serve the static files from the React app
 
 // connection with mongoDB Atlas
-const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0.rolps.mongodb.net/myFirstDatabase?retryWrites=true&w=majoritymongodb+srv://<username>:<password>@cluster0.rolps.mongodb.net/myFirstDatabase?retryWrites=true&w=majority`;
+const uri = process.env.MONGODB_URI;
 
-mongoose.connect(uri,{
-   useNewUrlParser: true,
-  useUnifiedTopology: true,
-})
-.then(()=>console.log('connection successfull'))
-.catch((err)=>console.log(err));
+mongoose
+  .connect(uri, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  })
+  .then(() => console.log('connection successfull'))
+  .catch((err) => console.log(err));
 
-async function run(){
-   try{
-
-      app.use('/user',usersHandaler);
-
-   }
-   catch(error){
-   }
+async function run() {
+  try {
+    app.use('/auth', authRoutes);
+  } catch (error) {
+    console.log(error.message);
+  }
 }
+
 run().catch(console.dir);
 
+// Handles any requests that don't match the ones above
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname + '/build/index.html'));
+});
 
-// server running
-app.get('/', (req, res) => {
-    res.send('Smart village server is Running');
- });
+// use error handaler
+app.use(errorhandler);
 
+const port = process.env.PORT;
 
 // app listner
- app.listen(port, () => {
-    console.log('server is running in localhost:', port)
- })
+app.listen(port, () => {
+  console.log('server is running in localhost:', port);
+});

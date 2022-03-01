@@ -1,0 +1,50 @@
+[
+  {
+    "id": "1",
+    "Title": "Notification1",
+    "date": "02/02/2022",
+    "description": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Illum ad sed, dolorum beatae asperiores corporis vero quam harum officia culpa delectus nulla pariatur possimus error quo voluptates provident. Molestiae, facilis. Nobis quam atque, culpa odit ad eaque quidem totam cumque. Obcaecati consectetur voluptate fugit aspernatur amet voluptatem harum consequatur minima!"
+  },
+  {
+    "id": "2",
+    "Title": "Notification2",
+    "date": "02/02/2022",
+    "description": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Illum ad sed, dolorum beatae asperiores corporis vero quam harum officia culpa delectus nulla pariatur possimus error quo voluptates provident. Molestiae, facilis. Nobis quam atque, culpa odit ad eaque quidem totam cumque. Obcaecati consectetur voluptate fugit aspernatur amet voluptatem harum consequatur minima!"
+  },
+  {
+    "id": "3",
+    "Title": "Notification3",
+    "date": "02/02/2022",
+    "description": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Illum ad sed, dolorum beatae asperiores corporis vero quam harum officia culpa delectus nulla pariatur possimus error quo voluptates provident. Molestiae, facilis. Nobis quam atque, culpa odit ad eaque quidem totam cumque. Obcaecati consectetur voluptate fugit aspernatur amet voluptatem harum consequatur minima!"
+  },
+  {
+    "id": "4",
+    "Title": "Notification4",
+    "date": "02/02/2022",
+    "description": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Illum ad sed, dolorum beatae asperiores corporis vero quam harum officia culpa delectus nulla pariatur possimus error quo voluptates provident. Molestiae, facilis. Nobis quam atque, culpa odit ad eaque quidem totam cumque. Obcaecati consectetur voluptate fugit aspernatur amet voluptatem harum consequatur minima!"
+  },
+  {
+    "id": "5",
+    "Title": "Notification5",
+    "date": "02/02/2022",
+    "description": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Illum ad sed, dolorum beatae asperiores corporis vero quam harum officia culpa delectus nulla pariatur possimus error quo voluptates provident. Molestiae, facilis. Nobis quam atque, culpa odit ad eaque quidem totam cumque. Obcaecati consectetur voluptate fugit aspernatur amet voluptatem harum consequatur minima!"
+  },
+  {
+    "id": "6",
+    "Title": "Notification6",
+    "date": "02/02/2022",
+    "description": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Illum ad sed, dolorum beatae asperiores corporis vero quam harum officia culpa delectus nulla pariatur possimus error quo voluptates provident. Molestiae, facilis. Nobis quam atque, culpa odit ad eaque quidem totam cumque. Obcaecati consectetur voluptate fugit aspernatur amet voluptatem harum consequatur minima!"
+  },
+  {
+    "id": "7",
+    "Title": "Notification7",
+    "date": "02/02/2022",
+    "description": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Illum ad sed, dolorum beatae asperiores corporis vero quam harum officia culpa delectus nulla pariatur possimus error quo voluptates provident. Molestiae, facilis. Nobis quam atque, culpa odit ad eaque quidem totam cumque. Obcaecati consectetur voluptate fugit aspernatur amet voluptatem harum consequatur minima!"
+  },
+  {
+    "id": "8",
+    "Title": "Notification8",
+    "date": "02/02/2022",
+    "description": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Illum ad sed, dolorum beatae asperiores corporis vero quam harum officia culpa delectus nulla pariatur possimus error quo voluptates provident. Molestiae, facilis. Nobis quam atque, culpa odit ad eaque quidem totam cumque. Obcaecati consectetur voluptate fugit aspernatur amet voluptatem harum consequatur minima!"
+  }
+]
