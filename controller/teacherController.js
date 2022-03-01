@@ -2,7 +2,6 @@ const Video = require('../schemas/VideosSchema/Video');
 const fileSizeFormatter = require('../utilities/fileSizeFormatter');
 
 const handleUploadVideo = async (req, res, next) => {
-  console.log(req.file);
   try {
     const file = {
       videoName: req.file.originalname,

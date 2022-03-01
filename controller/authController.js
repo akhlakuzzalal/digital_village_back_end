@@ -30,6 +30,40 @@ const handleRegister = async (req, res, next) => {
   };
 
   try {
+    const response = await User.find({ email: req.body.email });
+
+    // USER ALLREADY EXIST SO LOGIN HIM
+    if (response && response[0]?.name) {
+      // GIVE THE USE AN ACCESS TOKEN
+      const accessToken = jwt.sign(
+        {
+          UserInfo: {
+            name: response[0].name,
+            dateOfBirth: response[0].dateOfBirth,
+            roles,
+          },
+        },
+        process.env.ACCESS_TOKEN_SECRET,
+        {
+          expiresIn: '30m',
+        }
+      );
+      await User.updateOne({ ...response, refreshToken });
+
+      res.cookie('jwt', refreshToken, {
+        httpOnly: true,
+        sameSite: 'None',
+        secure: true,
+        maxAge: 24 * 60 * 60 * 1000,
+      });
+
+      return res.json({
+        accessToken,
+        roles,
+        message: `The user allready exist and logged in successfully`,
+      });
+    }
+
     await User.insertMany(newUser);
 
     // GIVE THE USER AN ACCESS TOKEN
@@ -68,7 +102,7 @@ const handleRegister = async (req, res, next) => {
 const handleLogin = async (req, res, next) => {
   try {
     const user = await User.find({ email: req.body.email });
-    console.log(user);
+
     if (user && user.length > 0) {
       const isValidPassword =
         hashPassword(req.body.password) === user[0].password;
@@ -133,17 +167,16 @@ const handleLogin = async (req, res, next) => {
   }
 };
 
-// *********** the problem is it is finding just the first user that has refresh token and removes from it. same for other api as well ******//
 const handleLogout = async (req, res, next) => {
   const cookies = req.cookies;
-  console.log('step 1');
+
   if (!cookies?.jwt) return res.status(204).json({ message: 'logout failed' });
-  console.log('step 2');
+
   const refreshToken = cookies.jwt;
 
   try {
     const user = await User.find({ refreshToken });
-    console.log(user, 'working');
+
     if (!user[0].name) {
       res.clearCookie('jwt', {
         httpOnly: true,
@@ -154,7 +187,7 @@ const handleLogout = async (req, res, next) => {
         message: 'logout failed',
       });
     }
-    console.log('step 3', user);
+
     // DELETE THE PREVIOUS REFRESH TOKEN OF USER
     await User.findOneAndUpdate({ refreshToken }, { refreshToken: '' });
 
@@ -162,8 +195,6 @@ const handleLogout = async (req, res, next) => {
       httpOnly: true,
       secure: true,
     });
-
-    console.log('step 4');
 
     res.status(204).json({
       message: 'Successfully logged out',
@@ -199,7 +230,6 @@ const useRefreshToken = async (req, res, next) => {
       refreshToken,
       process.env.REFRESH_TOKEN_SECRET,
       (err, decoded) => {
-        console.log(err, user, decoded);
         if (err || user[0].name !== decoded.name) return res.sendStatus(403);
 
         const roles = Object.values(user[0].roles);
