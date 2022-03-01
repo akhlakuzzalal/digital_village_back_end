@@ -7,7 +7,7 @@ const cors = require('cors');
 const credentials = require('./middlewares/credentials');
 const corsOptions = require('./config/corsOptions');
 const authRoutes = require('./routes/authRoutes');
-const teacherRoutes = require('./routes/teacherRoutes');
+const teacherRoutes = require('./routes/Education/teacherRoutes');
 const notificationRoutes = require('./routes/NotificationRoutes');
 const errorhandler = require('./middlewares/errorhandler');
 
