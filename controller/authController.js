@@ -1,4 +1,3 @@
-const express = require('express');
 const User = require('../schemas/UsersSchema/User');
 const hashPassword = require('../utilities/hashPassword');
 const jwt = require('jsonwebtoken');
@@ -8,16 +7,57 @@ const handleRegister = async (req, res, next) => {
   // secure the user password
   const hashedPassword = hashPassword(req.body.password);
 
+  const roles = { User: 1000 };
+
+  // GIVE THE USE A REFRESH TOKEN
+  const refreshToken = jwt.sign(
+    {
+      name: req.body.name,
+      dateOfBirth: req.body.dateOfBirth,
+      roles,
+    },
+    process.env.REFRESH_TOKEN_SECRET,
+    {
+      expiresIn: '30d',
+    }
+  );
+
   const newUser = {
     ...req.body,
-    roles: { User: 1000 },
+    roles,
     password: hashedPassword,
+    refreshToken,
   };
 
   try {
     await User.insertMany(newUser);
+
+    // GIVE THE USER AN ACCESS TOKEN
+    const accessToken = jwt.sign(
+      {
+        UserInfo: {
+          name: req.body.name,
+          dateOfBirth: req.body.dateOfBirth,
+          roles,
+        },
+      },
+      process.env.ACCESS_TOKEN_SECRET,
+      {
+        expiresIn: '30m',
+      }
+    );
+
+    res.cookie('jwt', refreshToken, {
+      httpOnly: true,
+      sameSite: 'None',
+      // secure: true,
+      maxAge: 24 * 60 * 60 * 1000,
+    });
+
     res.json({
-      message: 'User have signed up successfully',
+      accessToken,
+      roles,
+      message: `${newUser.name}, You have signed up successfully`,
     });
   } catch (error) {
     next(error);
@@ -40,27 +80,27 @@ const handleLogin = async (req, res, next) => {
         const accessToken = jwt.sign(
           {
             UserInfo: {
-              userId: user[0]._id,
-              roles,
               name: user[0].name,
               dateOfBirth: user[0].dateOfBirth,
+              roles,
             },
           },
           process.env.ACCESS_TOKEN_SECRET,
           {
-            expiresIn: '30s',
+            expiresIn: '30m',
           }
         );
 
+        // GIVE THE USE A REFRESH TOKEN
         const refreshToken = jwt.sign(
           {
-            userId: user[0]._id,
             name: user[0].name,
             dateOfBirth: user[0].dateOfBirth,
+            roles,
           },
           process.env.REFRESH_TOKEN_SECRET,
           {
-            expiresIn: '1d',
+            expiresIn: '30d',
           }
         );
 
@@ -79,7 +119,7 @@ const handleLogin = async (req, res, next) => {
           message: `Successfully logged in`,
         });
       } else {
-        res.status(401).json({
+        res.sendStatus(401).json({
           error: 'Authentication failed!',
         });
       }
@@ -88,6 +128,42 @@ const handleLogin = async (req, res, next) => {
         error: 'Authentication failed!',
       });
     }
+  } catch (error) {
+    console.log('error here');
+    next(error);
+  }
+};
+
+const handleLogout = async (req, res, next) => {
+  const cookies = req.cookies;
+
+  if (!cookies?.jwt) return res.status(204).json({ message: 'logout failed' });
+  const refreshToken = cookies.jwt;
+  try {
+    const user = await User.find({ refreshToken });
+
+    if (!user[0].name) {
+      res.clearCookie('jwt', {
+        httpOnly: true,
+        sameSite: 'None',
+        // secure: true,
+      });
+      return res.status(403).json({
+        message: 'logout failed',
+      });
+    }
+
+    // DELETE THE PREVIOUS REFRESH TOKEN OF USER
+    await User.findOneAndUpdate({ refreshToken }, { refreshToken: '' });
+
+    res.clearCookie('jwt', {
+      httpOnly: true,
+      // secure: true,
+    });
+
+    res.status(204).json({
+      message: 'Successfully logged out',
+    });
   } catch (error) {
     next(error);
   }
@@ -121,6 +197,7 @@ const useRefreshToken = async (req, res, next) => {
       (err, decoded) => {
         if (err || user[0].name !== decoded.name) return res.sendStatus(403);
         const roles = Object.values(user[0].roles);
+
         const accessToken = jwt.sign(
           {
             UserInfo: {
@@ -131,48 +208,20 @@ const useRefreshToken = async (req, res, next) => {
             },
           },
           process.env.ACCESS_TOKEN_SECRET,
-          { expiresIn: '30s' }
+          { expiresIn: '30m' }
         );
+
+        // SEND THE COOKIE
         res.cookie('jwt', refreshToken, {
           httpOnly: true,
           sameSite: 'None',
           // secure: true, // hide when testing
           maxAge: 24 * 60 * 60 * 1000,
         });
+
         res.json({ accessToken });
       }
     );
-  } catch (error) {
-    next(error);
-  }
-};
-
-const handleLogout = async (req, res, next) => {
-  const cookies = req.cookies;
-
-  if (!cookies?.jwt) return res.sendStatus(204);
-  const refreshToken = cookies.jwt;
-
-  try {
-    const user = await User.find({ refreshToken });
-    if (!user[0].name) {
-      res.clearCookie('jwt', {
-        httpOnly: true,
-        sameSite: 'None',
-        secure: true,
-      });
-      return res.sendStatus(403);
-    }
-
-    // delete the existing refresh token of the logged out user
-    await User.findOneAndUpdate({ refreshToken }, { refreshToken: '' });
-
-    res.clearCookie('jwt', {
-      httpOnly: true,
-      secure: true,
-    });
-
-    res.sendStatus(204);
   } catch (error) {
     next(error);
   }

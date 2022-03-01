@@ -16,5 +16,5 @@ router.post('/register', handleRegister);
 router.post('/login', handleLogin);
 router.get('/logout', handleLogout);
 router.get('/refresh', useRefreshToken);
-router.get('/allUsers', validateUser, verifyRoles(roles.Admin), getAllUsers);
+router.get('/allUsers', validateUser, getAllUsers);
 module.exports = router;
