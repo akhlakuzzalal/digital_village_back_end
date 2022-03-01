@@ -1,17 +1,50 @@
 const express = require('express');
+const path = require('path');
+const mongoose = require('mongoose');
 const cors = require('cors');
-require('dotenv').config;
+require('dotenv').config();
+const usersHandaler = require('./handler/usersHandler');
+const errorHandaler = require('./handler/errorHandler');
 
-const port = process.env.PORT || 5000;
-
+// midlewire
 const app = express();
 app.use(cors());
 app.use(express.json());
+app.use(express.static('build'));
 
-app.get('/', (req, res) => {
-  res.send('Smart village server is Running');
+// Serve the static files from the React app
+app.use(express.static(path.join(__dirname, '/build')));
+
+// connection with mongoDB Atlas
+// const uri = "mongodb+srv://digital-village:HVcG8fCzyilDkSrH@cluster0.l2jwh.mongodb.net/digital-village?retryWrites=true&w=majority";
+const uri = process.env.MONGODB_URI;
+
+mongoose
+  .connect(uri, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  })
+  .then(() => console.log('connection successfull'))
+  .catch((err) => console.log(err));
+
+async function run() {
+  try {
+    app.use('/user', usersHandaler);
+  } catch (error) {}
+}
+
+run().catch(console.dir);
+
+// use error handaler
+app.use(errorHandaler);
+
+// Handles any requests that don't match the ones above
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname + '/build/index.html'));
 });
 
+const port = process.env.PORT || 5000;
+// app listner
 app.listen(port, () => {
   console.log('server is running in localhost:', port);
 });
