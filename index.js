@@ -9,6 +9,7 @@ const corsOptions = require('./config/corsOptions');
 const authRoutes = require('./routes/authRoutes');
 const teacherRoutes = require('./routes/teacherRoutes');
 const notificationRoutes = require('./routes/NotificationRoutes');
+const appointmentRoutes = require('./routes/appointmentRoutes');
 const errorhandler = require('./middlewares/errorhandler');
 
 // midlewire
@@ -22,7 +23,7 @@ app.use('/uploads', express.static(path.join(__dirname, 'uploads'))); // Serve t
 
 // connection with mongoDB Atlas
 const uri = process.env.MONGODB_URI;
-
+console.log(uri);
 mongoose
   .connect(uri, {
     useNewUrlParser: true,
@@ -36,6 +37,7 @@ async function run() {
     app.use('/auth', authRoutes);
     app.use('/teacher', teacherRoutes);
     app.use('/notification', notificationRoutes);
+    app.use('/appointment', appointmentRoutes);
   } catch (error) {
     console.log(error.message);
   }
