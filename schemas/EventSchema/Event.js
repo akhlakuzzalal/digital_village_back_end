@@ -35,11 +35,9 @@ const eventSchema = new mongoose.Schema(
       required: true,
       enum: ['upcoming', 'archived'],
     },
-   
+    participants: Array,
   },
-  
+  { versionKey: false }
 );
-
-
 
 module.exports = mongoose.model('Event', eventSchema);
