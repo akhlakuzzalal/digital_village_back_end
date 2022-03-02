@@ -9,6 +9,7 @@ const corsOptions = require('./config/corsOptions');
 const authRoutes = require('./routes/authRoutes');
 const teacherRoutes = require('./routes/Education/teacherRoutes');
 const notificationRoutes = require('./routes/NotificationRoutes');
+const studentRoutes = require('./routes/Education/studentRoutes');
 const errorhandler = require('./middlewares/errorhandler');
 const { urlencoded } = require('express');
 
@@ -37,6 +38,7 @@ async function run() {
   try {
     app.use('/auth', authRoutes);
     app.use('/teacher', teacherRoutes);
+    app.use('/student', studentRoutes);
     app.use('/notification', notificationRoutes);
   } catch (error) {
     console.log(error.message);
