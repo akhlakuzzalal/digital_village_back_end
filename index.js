@@ -13,6 +13,7 @@ const eMarketRoutes = require('./routes/eMarketRoutes');
 const notificationRoutes = require('./routes/NotificationRoutes');
 const eventRoutes = require('./routes/eventRoutes');
 const reviewRoutes = require('./routes/reviewRoutes');
+const appointmentRoutes = require('./routes/appointmentRoutes');
 const errorhandler = require('./middlewares/errorhandler');
 
 // midlewire
@@ -26,7 +27,7 @@ app.use('/uploads', express.static(path.join(__dirname, 'uploads'))); // Serve t
 
 // connection with mongoDB Atlas
 const uri = process.env.MONGODB_URI;
-
+console.log(uri);
 mongoose
   .connect(uri, {
     useNewUrlParser: true,
@@ -45,6 +46,7 @@ async function run() {
     app.use('/review', reviewRoutes);
     app.use('/payment', paymentRoute);
     app.use('/emartket', eMarketRoutes);
+    app.use('/appointment', appointmentRoutes);
   } catch (error) {
     console.log(error.message);
   }
