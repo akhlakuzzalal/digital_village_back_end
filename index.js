@@ -8,6 +8,8 @@ const credentials = require('./middlewares/credentials');
 const corsOptions = require('./config/corsOptions');
 const authRoutes = require('./routes/authRoutes');
 const teacherRoutes = require('./routes/teacherRoutes');
+const paymentRoute = require('./routes/paymentRoute');
+const eMarketRoutes = require('./routes/eMarketRoutes');
 const notificationRoutes = require('./routes/NotificationRoutes');
 const eventRoutes = require('./routes/eventRoutes');
 const reviewRoutes = require('./routes/reviewRoutes');
@@ -33,6 +35,7 @@ mongoose
   .then(() => console.log('connection successfull'))
   .catch((err) => console.log(err));
 
+// All API
 async function run() {
   try {
     app.use('/auth', authRoutes);
@@ -40,6 +43,8 @@ async function run() {
     app.use('/notification', notificationRoutes);
     app.use('/event', eventRoutes);
     app.use('/review', reviewRoutes);
+    app.use('/payment', paymentRoute);
+    app.use('/emartket', eMarketRoutes);
   } catch (error) {
     console.log(error.message);
   }

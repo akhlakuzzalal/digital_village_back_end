@@ -1,3 +1,5 @@
+const stripe = require('stripe')(process.env.STRIPE_SECRETE);
+
 const handlePaymentStripe = async (req, res) => {
   const items = req.body;
   // Create a PaymentIntent with the order amount and currency
