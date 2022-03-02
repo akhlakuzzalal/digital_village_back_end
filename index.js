@@ -28,7 +28,6 @@ app.use('/uploads', express.static(path.join(__dirname, 'uploads'))); // Serve t
 
 // connection with mongoDB Atlas
 const uri = process.env.MONGODB_URI;
-console.log(uri);
 mongoose
   .connect(uri, {
     useNewUrlParser: true,
