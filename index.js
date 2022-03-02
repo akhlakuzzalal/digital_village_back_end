@@ -14,6 +14,7 @@ const notificationRoutes = require('./routes/NotificationRoutes');
 const eventRoutes = require('./routes/eventRoutes');
 const reviewRoutes = require('./routes/reviewRoutes');
 const appointmentRoutes = require('./routes/appointmentRoutes');
+const newsRoutes = require('./routes/NewsRoutes');
 const errorhandler = require('./middlewares/errorhandler');
 
 // midlewire
@@ -47,6 +48,7 @@ async function run() {
     app.use('/payment', paymentRoute);
     app.use('/emartket', eMarketRoutes);
     app.use('/appointment', appointmentRoutes);
+    app.use('/news', newsRoutes);
   } catch (error) {
     console.log(error.message);
   }
