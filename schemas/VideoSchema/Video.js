@@ -2,26 +2,29 @@ const mongoose = require('mongoose');
 
 const videoSchema = new mongoose.Schema(
   {
-    title: String,
-    email: String,
-    videoName: {
+    author: { type: String, required: true },
+    email: { type: String, required: true },
+    title: {
       type: String,
       required: true,
     },
-    videoPath: {
-      type: String,
-      required: true,
-    },
-    videoType: {
-      type: String,
-      required: true,
-    },
-    videoSize: {
-      type: String,
+    video: {
+      type: Object,
       required: true,
     },
     rating: String,
-    date: String,
+    isVerified: {
+      type: Boolean,
+      required: true,
+    },
+    tags: {
+      type: Array,
+      requried: true,
+    },
+    publishDate: {
+      type: String,
+      required: true,
+    },
   },
   { versionKey: false }
 );

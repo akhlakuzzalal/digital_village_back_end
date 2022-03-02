@@ -1,24 +1,8 @@
-const Video = require('../../schemas/VideosSchema/Video');
+const Video = require('../../schemas/VideoSchema/Video');
 const User = require('../../schemas/UsersSchema/User');
 const Teacher = require('../../schemas/Education/TeacherSchema/Teacher');
 const fileSizeFormatter = require('../../utilities/fileSizeFormatter');
-
-const handleUploadVideo = async (req, res, next) => {
-  try {
-    const file = {
-      videoName: req.file.originalname,
-      videoPath: req.file.path,
-      videoType: req.file.mimetype,
-      videoSize: fileSizeFormatter(req.file.size, 2), // 0.00
-    };
-    await Video.insertMany(file);
-    res.json({
-      message: 'file uploaded successfully',
-    });
-  } catch (error) {
-    next(error);
-  }
-};
+const Blog = require('../../schemas/Education/BlogSchema/Blog');
 
 const getallVideo = async (req, res, next) => {
   try {
@@ -46,8 +30,55 @@ const addTeacher = async (req, res, next) => {
   }
 };
 
+// publish blog
+const publishBlog = async (req, res, next) => {
+  const file = {
+    name: req.file.originalname,
+    path: req.file.path,
+    type: req.file.mimetype,
+    size: fileSizeFormatter(req.file.size, 2), // 0.00
+  };
+
+  const newBlog = {
+    ...JSON.parse(req.body.blog),
+    bannerImg: file,
+    isVerified: false,
+  };
+
+  try {
+    const response = await Blog.insertMany(newBlog);
+    res.json(response);
+  } catch (error) {
+    next(error);
+  }
+};
+
+// publish video
+const publishVideo = async (req, res, next) => {
+  const file = {
+    name: req.file.originalname,
+    path: req.file.path,
+    type: req.file.mimetype,
+    size: fileSizeFormatter(req.file.size, 2), // 0.00
+  };
+
+  const newVideo = {
+    ...JSON.parse(req.body.video),
+    video: file,
+    isVerified: false,
+  };
+
+  try {
+    const response = await Video.insertMany(newVideo);
+    res.json(response);
+  } catch (error) {
+    next(error);
+  }
+};
+
 module.exports = {
-  handleUploadVideo,
   getallVideo,
   addTeacher,
+  publishBlog,
+  publishVideo,
 };
