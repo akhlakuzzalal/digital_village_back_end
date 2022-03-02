@@ -1,3 +1,4 @@
+const { response } = require('express');
 const Appointment = require('../schemas/AppointmentSchema/AppointmentSchema');
 
 const handleAppointment = async (req, res, next) => {
