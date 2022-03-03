@@ -18,6 +18,7 @@ const reviewRoutes = require('./routes/reviewRoutes');
 const appointmentRoutes = require('./routes/appointmentRoutes');
 const newsRoutes = require('./routes/NewsRoutes');
 const developmentRoutes = require('./routes/DevelopmentRoutes');
+const donateRoutes = require('./routes/donateRoutes');
 const errorhandler = require('./middlewares/errorhandler');
 const vaccineRegistrationRoutes = require('./routes/vaccineRegistrationRoutes');
 const availableAppointmentRoutes = require('./routes/availableAppointmentRoutes');
@@ -32,6 +33,7 @@ app.use(express.static(path.join(__dirname, '/build'))); // Serve the static fil
 app.use('/uploads', express.static(path.join(__dirname, 'uploads'))); // Serve the static files from the React app
 
 // connection with mongoDB Atlas
+// const uri = "mongodb+srv://digital-village:HVcG8fCzyilDkSrH@cluster0.l2jwh.mongodb.net/digital-village?retryWrites=true&w=majority";
 const uri = process.env.MONGODB_URI;
 mongoose
   .connect(uri, {
@@ -56,9 +58,9 @@ async function run() {
     app.use('/appointment', appointmentRoutes);
     app.use('/news', newsRoutes);
     app.use('/development', developmentRoutes);
-
     app.use('/vaccine', vaccineRegistrationRoutes);
     app.use('/availableAppointment', availableAppointmentRoutes);
+    app.use('/donation', donateRoutes);
   } catch (error) {
     console.log(error.message);
   }
