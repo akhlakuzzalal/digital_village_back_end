@@ -1,0 +1,46 @@
+[
+  {
+    "id": 1,
+    "specialties": "Family Physicians",
+    "Description": "Any types of routine checkups and screening tests, give you flu and immunization shots, and manage diabetes and other ongoing medical conditions. ",
+    "cost": "$25",
+    "time": "10 am to 5 pm",
+    "space": 20
+  },
+
+  {
+    "id": 2,
+    "specialties": "Family Physicians",
+    "Description": "Any types of routine checkups and screening tests, give you flu and immunization shots, and manage diabetes and other ongoing medical conditions. ",
+    "cost": "$25",
+    "time": "10 am to 5 pm",
+    "space": 20
+  },
+
+  {
+    "id": 3,
+    "specialties": "Family Physicians",
+    "Description": "Any types of routine checkups and screening tests, give you flu and immunization shots, and manage diabetes and other ongoing medical conditions. ",
+    "cost": "$25",
+    "time": "10 am to 5 pm",
+    "space": 20
+  },
+
+  {
+    "id": 4,
+    "specialties": "Family Physicians",
+    "Description": "Any types of routine checkups and screening tests, give you flu and immunization shots, and manage diabetes and other ongoing medical conditions. ",
+    "cost": "$25",
+    "time": "10 am to 5 pm",
+    "space": 20
+  },
+
+  {
+    "id": 5,
+    "specialties": "Family Physicians",
+    "Description": "Any types of routine checkups and screening tests, give you flu and immunization shots, and manage diabetes and other ongoing medical conditions. ",
+    "cost": "$25",
+    "time": "10 am to 5 pm",
+    "space": 20
+  }
+]

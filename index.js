@@ -1,19 +1,25 @@
+require('dotenv').config();
 const express = require('express');
 const path = require('path');
 const mongoose = require('mongoose');
+const cookieParser = require('cookie-parser');
 const cors = require('cors');
-require('dotenv').config();
-const usersHandaler = require('./handler/usersHandler');
-const errorHandaler = require('./handler/errorHandler');
+const credentials = require('./middlewares/credentials');
+const corsOptions = require('./config/corsOptions');
+const authRoutes = require('./routes/authRoutes');
+const teacherRoutes = require('./routes/teacherRoutes');
+const notificationRoutes = require('./routes/NotificationRoutes');
+const donateRoutes = require('./routes/donateRoutes');
+const errorhandler = require('./middlewares/errorhandler');
 
 // midlewire
 const app = express();
-app.use(cors());
+app.use(credentials);
+app.use(cors(corsOptions));
 app.use(express.json());
-app.use(express.static('build'));
-
-// Serve the static files from the React app
-app.use(express.static(path.join(__dirname, '/build')));
+app.use(cookieParser()); // for cookies
+app.use(express.static(path.join(__dirname, '/build'))); // Serve the static files from the React app
+app.use('/uploads', express.static(path.join(__dirname, 'uploads'))); // Serve the static files from the React app
 
 // connection with mongoDB Atlas
 // const uri = "mongodb+srv://digital-village:HVcG8fCzyilDkSrH@cluster0.l2jwh.mongodb.net/digital-village?retryWrites=true&w=majority";
@@ -29,21 +35,27 @@ mongoose
 
 async function run() {
   try {
-    app.use('/user', usersHandaler);
-  } catch (error) {}
+    app.use('/auth', authRoutes);
+    app.use('/teacher', teacherRoutes);
+    app.use('/notification', notificationRoutes);
+    app.use('/donation', donateRoutes);
+  } catch (error) {
+    console.log(error.message);
+  }
 }
 
 run().catch(console.dir);
-
-// use error handaler
-app.use(errorHandaler);
 
 // Handles any requests that don't match the ones above
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname + '/build/index.html'));
 });
 
-const port = process.env.PORT || 5000;
+// use error handaler
+app.use(errorhandler);
+
+const port = process.env.PORT;
+
 // app listner
 app.listen(port, () => {
   console.log('server is running in localhost:', port);

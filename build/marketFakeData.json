@@ -1,0 +1,82 @@
+[
+  {
+    "id": 1,
+    "name": "Lux Soap",
+    "categorie": "soap",
+    "brand": "Lux",
+    "description": "LUX is a global brand developed by Unilever. Lux is marketed primarily in Brazil, India, Thailand and South Africa. ",
+    "img": "https://5.imimg.com/data5/SELLER/Default/2021/2/ZG/BY/ES/538095/lux-soft-touch-soap-bath-soap-500x500.png",
+    "price": 40,
+    "rating": 4
+  },
+  {
+    "id": 2,
+    "name": "Soyabean oil",
+    "categorie": "oil",
+    "brand": "Rupchada",
+    "description": "The soybean, soy bean, or soya bean is a species of legume native to East Asia, widely grown for its edible bean, which has numerous uses. Traditional unfermented food uses of soybeans include soy milk, from which tofu and tofu skin are made.",
+    "img": "https://images.othoba.com/images/thumbs/0053865_rupchanda-soyabean-oil-5ltr.jpeg",
+    "price": 560,
+    "rating": 5
+  },
+  {
+    "id": 3,
+    "name": "Tomato",
+    "categorie": "vegetable",
+    "brand": "No brand",
+    "description": "The tomato is the edible berry of the plant Solanum lycopersicum, commonly known as a tomato plant. The species originated in western South America and Central America. The Mexican Nahuatl word tomatl gave rise to the Spanish word tomate, from which the English word tomato derived.",
+    "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQU9FyKbIpeHR9YFEBeY_0pFM4G3L4lxJ_aXafJZ_H8_Gv7BdIh_E91sCMoDl9s7SdVlsc&usqp=CAU",
+    "price": 20,
+    "rating": 4
+  },
+  {
+    "id": 4,
+    "name": "Rice",
+    "categorie": "rice",
+    "brand": "No brand",
+    "description": "Rice is the seed of the grass species Oryza sativa or less commonly Oryza glaberrima. The name wild rice is usually used for species of the genera Zizania and Porteresia, both wild and domesticated, although the term may also be used for primitive or uncultivated varieties of Oryza.",
+    "img": "https://cdn.britannica.com/17/176517-050-6F2B774A/Pile-uncooked-rice-grains-Oryza-sativa.jpg",
+    "price": 60,
+    "rating": 4
+  },
+  {
+    "id": 5,
+    "name": "Meat Mashala",
+    "categorie": "spices",
+    "brand": "Radhuni",
+    "description": "A grape is a fruit, botanically a berry, of the deciduous woody vines of the flowering plant genus Vitis. Grapes can be eaten fresh as table grapes, used for making wine, jam, grape juice, jelly, grape seed extract, vinegar, and grape seed oil, or dried as raisins, currants and sultanas",
+    "img": "https://kachabazar.co.uk/wp-content/uploads/2020/03/RADHUNI-KALA-BHUNA-MASALA80GM.jpg",
+    "price": 80,
+    "rating": 5
+  },
+  {
+    "id": 6,
+    "name": "Grapes",
+    "categorie": "fruit",
+    "brand": "No brand",
+    "description": "A grape is a fruit, botanically a berry, of the deciduous woody vines of the flowering plant genus Vitis. Grapes can be eaten fresh as table grapes, used for making wine, jam, grape juice, jelly, grape seed extract, vinegar, and grape seed oil, or dried as raisins, currants and sultanas",
+    "img": "https://www.collinsdictionary.com/images/full/grape_229112122.jpg",
+    "price": 80,
+    "rating": 5
+  },
+  {
+    "id": 7,
+    "name": "Dove Soap",
+    "categorie": "soap",
+    "brand": "Dove",
+    "description": "Dove is an American personal care brand owned by the British multinational consumer goods company Unilever. Dove products are manufactured in countries around the world. The products are sold in more than 150 countries and are offered for both women, men, and babies",
+    "img": "https://www.dove.com/content/dam/unilever/dove/united_arab_emirates/static_not_in-use_products_/6281006481312-1618965-png.png",
+    "price": 80,
+    "rating": 5
+  },
+  {
+    "id": 8,
+    "name": "Soyabean Oil",
+    "categorie": "oil",
+    "brand": "Dove",
+    "description": "Dove is an American personal care brand owned by the British multinational consumer goods company Unilever. Dove products are manufactured in countries around the world. The products are sold in more than 150 countries and are offered for both women, men, and babies",
+    "img": "https://sebaaz.com/wp-content/uploads/2021/08/teer-soyabean-oil-5-ltr.jpg",
+    "price": 80,
+    "rating": 5
+  }
+]
