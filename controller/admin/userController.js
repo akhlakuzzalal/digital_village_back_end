@@ -11,7 +11,6 @@ const getAllUsers = async (req, res, next) => {
 
 const updateRoles = () => {
   try {
-    console.log('update the role of user');
   } catch (error) {
     next(error);
   }

@@ -19,6 +19,8 @@ const appointmentRoutes = require('./routes/appointmentRoutes');
 const newsRoutes = require('./routes/NewsRoutes');
 const developmentRoutes = require('./routes/DevelopmentRoutes');
 const errorhandler = require('./middlewares/errorhandler');
+const vaccineRegistrationRoutes = require('./routes/vaccineRegistrationRoutes');
+const availableAppointmentRoutes = require('./routes/availableAppointmentRoutes');
 
 // midlewares
 const app = express();
@@ -53,8 +55,10 @@ async function run() {
     app.use('/emartket', eMarketRoutes);
     app.use('/appointment', appointmentRoutes);
     app.use('/news', newsRoutes);
-    app.use('/development',developmentRoutes);
-    
+    app.use('/development', developmentRoutes);
+
+    app.use('/vaccine', vaccineRegistrationRoutes);
+    app.use('/availableAppointment', availableAppointmentRoutes);
   } catch (error) {
     console.log(error.message);
   }

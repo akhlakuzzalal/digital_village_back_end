@@ -1,16 +1,12 @@
-const News = require("../schemas/NewsSchema/NewsSchema");
-
+const News = require('../schemas/NewsSchema/NewsSchema');
 
 const getAllNews = async (req, res, next) => {
-    console.log("get request check")
   try {
     const response = await News.find({});
     res.json(response);
-    console.log(response)
   } catch (error) {
     next(error);
   }
-  
 };
 
 const handleAddNews = async (req, res, next) => {
@@ -26,7 +22,7 @@ const handleAddNews = async (req, res, next) => {
 const handleDeleteNews = async (req, res, next) => {
   try {
     const { id } = req.query;
-    const data={_id: id}
+    const data = { _id: id };
     const response = await News.deleteOne(data);
     res.json(response);
   } catch (error) {
@@ -34,9 +30,8 @@ const handleDeleteNews = async (req, res, next) => {
   }
 };
 
-
 module.exports = {
   getAllNews,
   handleAddNews,
-  handleDeleteNews
+  handleDeleteNews,
 };

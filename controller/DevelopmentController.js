@@ -1,16 +1,12 @@
-const Development = require("../schemas/DevelopmentSchema/DevelopmentSchema");
-
+const Development = require('../schemas/DevelopmentSchema/DevelopmentSchema');
 
 const getAllDevelopment = async (req, res, next) => {
-    console.log("get request check")
   try {
     const response = await Development.find({});
     res.json(response);
-    console.log(response)
   } catch (error) {
     next(error);
   }
-  
 };
 
 const handleAddNewDevelopment = async (req, res, next) => {
@@ -26,7 +22,7 @@ const handleAddNewDevelopment = async (req, res, next) => {
 const handleDeleteDevelopment = async (req, res, next) => {
   try {
     const { id } = req.query;
-    const data={_id: id}
+    const data = { _id: id };
     const response = await Development.deleteOne(data);
     res.json(response);
   } catch (error) {
@@ -34,9 +30,8 @@ const handleDeleteDevelopment = async (req, res, next) => {
   }
 };
 
-
 module.exports = {
   getAllDevelopment,
   handleAddNewDevelopment,
-  handleDeleteDevelopment
+  handleDeleteDevelopment,
 };
