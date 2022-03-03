@@ -22,7 +22,6 @@ const handleAddNotification = async (req, res, next) => {
 const getSpecificUserNotification = async (req, res, next) => {
   try {
     const { email } = req.query;
-    console.log(email);
     const response = await Notification.find({ email });
     res.json(response);
   } catch (error) {

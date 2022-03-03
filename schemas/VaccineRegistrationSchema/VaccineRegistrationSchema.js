@@ -1,12 +1,21 @@
 const mongoose = require('mongoose');
 
-const eventSchema = new mongoose.Schema(
+const vaccineRegistrationSchema = new mongoose.Schema(
   {
-    title: {
+     email: {
       type: String,
       required: true,
     },
-    description: {
+    name: {
+      type: String,
+      required: true,
+    },
+   
+    fatherName: {
+      type: String,
+      required: true,
+    },
+    motherName: {
       type: String,
       required: true,
     },
@@ -14,30 +23,23 @@ const eventSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    image: {
+    nid: {
       type: String,
       required: true,
     },
-    category: {
+    mobile: {
       type: String,
       required: true,
     },
-    time: {
+    address: {
       type: String,
       required: true,
     },
-    place: {
-      type: String,
-      required: true,
-    },
-    eventType: {
-      type: String,
-      required: true,
-      enum: ['upcoming', 'archived'],
-    },
-    participants: Array,
   },
   { versionKey: false }
 );
 
-module.exports = mongoose.model('Event', eventSchema);
+module.exports = mongoose.model(
+  'VaccineRegistration',
+  vaccineRegistrationSchema
+);

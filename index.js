@@ -7,10 +7,16 @@ const cors = require('cors');
 const credentials = require('./middlewares/credentials');
 const corsOptions = require('./config/corsOptions');
 const authRoutes = require('./routes/authRoutes');
-const teacherRoutes = require('./routes/teacherRoutes');
+const teacherRoutes = require('./routes/Education/teacherRoutes');
+const paymentRoute = require('./routes/paymentRoute');
+const eMarketRoutes = require('./routes/eMarketRoutes');
 const notificationRoutes = require('./routes/NotificationRoutes');
+const eventRoutes = require('./routes/eventRoutes');
+const reviewRoutes = require('./routes/reviewRoutes');
 const appointmentRoutes = require('./routes/appointmentRoutes');
+const newsRoutes = require('./routes/NewsRoutes');
 const errorhandler = require('./middlewares/errorhandler');
+const vaccineRegistrationRoutes = require('./routes/vaccineRegistrationRoutes');
 
 // midlewire
 const app = express();
@@ -23,7 +29,6 @@ app.use('/uploads', express.static(path.join(__dirname, 'uploads'))); // Serve t
 
 // connection with mongoDB Atlas
 const uri = process.env.MONGODB_URI;
-console.log(uri);
 mongoose
   .connect(uri, {
     useNewUrlParser: true,
@@ -32,12 +37,19 @@ mongoose
   .then(() => console.log('connection successfull'))
   .catch((err) => console.log(err));
 
+// All API
 async function run() {
   try {
     app.use('/auth', authRoutes);
     app.use('/teacher', teacherRoutes);
     app.use('/notification', notificationRoutes);
+    app.use('/event', eventRoutes);
+    app.use('/review', reviewRoutes);
+    app.use('/payment', paymentRoute);
+    app.use('/emartket', eMarketRoutes);
     app.use('/appointment', appointmentRoutes);
+    app.use('/news', newsRoutes);
+    app.use('/vaccine', vaccineRegistrationRoutes);
   } catch (error) {
     console.log(error.message);
   }
