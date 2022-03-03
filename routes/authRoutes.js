@@ -7,11 +7,11 @@ const validateUser = require('../middlewares/validateUser');
 const {
   handleLogin,
   handleRegister,
-  getAllUsers,
   useRefreshToken,
   handleLogout,
   handleUpdateUser,
 } = require('../controller/authController');
+const { getAllUsers } = require('../controller/admin/userController');
 
 router.post('/register', handleRegister);
 router.post('/login', handleLogin);

@@ -11,13 +11,15 @@ const teacherRoutes = require('./routes/Education/teacherRoutes');
 const paymentRoute = require('./routes/paymentRoute');
 const eMarketRoutes = require('./routes/eMarketRoutes');
 const notificationRoutes = require('./routes/NotificationRoutes');
+const userRoutes = require('./routes/admin/userRoutes');
+const studentRoutes = require('./routes/Education/studentRoutes');
 const eventRoutes = require('./routes/eventRoutes');
 const reviewRoutes = require('./routes/reviewRoutes');
 const appointmentRoutes = require('./routes/appointmentRoutes');
 const newsRoutes = require('./routes/NewsRoutes');
 const errorhandler = require('./middlewares/errorhandler');
 
-// midlewire
+// midlewares
 const app = express();
 app.use(credentials);
 app.use(cors(corsOptions));
@@ -41,6 +43,8 @@ async function run() {
   try {
     app.use('/auth', authRoutes);
     app.use('/teacher', teacherRoutes);
+    app.use('/student', studentRoutes);
+    app.use('/user', userRoutes);
     app.use('/notification', notificationRoutes);
     app.use('/event', eventRoutes);
     app.use('/review', reviewRoutes);

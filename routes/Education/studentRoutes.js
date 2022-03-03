@@ -7,8 +7,8 @@ const {
 } = require('../../controller/Education/studentController');
 const router = express.Router();
 
-router.post('/favouriteBlogs', getAllFavouriteBlogs);
-router.post('/favouriteVideos', getAllFavouriteVideos);
+router.get('/favouriteVideos', getAllFavouriteVideos);
+router.get('/favouriteBlogs', getAllFavouriteBlogs);
 router.post('/makeBlogFavourite', makeBlogFavourite);
 router.post('/makeVideoFavourite', makeVideoFavourite);
 
