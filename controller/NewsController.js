@@ -23,8 +23,20 @@ const handleAddNews = async (req, res, next) => {
   }
 };
 
+const handleDeleteNews = async (req, res, next) => {
+  try {
+    const { id } = req.query;
+    const data={_id: id}
+    const response = await News.deleteOne(data);
+    res.json(response);
+  } catch (error) {
+    next(error);
+  }
+};
+
 
 module.exports = {
   getAllNews,
   handleAddNews,
+  handleDeleteNews
 };

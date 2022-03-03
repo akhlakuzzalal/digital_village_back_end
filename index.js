@@ -17,6 +17,7 @@ const eventRoutes = require('./routes/eventRoutes');
 const reviewRoutes = require('./routes/reviewRoutes');
 const appointmentRoutes = require('./routes/appointmentRoutes');
 const newsRoutes = require('./routes/NewsRoutes');
+const developmentRoutes = require('./routes/DevelopmentRoutes');
 const errorhandler = require('./middlewares/errorhandler');
 
 // midlewares
@@ -52,6 +53,8 @@ async function run() {
     app.use('/emartket', eMarketRoutes);
     app.use('/appointment', appointmentRoutes);
     app.use('/news', newsRoutes);
+    app.use('/development',developmentRoutes);
+    
   } catch (error) {
     console.log(error.message);
   }
