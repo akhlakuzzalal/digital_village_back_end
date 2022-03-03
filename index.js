@@ -17,6 +17,7 @@ const appointmentRoutes = require('./routes/appointmentRoutes');
 const newsRoutes = require('./routes/NewsRoutes');
 const errorhandler = require('./middlewares/errorhandler');
 const vaccineRegistrationRoutes = require('./routes/vaccineRegistrationRoutes');
+const availableAppointmentRoutes = require('./routes/availableAppointmentRoutes');
 
 // midlewire
 const app = express();
@@ -50,6 +51,7 @@ async function run() {
     app.use('/appointment', appointmentRoutes);
     app.use('/news', newsRoutes);
     app.use('/vaccine', vaccineRegistrationRoutes);
+    app.use('/availableAppointment', availableAppointmentRoutes);
   } catch (error) {
     console.log(error.message);
   }
