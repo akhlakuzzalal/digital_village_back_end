@@ -204,15 +204,6 @@ const handleLogout = async (req, res, next) => {
   }
 };
 
-const getAllUsers = async (req, res, next) => {
-  try {
-    const allusers = await User.find();
-    res.json(allusers);
-  } catch (error) {
-    next(error);
-  }
-};
-
 // USE THE REFRESH TOKEN TO GENERATE A NEW ACCESS TOKEN
 const useRefreshToken = async (req, res, next) => {
   const cookies = req.cookies;
@@ -267,6 +258,5 @@ module.exports = {
   handleLogin,
   handleRegister,
   handleLogout,
-  getAllUsers,
   useRefreshToken,
 };
