@@ -1,12 +1,16 @@
 const mongoose = require('mongoose');
 
-const eventSchema = new mongoose.Schema(
+const appointmentSchema = new mongoose.Schema(
   {
-    title: {
+    name: {
       type: String,
       required: true,
     },
-    description: {
+    email: {
+      type: String,
+      required: true,
+    },
+    service: {
       type: String,
       required: true,
     },
@@ -14,30 +18,16 @@ const eventSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    image: {
-      type: String,
-      required: true,
-    },
-    category: {
-      type: String,
-      required: true,
-    },
     time: {
       type: String,
       required: true,
     },
-    place: {
+    price: {
       type: String,
       required: true,
     },
-    eventType: {
-      type: String,
-      required: true,
-      enum: ['upcoming', 'archived'],
-    },
-    participants: Array,
   },
   { versionKey: false }
 );
 
-module.exports = mongoose.model('Event', eventSchema);
+module.exports = mongoose.model('Appointment', appointmentSchema);
