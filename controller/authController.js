@@ -167,6 +167,7 @@ const handleLogin = async (req, res, next) => {
   }
 };
 
+// handle log out
 const handleLogout = async (req, res, next) => {
   const cookies = req.cookies;
 
@@ -199,15 +200,6 @@ const handleLogout = async (req, res, next) => {
     res.status(204).json({
       message: 'Successfully logged out',
     });
-  } catch (error) {
-    next(error);
-  }
-};
-
-const getAllUsers = async (req, res, next) => {
-  try {
-    const allusers = await User.find();
-    res.json(allusers);
   } catch (error) {
     next(error);
   }
@@ -263,10 +255,23 @@ const useRefreshToken = async (req, res, next) => {
   }
 };
 
+// Update User
+
+const handleUpdateUser = async (req, res, next) => {
+  try {
+    const user = await User.findOne({ email: req.params.email });
+    Object.assign(user, req.body);
+    user.save();
+    res.send(user);
+  } catch (error) {
+    next(error);
+  }
+};
+
 module.exports = {
   handleLogin,
   handleRegister,
   handleLogout,
-  getAllUsers,
   useRefreshToken,
+  handleUpdateUser,
 };

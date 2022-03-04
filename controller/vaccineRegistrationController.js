@@ -12,11 +12,7 @@ const handleInfo = async (req, res, next) => {
 };
 const handleFindInfo = async (req, res, next) => {
   try {
-    console.log('hitted');
     const { email } = req.query;
-
-    console.log({ email });
-
     const response = await VaccineRegistration.find({ email });
     res.json(response);
   } catch (error) {

@@ -12,11 +12,8 @@ const handleAppointment = async (req, res, next) => {
 };
 const handleUserAppointment = async (req, res, next) => {
   try {
-    console.log('hitted');
     const { email } = req.query;
     const date = new Date(req.query.date).toLocaleDateString();
-    console.log({ email });
-    console.log(date);
     const response = await Appointment.find({ email, date });
     res.json(response);
   } catch (error) {

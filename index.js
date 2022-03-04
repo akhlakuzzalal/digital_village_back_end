@@ -11,15 +11,19 @@ const teacherRoutes = require('./routes/Education/teacherRoutes');
 const paymentRoute = require('./routes/paymentRoute');
 const eMarketRoutes = require('./routes/eMarketRoutes');
 const notificationRoutes = require('./routes/NotificationRoutes');
+const userRoutes = require('./routes/admin/userRoutes');
+const studentRoutes = require('./routes/Education/studentRoutes');
 const eventRoutes = require('./routes/eventRoutes');
 const reviewRoutes = require('./routes/reviewRoutes');
 const appointmentRoutes = require('./routes/appointmentRoutes');
 const newsRoutes = require('./routes/NewsRoutes');
+const developmentRoutes = require('./routes/DevelopmentRoutes');
+const donateRoutes = require('./routes/donateRoutes');
 const errorhandler = require('./middlewares/errorhandler');
 const vaccineRegistrationRoutes = require('./routes/vaccineRegistrationRoutes');
 const availableAppointmentRoutes = require('./routes/availableAppointmentRoutes');
 
-// midlewire
+// midlewares
 const app = express();
 app.use(credentials);
 app.use(cors(corsOptions));
@@ -29,6 +33,7 @@ app.use(express.static(path.join(__dirname, '/build'))); // Serve the static fil
 app.use('/uploads', express.static(path.join(__dirname, 'uploads'))); // Serve the static files from the React app
 
 // connection with mongoDB Atlas
+// const uri = "mongodb+srv://digital-village:HVcG8fCzyilDkSrH@cluster0.l2jwh.mongodb.net/digital-village?retryWrites=true&w=majority";
 const uri = process.env.MONGODB_URI;
 mongoose
   .connect(uri, {
@@ -43,6 +48,8 @@ async function run() {
   try {
     app.use('/auth', authRoutes);
     app.use('/teacher', teacherRoutes);
+    app.use('/student', studentRoutes);
+    app.use('/user', userRoutes);
     app.use('/notification', notificationRoutes);
     app.use('/event', eventRoutes);
     app.use('/review', reviewRoutes);
@@ -50,8 +57,10 @@ async function run() {
     app.use('/emartket', eMarketRoutes);
     app.use('/appointment', appointmentRoutes);
     app.use('/news', newsRoutes);
+    app.use('/development', developmentRoutes);
     app.use('/vaccine', vaccineRegistrationRoutes);
     app.use('/availableAppointment', availableAppointmentRoutes);
+    app.use('/donation', donateRoutes);
   } catch (error) {
     console.log(error.message);
   }

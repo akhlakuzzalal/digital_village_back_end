@@ -7,14 +7,16 @@ const validateUser = require('../middlewares/validateUser');
 const {
   handleLogin,
   handleRegister,
-  getAllUsers,
   useRefreshToken,
   handleLogout,
+  handleUpdateUser,
 } = require('../controller/authController');
+const { getAllUsers } = require('../controller/admin/userController');
 
 router.post('/register', handleRegister);
 router.post('/login', handleLogin);
 router.get('/logout', handleLogout);
 router.get('/refresh', useRefreshToken);
 router.get('/allUsers', validateUser, getAllUsers);
+router.put('/update/:email', handleUpdateUser);
 module.exports = router;
