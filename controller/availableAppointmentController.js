@@ -10,7 +10,16 @@ const handleSaveAppointment = async (req, res, next) => {
     next(error);
   }
 };
+const handleGetAppointment = async (req, res, next) => {
+  try {
+    const response = await AvailableAppointment.find();
+    res.json(response);
+  } catch (error) {
+    next(error);
+  }
+};
 
 module.exports = {
   handleSaveAppointment,
+  handleGetAppointment,
 };
