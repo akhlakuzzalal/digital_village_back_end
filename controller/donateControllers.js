@@ -44,10 +44,9 @@ const getAllPayments = async (req, res, next) => {
 
 // Get sigle Cuase == ok
 const getSigleCuase = async (req, res, next) => {
-  console.log('hitted');
   try {
     const id = req.query.id;
-    const query = { _id: id }
+    const query = { _id: id };
     const sigleCuase = await Donate.findOne(query);
     res.json(sigleCuase);
   } catch (error) {
@@ -59,7 +58,7 @@ const getSigleCuase = async (req, res, next) => {
 const deleteCuase = async (req, res, next) => {
   try {
     const id = req.query.id;
-    const query = { _id: id }
+    const query = { _id: id };
     const sigleCuasedelete = await Donate.findOneAndDelete(query);
     res.json(sigleCuasedelete);
   } catch (error) {
@@ -69,39 +68,34 @@ const deleteCuase = async (req, res, next) => {
 
 //Update sigle Cuase
 const updeteCuase = async (req, res, next) => {
-  console.log('hitted');
   try {
     const id = req.query.id;
-            const updateCuase = req.body;
-            const filter = { _id: id };
+    const updateCuase = req.body;
+    const filter = { _id: id };
 
-            const response = await Donate.findOneAndUpdate(filter, {
-               
-                  title: updateCuase?.title,
-                  image: updateCuase?.image,
-                  description: updateCuase?.description,
-                  category: updateCuase?.category,
-                  goal: updateCuase?.goal,
-                  raised: updateCuase?.raised,
-                  date: updateCuase?.date
-            
-            })
-            res.json(response)
-             
+    const response = await Donate.findOneAndUpdate(filter, {
+      title: updateCuase?.title,
+      image: updateCuase?.image,
+      description: updateCuase?.description,
+      category: updateCuase?.category,
+      goal: updateCuase?.goal,
+      raised: updateCuase?.raised,
+      date: updateCuase?.date,
+    });
+    res.json(response);
   } catch (error) {
     next(error);
   }
 };
 
-
 // exports all module
 
 module.exports = {
-    handleAddDonateCuase,
-    getAllCuases,
-    getSigleCuase,
-    AddDonarPayment,
-    deleteCuase,
-    updeteCuase,
-    getAllPayments,
-  };
+  handleAddDonateCuase,
+  getAllCuases,
+  getSigleCuase,
+  AddDonarPayment,
+  deleteCuase,
+  updeteCuase,
+  getAllPayments,
+};
