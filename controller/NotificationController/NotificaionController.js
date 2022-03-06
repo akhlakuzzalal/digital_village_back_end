@@ -1,4 +1,4 @@
-const Notification = require('../schemas/NotificationsSchema/NotificationsSchema');
+const Notification = require('../../schemas/NotificationsSchema/NotificationsSchema');
 
 const getAllNotification = async (req, res, next) => {
   try {
@@ -12,7 +12,7 @@ const getAllNotification = async (req, res, next) => {
 const handleAddNotification = async (req, res, next) => {
   try {
     const newNotification = req.body;
-    const response = await Notification.insertMany(newNotification);
+    const response = await Notification.create(newNotification);
     res.json(response);
   } catch (error) {
     next(error);
@@ -39,9 +39,19 @@ const handleDeleteNotification = async (req, res, next) => {
   }
 };
 
+const testNotification = async (req, res, next) => {
+  try {
+    await res.status(400);
+    await res.json({ message: 'hello' });
+  } catch (error) {
+    next(error);
+  }
+};
+
 module.exports = {
   getAllNotification,
   handleAddNotification,
   getSpecificUserNotification,
   handleDeleteNotification,
+  testNotification,
 };
