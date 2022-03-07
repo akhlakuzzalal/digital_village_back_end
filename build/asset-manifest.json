@@ -1,11 +1,12 @@
 {
   "files": {
-    "main.css": "/static/css/main.62871aa9.css",
-    "main.js": "/static/js/main.5b8255df.js",
+    "main.css": "/static/css/main.a2b98ac3.css",
+    "main.js": "/static/js/main.e09bbbae.js",
     "static/js/498.56cf3c8a.chunk.js": "/static/js/498.56cf3c8a.chunk.js",
     "static/js/703.26df448e.chunk.js": "/static/js/703.26df448e.chunk.js",
-    "static/js/513.7c61961e.chunk.js": "/static/js/513.7c61961e.chunk.js",
+    "static/js/513.3fef7b40.chunk.js": "/static/js/513.3fef7b40.chunk.js",
     "static/js/787.31f30833.chunk.js": "/static/js/787.31f30833.chunk.js",
+    "static/media/video1.mp4": "/static/media/video1.4c88e246cdf7f84e7910.mp4",
     "static/media/development.png": "/static/media/development.3cd8fbc5375a6adb9c35.png",
     "static/media/video2.mp4": "/static/media/video2.0e5215f36a5e9917b6eb.mp4",
     "static/media/education.png": "/static/media/education.1548e6b383314d260026.png",
@@ -15,27 +16,28 @@
     "static/media/donate.png": "/static/media/donate.9235e29e7adca3b09676.png",
     "static/media/home_bg.png": "/static/media/home_bg.5994fa3f060fac94b498.png",
     "static/media/notification.png": "/static/media/notification.3e02ab34746eba3640c1.png",
+    "static/media/schedule.png": "/static/media/schedule.fdb917e7684846a436d9.png",
     "static/media/study.png": "/static/media/study.fd96f4b2d4665a0a6523.png",
     "static/media/doctor.png": "/static/media/doctor.424c71a3766cc9b271fd.png",
     "static/media/vaccineinfo.png": "/static/media/vaccineinfo.67f749ab7d495ca2cc86.png",
     "static/media/Add events.PNG": "/static/media/Add events.e9894cdf9c5448adf769.PNG",
+    "static/media/polio.jpg": "/static/media/polio.b3c9aa93afe05fe4a0cc.jpg",
     "static/media/COVAX.jpg": "/static/media/COVAX.9a48e0447ecef520ed3e.jpg",
     "static/media/who we are.jpg": "/static/media/who we are.7bf090b2f9e4ebdef7be.jpg",
     "static/media/event.png": "/static/media/event.6a532e097c3856cded41.png",
-    "static/media/events.png": "/static/media/events.6a532e097c3856cded41.png",
     "static/media/contact.jpg": "/static/media/contact.eda293f56e17569aefd6.jpg",
     "static/media/review.jpg": "/static/media/review.058940d89f72b3a25ee0.jpg",
-    "static/media/icon-01.svg": "/static/media/icon-01.dbdf9f48860d30ce4990002aa3aabd25.svg",
+    "static/media/logo.png": "/static/media/logo.05ff88cd21b64e34144e.png",
     "index.html": "/index.html",
-    "main.62871aa9.css.map": "/static/css/main.62871aa9.css.map",
-    "main.5b8255df.js.map": "/static/js/main.5b8255df.js.map",
+    "main.a2b98ac3.css.map": "/static/css/main.a2b98ac3.css.map",
+    "main.e09bbbae.js.map": "/static/js/main.e09bbbae.js.map",
     "498.56cf3c8a.chunk.js.map": "/static/js/498.56cf3c8a.chunk.js.map",
     "703.26df448e.chunk.js.map": "/static/js/703.26df448e.chunk.js.map",
-    "513.7c61961e.chunk.js.map": "/static/js/513.7c61961e.chunk.js.map",
+    "513.3fef7b40.chunk.js.map": "/static/js/513.3fef7b40.chunk.js.map",
     "787.31f30833.chunk.js.map": "/static/js/787.31f30833.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.62871aa9.css",
-    "static/js/main.5b8255df.js"
+    "static/css/main.a2b98ac3.css",
+    "static/js/main.e09bbbae.js"
   ]
 }

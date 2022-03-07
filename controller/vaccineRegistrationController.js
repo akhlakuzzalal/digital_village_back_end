@@ -1,5 +1,4 @@
-const { response } = require('express');
-const VaccineRegistration = require('../schemas/vaccineRegistrationSchema/vaccineRegistrationSchema');
+const VaccineRegistration = require('../schemas/VaccineRegistrationSchema/VaccineRegistrationSchema');
 
 const handleInfo = async (req, res, next) => {
   try {
