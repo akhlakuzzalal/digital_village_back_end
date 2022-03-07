@@ -40,7 +40,7 @@ mongoose
     useNewUrlParser: true,
     useUnifiedTopology: true,
   })
-  .then(() => console.log('connection successfull'))
+  .then(() => console.log('Database connection successfull'))
   .catch((err) => console.log(err));
 
 // All API
