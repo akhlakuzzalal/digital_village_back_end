@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 
 const donateSchema = new mongoose.Schema(
+
   {
     title: {
       type: String,
@@ -24,9 +25,11 @@ const donateSchema = new mongoose.Schema(
     },
     raised: {
         type: Number,
-        required: true,
     },
     donars: {
+        type: Array,
+    },
+    author: {
         type: Array,
     },
     date: {
