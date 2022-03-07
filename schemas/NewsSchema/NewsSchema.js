@@ -15,6 +15,8 @@ const NewsSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  bannerImg: Object,
+  
   
   publishDate: {
     type: String,
