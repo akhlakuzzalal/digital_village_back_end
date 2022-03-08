@@ -54,7 +54,7 @@ async function run() {
     app.use('/event', eventRoutes);
     app.use('/review', reviewRoutes);
     app.use('/payment', paymentRoute);
-    app.use('/emartket', eMarketRoutes);
+    app.use('/emarket', eMarketRoutes);
     app.use('/appointment', appointmentRoutes);
     app.use('/news', newsRoutes);
     app.use('/development', developmentRoutes);
