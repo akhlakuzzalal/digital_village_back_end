@@ -1,10 +1,10 @@
-require('dotenv').config();
-require('./config/mongo');
 const app = require('./app');
+const http = require('http');
+const appConfig = require('./config/appConfig');
 
-const port = process.env.PORT;
+const server = http.createServer(app);
 
 // app listner
-app.listen(port, () => {
-  console.log('server is running in localhost:', port);
+server.listen(appConfig.PORT, () => {
+  console.log('server is running in localhost:', appConfig.PORT);
 });

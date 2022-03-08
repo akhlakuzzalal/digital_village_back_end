@@ -1,6 +1,7 @@
 const express = require('express');
-const path = require('path');
 const mongoose = require('mongoose');
+const path = require('path');
+const appConfig = require('./config/appConfig');
 const cookieParser = require('cookie-parser');
 const cors = require('cors');
 const credentials = require('./middlewares/credentials');
@@ -21,9 +22,19 @@ const donateRoutes = require('./routes/donateRoutes');
 const errorhandler = require('./middlewares/errorhandler');
 const vaccineRegistrationRoutes = require('./routes/vaccineRegistrationRoutes');
 const availableAppointmentRoutes = require('./routes/availableAppointmentRoutes');
+const { dir } = require('console');
+
+const app = express();
+
+mongoose
+  .connect(appConfig.MONGODB_URI, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  })
+  .then(() => console.log('connection successfull'))
+  .catch((err) => console.log(err));
 
 // midlewares
-const app = express();
 app.use(credentials);
 app.use(cors(corsOptions));
 app.use(express.json());
@@ -31,35 +42,22 @@ app.use(cookieParser()); // for cookies
 app.use(express.static(path.join(__dirname, '/build'))); // Serve the static files from the React app
 app.use('/uploads', express.static(path.join(__dirname, 'uploads'))); // Serve the static files from the React app
 
-// All API
-async function run() {
-  try {
-    app.use('/auth', authRoutes);
-    app.use('/teacher', teacherRoutes);
-    app.use('/student', studentRoutes);
-    app.use('/user', userRoutes);
-    app.use('/notification', notificationRoutes);
-    app.use('/event', eventRoutes);
-    app.use('/review', reviewRoutes);
-    app.use('/payment', paymentRoute);
-    app.use('/emartket', eMarketRoutes);
-    app.use('/appointment', appointmentRoutes);
-    app.use('/news', newsRoutes);
-    app.use('/development', developmentRoutes);
-    app.use('/vaccine', vaccineRegistrationRoutes);
-    app.use('/availableAppointment', availableAppointmentRoutes);
-    app.use('/donation', donateRoutes);
-
-    // for testing purpose
-    app.get('/test', async (req, res) => {
-      res.json({ message: 'pass!' });
-    });
-  } catch (error) {
-    console.log(error.message);
-  }
-}
-
-run().catch(console.dir);
+// API
+app.use('/auth', authRoutes);
+app.use('/teacher', teacherRoutes);
+app.use('/student', studentRoutes);
+app.use('/user', userRoutes);
+app.use('/notification', notificationRoutes);
+app.use('/event', eventRoutes);
+app.use('/review', reviewRoutes);
+app.use('/payment', paymentRoute);
+app.use('/emartket', eMarketRoutes);
+app.use('/appointment', appointmentRoutes);
+app.use('/news', newsRoutes);
+app.use('/development', developmentRoutes);
+app.use('/vaccine', vaccineRegistrationRoutes);
+app.use('/availableAppointment', availableAppointmentRoutes);
+app.use('/donation', donateRoutes);
 
 // Handles any requests that don't match the ones above
 app.get('*', (req, res) => {
