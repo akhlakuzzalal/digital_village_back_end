@@ -9,37 +9,19 @@ const handleRegister = async (req, res, next) => {
 
   const roles = { User: 1000 };
 
-  // GIVE THE USE A REFRESH TOKEN
-  const refreshToken = jwt.sign(
-    {
-      name: req.body.name,
-      dateOfBirth: req.body.dateOfBirth,
-      roles,
-    },
-    process.env.REFRESH_TOKEN_SECRET,
-    {
-      expiresIn: '30d',
-    }
-  );
-
-  const newUser = {
-    ...req.body,
-    roles,
-    password: hashedPassword,
-    refreshToken,
-  };
-
   try {
     const response = await User.find({ email: req.body.email });
 
     // USER ALLREADY EXIST SO LOGIN HIM
     if (response && response[0]?.name) {
+      console.log('enter 1');
       // GIVE THE USE AN ACCESS TOKEN
       const accessToken = jwt.sign(
         {
           UserInfo: {
             name: response[0].name,
             dateOfBirth: response[0].dateOfBirth,
+            uId: response[0]._id,
             roles,
           },
         },
@@ -48,6 +30,21 @@ const handleRegister = async (req, res, next) => {
           expiresIn: '30m',
         }
       );
+
+      // GIVE THE USER A REFRESH TOKEN
+      const refreshToken = jwt.sign(
+        {
+          name: req.body.name,
+          dateOfBirth: req.body.dateOfBirth,
+          uId: response[0]._id,
+          roles,
+        },
+        process.env.REFRESH_TOKEN_SECRET,
+        {
+          expiresIn: '30d',
+        }
+      );
+
       await User.updateOne({ ...response, refreshToken });
 
       res.cookie('jwt', refreshToken, {
@@ -59,12 +56,22 @@ const handleRegister = async (req, res, next) => {
 
       return res.json({
         accessToken,
+        uId: response[0]._id,
         roles,
         message: `The user allready exist and logged in successfully`,
       });
     }
 
-    await User.insertMany(newUser);
+    // REGISTER THE NEW USER
+    const newUser = {
+      ...req.body,
+      roles,
+      refreshToken: '',
+      password: hashedPassword,
+    };
+
+    // user doesn't exist allready
+    const newlyRegisteredUser = await User.insertMany(newUser);
 
     // GIVE THE USER AN ACCESS TOKEN
     const accessToken = jwt.sign(
@@ -72,6 +79,7 @@ const handleRegister = async (req, res, next) => {
         UserInfo: {
           name: req.body.name,
           dateOfBirth: req.body.dateOfBirth,
+          uId: newlyRegisteredUser[0]._id,
           roles,
         },
       },
@@ -80,6 +88,25 @@ const handleRegister = async (req, res, next) => {
         expiresIn: '30m',
       }
     );
+
+    // GIVE THE USE A REFRESH TOKEN
+    const refreshToken = jwt.sign(
+      {
+        name: req.body.name,
+        dateOfBirth: req.body.dateOfBirth,
+        uId: newlyRegisteredUser[0]._id,
+        roles,
+      },
+      process.env.REFRESH_TOKEN_SECRET,
+      {
+        expiresIn: '30d',
+      }
+    );
+
+    await User.findOneAndUpdate(
+      { email: newlyRegisteredUser.email },
+      { refreshToken }
+    ); // set the refresh token after registering
 
     res.cookie('jwt', refreshToken, {
       httpOnly: true,
@@ -91,6 +118,7 @@ const handleRegister = async (req, res, next) => {
     res.json({
       accessToken,
       roles,
+      uId: newlyRegisteredUser[0]._id,
       message: `${newUser.name}, You have signed up successfully`,
     });
   } catch (error) {
@@ -116,6 +144,7 @@ const handleLogin = async (req, res, next) => {
             UserInfo: {
               name: user[0].name,
               dateOfBirth: user[0].dateOfBirth,
+              uId: user[0]._id,
               roles,
             },
           },
@@ -130,6 +159,7 @@ const handleLogin = async (req, res, next) => {
           {
             name: user[0].name,
             dateOfBirth: user[0].dateOfBirth,
+            uId: user[0]._id,
             roles,
           },
           process.env.REFRESH_TOKEN_SECRET,
@@ -150,6 +180,7 @@ const handleLogin = async (req, res, next) => {
         res.json({
           accessToken,
           roles,
+          uId: user[0]._id,
           message: `Successfully logged in`,
         });
       } else {

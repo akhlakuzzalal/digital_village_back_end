@@ -34,6 +34,7 @@ const getAllCuases = async (req, res, next) => {
     next(error);
   }
 };
+
 // Get All Payments == not try
 const getAllPayments = async (req, res, next) => {
   try {
