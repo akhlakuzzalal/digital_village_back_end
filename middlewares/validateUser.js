@@ -12,10 +12,11 @@ const validateUser = (req, res, next) => {
         return res.sendStatus(403); // invalid token
       }
       const {
-        UserInfo: { name, dateOfBirth, roles },
+        UserInfo: { name, dateOfBirth, roles, uId },
       } = decoded;
       req.name = name;
       req.dateOfBirth = dateOfBirth;
+      req.uId = uId;
       req.roles = roles;
       next();
     });
