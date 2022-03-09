@@ -60,6 +60,38 @@ const handleParticipants = async (req, res, next) => {
   }
 };
 
+const getEventWithEmail = async (req, res, next) => {
+  try {
+    const { email } = req.query;
+    const allBookingEvents = await Event.find({});
+    const myBookingEvents = allBookingEvents.filter((event) =>
+      event.participants.includes(email)
+    );
+    res.json(myBookingEvents);
+  } catch (error) {
+    next(error);
+  }
+};
+
+const handleDeleteMyBookingEvents = async (req, res, next) => {
+  try {
+    const { email, id } = req.query;
+    const myBooking = await Event.find({ _id: id });
+    console.log(myBooking);
+    const newParticipantArray = myBooking[0].participants.filter(
+      (e) => e !== email
+    );
+    const response = await Event.findOneAndUpdate(
+      { _id: id },
+      { participants: newParticipantArray }
+    );
+
+    res.json(response);
+  } catch (error) {
+    next(error);
+  }
+};
+
 module.exports = {
   handleAddEvent,
   getAllEvent,
@@ -67,4 +99,6 @@ module.exports = {
   getUpcomingEvents,
   handleDeleteEvents,
   handleParticipants,
+  getEventWithEmail,
+  handleDeleteMyBookingEvents,
 };
