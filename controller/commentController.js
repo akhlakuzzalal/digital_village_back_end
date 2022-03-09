@@ -1,5 +1,19 @@
 const Comment = require('../schemas/CommentSchema/CommentSchema');
 
+const getAllComment = async (req, res, next) => {
+  try {
+    const { id } = req.query;
+    Comment.find({ postId: id })
+      .populate('commenter')
+      .exec((err, comments) => {
+        if (err) return res.status(400).send(err);
+        res.status(200).json({ success: true, comments });
+      });
+  } catch (error) {
+    next(error);
+  }
+};
+
 const handleAddComment = async (req, res, next) => {
   try {
     const comment = new Comment(req.body);
@@ -21,4 +35,5 @@ const handleAddComment = async (req, res, next) => {
 
 module.exports = {
   handleAddComment,
+  getAllComment,
 };
