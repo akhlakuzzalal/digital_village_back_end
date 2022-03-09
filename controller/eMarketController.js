@@ -35,9 +35,27 @@ const deleteProduct = async (req, res, next) => {
   }
 };
 
+// Update a Product
+const updeteProduct = async (req, res, next) => {
+  try {
+    const id = req.params.id;
+    const updateProduct = req.body;
+    console.log(updateProduct);
+    const filter = { _id: id };
+
+    const response = await Products.updateOne(filter, {
+      $set: updateProduct,
+    });
+    res.json(response);
+  } catch (error) {
+    next(error);
+  }
+};
+
 //   export controllers
 module.exports = {
   getAllProducts,
   addProducts,
   deleteProduct,
+  updeteProduct,
 };
