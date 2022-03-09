@@ -14,6 +14,7 @@ const notificationRoutes = require('./routes/NotificationRoutes');
 const userRoutes = require('./routes/admin/userRoutes');
 const studentRoutes = require('./routes/Education/studentRoutes');
 const eventRoutes = require('./routes/eventRoutes');
+const UserReviewRoutes = require('./routes/UserReviewRoutes');
 const reviewRoutes = require('./routes/reviewRoutes');
 const appointmentRoutes = require('./routes/appointmentRoutes');
 const newsRoutes = require('./routes/NewsRoutes');
@@ -53,6 +54,7 @@ async function run() {
     app.use('/notification', notificationRoutes);
     app.use('/event', eventRoutes);
     app.use('/review', reviewRoutes);
+    app.use('/userReview',UserReviewRoutes);
     app.use('/payment', paymentRoute);
     app.use('/emartket', eMarketRoutes);
     app.use('/appointment', appointmentRoutes);
