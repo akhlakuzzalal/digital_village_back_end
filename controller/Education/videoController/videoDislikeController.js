@@ -10,9 +10,9 @@ const getVideoDisLikes = async (req, res, next) => {
       query = { commentId };
     }
 
-    VideoDisLike.find(query).exec((err, videoLikes) => {
+    VideoDisLike.find(query).exec((err, videoDisLikes) => {
       if (err) return res.status(400).send(err);
-      res.status(200).json({ success: true, videoLikes });
+      res.status(200).json({ success: true, videoDisLikes });
     });
   } catch (error) {
     next(error);

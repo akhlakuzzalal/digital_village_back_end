@@ -3,7 +3,7 @@ const Schema = mongoose.Schema;
 
 const videoLikeSchema = Schema(
   {
-    userId: {
+    uId: {
       type: Schema.Types.ObjectId,
       ref: 'User',
     },
