@@ -10,6 +10,7 @@ const handleAppointment = async (req, res, next) => {
     next(error);
   }
 };
+
 const handleUserAppointment = async (req, res, next) => {
   try {
     const { email } = req.query;

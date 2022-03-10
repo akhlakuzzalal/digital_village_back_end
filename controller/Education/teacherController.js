@@ -1,4 +1,4 @@
-const Video = require('../../schemas/VideoSchema/Video');
+const Video = require('../../schemas/Education/VideoSchema/Video');
 const User = require('../../schemas/UsersSchema/User');
 const Teacher = require('../../schemas/Education/TeacherSchema/Teacher');
 const fileSizeFormatter = require('../../utilities/fileSizeFormatter');
@@ -8,6 +8,51 @@ const getallVideo = async (req, res, next) => {
   try {
     const videos = await Video.find();
     res.json(videos);
+  } catch (error) {
+    next(error);
+  }
+};
+
+const getallBlogs = async (req, res, next) => {
+  const { page, size } = req.query;
+  console.log(page, size);
+
+  try {
+    let count;
+    if (!(page && size)) {
+      count = await Blog.count({});
+    } else {
+      count = await Blog.count({ isVerified: true });
+    }
+
+    const blogs = await Blog.find()
+      .skip(parseInt(page) * parseInt(size))
+      .limit(parseInt(size));
+
+    res.send({
+      count,
+      blogs,
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+
+const getMyBlogs = async (req, res, next) => {
+  try {
+    const { email } = req.query;
+    const response = await Blog.find({ email });
+    res.json(response);
+  } catch (error) {
+    next(error);
+  }
+};
+
+const getMyVideos = async (req, res, next) => {
+  try {
+    const { email } = req.query;
+    const response = await Video.find({ email });
+    res.json(response);
   } catch (error) {
     next(error);
   }
@@ -78,7 +123,10 @@ const publishVideo = async (req, res, next) => {
 
 module.exports = {
   getallVideo,
+  getallBlogs,
   addTeacher,
   publishBlog,
   publishVideo,
+  getMyBlogs,
+  getMyVideos,
 };
