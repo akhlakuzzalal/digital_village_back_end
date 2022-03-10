@@ -38,6 +38,26 @@ const getallBlogs = async (req, res, next) => {
   }
 };
 
+const getMyBlogs = async (req, res, next) => {
+  try {
+    const { email } = req.query;
+    const response = await Blog.find({ email });
+    res.json(response);
+  } catch (error) {
+    next(error);
+  }
+};
+
+const getMyVideos = async (req, res, next) => {
+  try {
+    const { email } = req.query;
+    const response = await Video.find({ email });
+    res.json(response);
+  } catch (error) {
+    next(error);
+  }
+};
+
 const addTeacher = async (req, res, next) => {
   try {
     const teacher = req.body;
@@ -107,4 +127,6 @@ module.exports = {
   addTeacher,
   publishBlog,
   publishVideo,
+  getMyBlogs,
+  getMyVideos,
 };
