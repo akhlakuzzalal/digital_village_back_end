@@ -4,6 +4,7 @@ const fileSizeFormatter = require('../utilities/fileSizeFormatter');
 const getAllDevelopment = async (req, res, next) => {
   try {
     const response = await Development.find({});
+    response.sort((a, b) => a?.upvotes?.length - b?.price?.length);
     res.json(response);
   } catch (error) {
     next(error);
@@ -43,8 +44,53 @@ const handleDeleteDevelopment = async (req, res, next) => {
   }
 };
 
+// handle upvote
+const handleUpvote = async (req, res, next) => {
+  try {
+    const { id, email } = req.query;
+    const query = { _id: id };
+    const proposal = await Development.find(query);
+    if (
+      !!proposal[0].upvotes?.includes(email) ||
+      !!proposal[0].downvotes?.includes(email)
+    ) {
+      return res.json({ alert: 'Already voted' });
+    } else {
+      const responce = await Development.updateOne(query, {
+        upvotes: [...proposal[0].upvotes, email],
+      });
+      res.json(responce);
+    }
+  } catch (error) {
+    next(error);
+  }
+};
+// handle downVote
+const handleDownvote = async (req, res, next) => {
+  try {
+    const { id, email } = req.query;
+    const query = { _id: id };
+    const proposal = await Development.find(query);
+    if (
+      !!proposal[0].downvotes?.includes(email) ||
+      !!proposal[0].upvotes?.includes(email)
+    ) {
+      return res.json({ alert: 'Already voted' });
+    } else {
+      const responce = await Development.updateOne(query, {
+        downvotes: [...proposal[0].downvotes, email],
+      });
+      res.json(responce);
+    }
+  } catch (error) {
+    next(error);
+  }
+};
+
 module.exports = {
   getAllDevelopment,
   handleAddNewDevelopment,
   handleDeleteDevelopment,
+  handleUpvote,
+  handleDownvote,
 };
