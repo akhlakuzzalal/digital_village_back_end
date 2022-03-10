@@ -16,7 +16,7 @@ const videoLikeSchema = Schema(
       ref: 'Video',
     },
   },
-  { timestamps: true }
+  { timestamps: true, versionKey: false }
 );
 
 module.exports = mongoose.model('videoLike', videoLikeSchema);

@@ -16,7 +16,7 @@ const videoDislikeSchema = Schema(
       ref: 'Video',
     },
   },
-  { timestamps: true }
+  { timestamps: true, versionKey: false }
 );
 
 module.exports = mongoose.model('videoDislike', videoDislikeSchema);

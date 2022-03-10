@@ -22,7 +22,9 @@ const getVideoDisLikes = async (req, res, next) => {
 
 const addDisLike = async (req, res, next) => {
   try {
+    const { videoId, uId, commentId } = req.body;
     let query = {};
+    console.log('adding dislike');
     if (videoId) {
       query = { videoId, uId };
     } else {
@@ -33,14 +35,15 @@ const addDisLike = async (req, res, next) => {
     //save the like information data in MongoDB
     disLike.save((err, dislikeResult) => {
       if (err) return res.json({ success: false, err });
-
       // if like button is allready clicked then decrease it
-      videoLike.findOneAndDelete(variable).exec((err, likeResult) => {
+      videoLike.findOneAndDelete(query).exec((err, likeResult) => {
         if (err) return res.status(400).json({ success: false, err });
         res.status(200).json({ success: true });
       });
     });
-  } catch (error) {}
+  } catch (error) {
+    next(error);
+  }
 };
 
 const removeDisLike = async (req, res, next) => {
@@ -57,7 +60,9 @@ const removeDisLike = async (req, res, next) => {
       if (err) return res.status(400).json({ success: false, err });
       res.status(200).json({ success: true });
     });
-  } catch (error) {}
+  } catch (error) {
+    next(error);
+  }
 };
 
 module.exports = {

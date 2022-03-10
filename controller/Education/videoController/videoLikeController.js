@@ -24,21 +24,21 @@ const getVideoLikes = async (req, res, next) => {
 const addLike = async (req, res, next) => {
   try {
     const { uId, videoId, commentId } = req.body;
-    let data = {};
+    let query = {};
     if (videoId) {
-      data = { videoId, userId };
+      query = { videoId, uId };
     } else {
-      data = { commentId, uId };
+      query = { commentId, uId };
     }
 
-    const like = new VideoLike(data);
+    const like = new VideoLike(query);
     //save the like information data in MongoDB
     like.save((err, likeResutl) => {
       if (err) return res.json({ success: false, err });
 
       //decrease the dislike by 1 if it previously clicked
 
-      videoDisLike.findOneAndDelete(variable).exec((err, disLikeResutl) => {
+      videoDisLike.findOneAndDelete(query).exec((err, disLikeResutl) => {
         if (err) return res.status(400).json({ success: false, err });
         res.status(200).json({ success: true });
       });
@@ -50,15 +50,15 @@ const addLike = async (req, res, next) => {
 
 const removeLike = async (req, res, next) => {
   try {
-    let data = {};
+    let query = {};
     const { uId, videoId, commentId } = req.body;
     if (videoId) {
-      data = { videoId, uId };
+      query = { videoId, uId };
     } else {
-      data = { commentId, uId };
+      query = { commentId, uId };
     }
 
-    VideoLike.findOneAndDelete(variable).exec((err, result) => {
+    VideoLike.findOneAndDelete(query).exec((err, result) => {
       if (err) return res.status(400).json({ success: false, err });
       res.status(200).json({ success: true });
     });
