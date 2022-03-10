@@ -1,12 +1,11 @@
 const mongoose = require('mongoose');
 
 const NewsSchema = new mongoose.Schema({
-  
   title: {
     type: String,
     required: true,
   },
-  
+
   description: {
     type: String,
     required: true,
@@ -16,8 +15,7 @@ const NewsSchema = new mongoose.Schema({
     required: true,
   },
   bannerImg: Object,
-  
-  
+
   publishDate: {
     type: String,
     required: true,
