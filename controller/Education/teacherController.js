@@ -1,8 +1,8 @@
 const Video = require('../../schemas/Education/VideoSchema/Video');
+const Blog = require('../../schemas/Education/BlogSchema/Blog');
 const User = require('../../schemas/UsersSchema/User');
 const Teacher = require('../../schemas/Education/TeacherSchema/Teacher');
 const fileSizeFormatter = require('../../utilities/fileSizeFormatter');
-const Blog = require('../../schemas/Education/BlogSchema/Blog');
 
 const getallVideo = async (req, res, next) => {
   try {
@@ -98,6 +98,26 @@ const publishBlog = async (req, res, next) => {
   }
 };
 
+const deleteAVideo = async (req, res, next) => {
+  try {
+    const { id } = req.query;
+    const response = await Video.findOneAndDelete({ _id: id });
+    res.json(response);
+  } catch (error) {
+    next(error);
+  }
+};
+
+const deleteABlog = async (req, res, next) => {
+  try {
+    const { id } = req.query;
+    const response = await Blog.deleteOne({ _id: id });
+    res.json(response);
+  } catch (error) {
+    next(error);
+  }
+};
+
 // publish video
 const publishVideo = async (req, res, next) => {
   const file = {
@@ -129,4 +149,6 @@ module.exports = {
   publishVideo,
   getMyBlogs,
   getMyVideos,
+  deleteABlog,
+  deleteAVideo,
 };

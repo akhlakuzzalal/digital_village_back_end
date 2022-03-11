@@ -34,7 +34,6 @@ const handleAddNews = async (req, res, next) => {
 
 const handleDeleteNews = async (req, res, next) => {
   try {
-    console.log('hitt this id');
     const id = req.params.id;
     const data = { _id: id };
     const response = await News.deleteOne(data);
