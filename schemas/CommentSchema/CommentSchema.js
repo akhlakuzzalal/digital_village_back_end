@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-const commentSchema = mongoose.Schema(
+const commentSchema = Schema(
   {
     commenter: {
       type: Schema.Types.ObjectId,

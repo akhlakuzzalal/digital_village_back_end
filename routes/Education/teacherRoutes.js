@@ -8,6 +8,8 @@ const {
   getallVideo,
   getMyBlogs,
   getMyVideos,
+  deleteABlog,
+  deleteAVideo,
 } = require('../../controller/Education/teacherController');
 
 router.get('/video/all', getallVideo);
@@ -16,5 +18,7 @@ router.get('/myBlogs', getMyBlogs);
 router.post('/publishVideo', upload.single('file'), publishVideo);
 router.post('/publishBlog', upload.single('file'), publishBlog);
 router.post('/addTeacher', addTeacher);
+router.delete('/deleteABlog', deleteABlog);
+router.delete('/deleteAVideo', deleteAVideo);
 
 module.exports = router;
