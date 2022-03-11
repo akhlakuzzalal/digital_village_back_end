@@ -9,11 +9,8 @@ const DevelopmentSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  bannerImg: String,
-  content: String,
-  constructionDate: String,
-  rating: String,
-  comments: Array,
+  bannerImg: Object,
+  proposalDate: String,
   upvotes: Array,
   downvotes: Array,
 });

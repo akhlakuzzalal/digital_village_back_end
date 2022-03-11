@@ -24,10 +24,10 @@ const handleAddNewDevelopment = async (req, res, next) => {
     bannerImg: file,
     isVerified: false,
   };
+
   try {
     const response = await Development.insertMany(newDevelopment);
-
-    console.log(newDevelopment);
+    res.json(response);
   } catch (error) {
     next(error);
   }
@@ -65,6 +65,7 @@ const handleUpvote = async (req, res, next) => {
     next(error);
   }
 };
+
 // handle downVote
 const handleDownvote = async (req, res, next) => {
   try {
