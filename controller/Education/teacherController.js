@@ -137,7 +137,7 @@ const getMyBlogs = async (req, res, next) => {
 const deleteABlog = async (req, res, next) => {
   try {
     const { id } = req.query;
-    const response = await Blog.deleteOne({ _id: id });
+    const response = await Blog.findOneAndDelete({ _id: id });
     res.json(response);
   } catch (error) {
     next(error);
