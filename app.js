@@ -22,6 +22,7 @@ const videoDisLikeRoutes = require('./routes/Education/videoRoutes/videoDislikeR
 const newsRoutes = require('./routes/NewsRoutes');
 const developmentRoutes = require('./routes/DevelopmentRoutes');
 const donateRoutes = require('./routes/donateRoutes');
+const favouriteVideoRoutes = require('./routes/Education/videoRoutes/favouriteVideoRoutes');
 const errorhandler = require('./middlewares/errorhandler');
 const vaccineRegistrationRoutes = require('./routes/vaccineRegistrationRoutes');
 const availableAppointmentRoutes = require('./routes/availableAppointmentRoutes');
@@ -65,6 +66,7 @@ app.use('/donation', donateRoutes);
 app.use('/comment', commentRoutes);
 app.use('/videoLike', videoLikeRoutes);
 app.use('/videoDisLike', videoDisLikeRoutes);
+app.use('/favouriteVideo', favouriteVideoRoutes);
 app.use('/userReview', UserReviewRoutes);
 
 // Handles any requests that don't match the ones above

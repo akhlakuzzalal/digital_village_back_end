@@ -4,10 +4,96 @@ const User = require('../../schemas/UsersSchema/User');
 const Teacher = require('../../schemas/Education/TeacherSchema/Teacher');
 const fileSizeFormatter = require('../../utilities/fileSizeFormatter');
 
+const publishVideo = async (req, res, next) => {
+  const file = {
+    name: req.file.originalname,
+    path: req.file.path,
+    type: req.file.mimetype,
+    size: fileSizeFormatter(req.file.size, 2), // 0.00
+  };
+
+  const newVideo = {
+    ...JSON.parse(req.body.video),
+    video: file,
+    isVerified: false,
+  };
+  try {
+    const response = await Video.insertMany(newVideo);
+    res.json(response);
+  } catch (error) {
+    next(error);
+  }
+};
+
 const getallVideo = async (req, res, next) => {
   try {
     const videos = await Video.find();
     res.json(videos);
+  } catch (error) {
+    next(error);
+  }
+};
+
+const getSingleVideo = async (req, res, next) => {
+  try {
+    const { id } = req.query;
+    const video = await Video.findOne({ _id: id });
+    res.json(video);
+  } catch (error) {
+    next(error);
+  }
+};
+
+const getMyVideos = async (req, res, next) => {
+  try {
+    const { email } = req.query;
+    const response = await Video.find({ email });
+    res.json(response);
+  } catch (error) {
+    next(error);
+  }
+};
+
+const editAVideo = async (req, res, next) => {
+  try {
+    const { id } = req.query;
+    const editedVideo = req.body;
+    const response = await Video.findOneAndUpdate({ _id: id }, editedVideo, {
+      new: true,
+    });
+    res.json(response);
+  } catch (error) {
+    next(error);
+  }
+};
+
+const deleteAVideo = async (req, res, next) => {
+  try {
+    const { id } = req.query;
+    const response = await Video.findOneAndDelete({ _id: id });
+    res.json(response);
+  } catch (error) {
+    next(error);
+  }
+};
+
+const publishBlog = async (req, res, next) => {
+  const file = {
+    name: req.file.originalname,
+    path: req.file.path,
+    type: req.file.mimetype,
+    size: fileSizeFormatter(req.file.size, 2), // 0.00
+  };
+
+  const newBlog = {
+    ...JSON.parse(req.body.blog),
+    bannerImg: file,
+    isVerified: false,
+  };
+
+  try {
+    const response = await Blog.insertMany(newBlog);
+    res.json(response);
   } catch (error) {
     next(error);
   }
@@ -48,10 +134,45 @@ const getMyBlogs = async (req, res, next) => {
   }
 };
 
-const getMyVideos = async (req, res, next) => {
+const getSingleBlog = async (req, res, next) => {
   try {
-    const { email } = req.query;
-    const response = await Video.find({ email });
+    const { id } = req.query;
+    const blog = await Blog.findOne({ _id: id });
+    res.json(blog);
+  } catch (error) {
+    next(error);
+  }
+};
+
+const editABlog = async (req, res, next) => {
+  const { id } = req.query;
+  const file = {
+    name: req.file.originalname,
+    path: req.file.path,
+    type: req.file.mimetype,
+    size: fileSizeFormatter(req.file.size, 2), // 0.00
+  };
+
+  const editedBlog = {
+    ...JSON.parse(req.body.blog),
+    bannerImg: file,
+  };
+
+  try {
+    const response = await Blog.findOneAndUpdate({ _id: id }, editedBlog);
+    res.json({
+      success: true,
+      response,
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+
+const deleteABlog = async (req, res, next) => {
+  try {
+    const { id } = req.query;
+    const response = await Blog.findOneAndDelete({ _id: id });
     res.json(response);
   } catch (error) {
     next(error);
@@ -75,71 +196,7 @@ const addTeacher = async (req, res, next) => {
   }
 };
 
-// publish blog
-const publishBlog = async (req, res, next) => {
-  const file = {
-    name: req.file.originalname,
-    path: req.file.path,
-    type: req.file.mimetype,
-    size: fileSizeFormatter(req.file.size, 2), // 0.00
-  };
-
-  const newBlog = {
-    ...JSON.parse(req.body.blog),
-    bannerImg: file,
-    isVerified: false,
-  };
-
-  try {
-    const response = await Blog.insertMany(newBlog);
-    res.json(response);
-  } catch (error) {
-    next(error);
-  }
-};
-
-const deleteAVideo = async (req, res, next) => {
-  try {
-    const { id } = req.query;
-    const response = await Video.findOneAndDelete({ _id: id });
-    res.json(response);
-  } catch (error) {
-    next(error);
-  }
-};
-
-const deleteABlog = async (req, res, next) => {
-  try {
-    const { id } = req.query;
-    const response = await Blog.deleteOne({ _id: id });
-    res.json(response);
-  } catch (error) {
-    next(error);
-  }
-};
-
 // publish video
-const publishVideo = async (req, res, next) => {
-  const file = {
-    name: req.file.originalname,
-    path: req.file.path,
-    type: req.file.mimetype,
-    size: fileSizeFormatter(req.file.size, 2), // 0.00
-  };
-
-  const newVideo = {
-    ...JSON.parse(req.body.video),
-    video: file,
-    isVerified: false,
-  };
-
-  try {
-    const response = await Video.insertMany(newVideo);
-    res.json(response);
-  } catch (error) {
-    next(error);
-  }
-};
 
 module.exports = {
   getallVideo,
@@ -151,4 +208,8 @@ module.exports = {
   getMyVideos,
   deleteABlog,
   deleteAVideo,
+  getSingleVideo,
+  editAVideo,
+  getSingleBlog,
+  editABlog,
 };
