@@ -12,6 +12,8 @@ const {
   deleteAVideo,
   getSingleVideo,
   editAVideo,
+  getSingleBlog,
+  editABlog,
 } = require('../../controller/Education/teacherController');
 
 router.get('/video/all', getallVideo);
@@ -21,7 +23,9 @@ router.post('/publishVideo', upload.single('file'), publishVideo);
 router.put('/editAVideo', editAVideo);
 router.delete('/deleteAVideo', deleteAVideo);
 router.get('/myBlogs', getMyBlogs);
+router.get('/getSingleBlog', getSingleBlog);
 router.post('/publishBlog', upload.single('file'), publishBlog);
+router.put('/editABlog', upload.single('file'), editABlog);
 router.delete('/deleteABlog', deleteABlog);
 router.post('/addTeacher', addTeacher);
 

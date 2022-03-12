@@ -134,6 +134,41 @@ const getMyBlogs = async (req, res, next) => {
   }
 };
 
+const getSingleBlog = async (req, res, next) => {
+  try {
+    const { id } = req.query;
+    const blog = await Blog.findOne({ _id: id });
+    res.json(blog);
+  } catch (error) {
+    next(error);
+  }
+};
+
+const editABlog = async (req, res, next) => {
+  const { id } = req.query;
+  const file = {
+    name: req.file.originalname,
+    path: req.file.path,
+    type: req.file.mimetype,
+    size: fileSizeFormatter(req.file.size, 2), // 0.00
+  };
+
+  const editedBlog = {
+    ...JSON.parse(req.body.blog),
+    bannerImg: file,
+  };
+
+  try {
+    const response = await Blog.findOneAndUpdate({ _id: id }, editedBlog);
+    res.json({
+      success: true,
+      response,
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+
 const deleteABlog = async (req, res, next) => {
   try {
     const { id } = req.query;
@@ -175,4 +210,6 @@ module.exports = {
   deleteAVideo,
   getSingleVideo,
   editAVideo,
+  getSingleBlog,
+  editABlog,
 };
