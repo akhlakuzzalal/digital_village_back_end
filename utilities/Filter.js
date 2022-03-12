@@ -1,5 +1,5 @@
 // filter for blogs
-const filterBlogs = (allData, search) => {
+const filter = (allData, search) => {
   const filteredData = allData.filter((data) => {
     const isMatched =
       [data.title, data.about, data.content, data.tags.join('')]
@@ -13,5 +13,5 @@ const filterBlogs = (allData, search) => {
 };
 
 module.exports = {
-  filterBlogs,
+  filter,
 };

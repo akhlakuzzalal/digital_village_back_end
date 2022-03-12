@@ -1,15 +1,15 @@
 const express = require('express');
 const {
   makeBlogFavourite,
-  getallVideo,
   getallBlogs,
   makeVideoFavourite,
   getAllFavouriteBlogs,
   getAllFavouriteVideos,
+  getallVideos,
 } = require('../../controller/Education/studentController');
 const router = express.Router();
 
-router.get('/allVideo', getallVideo);
+router.get('/allVideos', getallVideos);
 router.get('/allBlogs', getallBlogs);
 router.get('/favouriteVideos', getAllFavouriteVideos);
 router.get('/favouriteBlogs', getAllFavouriteBlogs);
