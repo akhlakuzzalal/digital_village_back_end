@@ -2,10 +2,27 @@ const Video = require('../../schemas/Education/VideoSchema/Video');
 const Blog = require('../../schemas/Education/BlogSchema/Blog');
 const Roles = require('../../config/roles');
 const { filterBlogs } = require('../../utilities/Filter');
+
 const getallVideo = async (req, res, next) => {
   try {
     const videos = await Video.find();
     res.json(videos);
+  } catch (error) {
+    next(error);
+  }
+};
+
+const makeVideoFavourite = async (req, res, next) => {
+  try {
+    res.json({ message: 'make a video favourite' });
+  } catch (error) {
+    next(error);
+  }
+};
+
+const getAllFavouriteVideos = async (req, res, next) => {
+  try {
+    res.json({ message: 'get all favourite videos' });
   } catch (error) {
     next(error);
   }
@@ -101,25 +118,9 @@ const getAllFavouriteBlogs = async (req, res, next) => {
   }
 };
 
-const getAllFavouriteVideos = async (req, res, next) => {
-  try {
-    res.json({ message: 'get all favourite videos' });
-  } catch (error) {
-    next(error);
-  }
-};
-
 const makeBlogFavourite = async (req, res, next) => {
   try {
     res.json({ message: 'make a blog favourite' });
-  } catch (error) {
-    next(error);
-  }
-};
-
-const makeVideoFavourite = async (req, res, next) => {
-  try {
-    res.json({ message: 'make a video favourite' });
   } catch (error) {
     next(error);
   }
