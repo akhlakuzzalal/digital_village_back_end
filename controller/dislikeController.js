@@ -1,19 +1,22 @@
-const DisLike = require('../../../schemas/DislikeSchema/DislikeSchema');
-const Like = require('../../../schemas/LikeSchema/LikeSchema');
+const DisLike = require('../schemas/DislikeSchema/DislikeSchema');
+const Like = require('../schemas/LikeSchema/LikeSchema');
 
-const getVideoDisLikes = async (req, res, next) => {
+const getDisLikes = async (req, res, next) => {
   try {
-    const { videoId, commentId } = req.body;
-    let query;
+    const { videoId, commentId, blogId } = req.body;
+    let query = {};
+
     if (videoId) {
       query = { videoId };
+    } else if (blogId) {
+      query = { blogId };
     } else {
       query = { commentId };
     }
 
-    DisLike.find(query).exec((err, videoDisLikes) => {
+    DisLike.find(query).exec((err, dislikes) => {
       if (err) return res.status(400).send(err);
-      res.status(200).json({ success: true, videoDisLikes });
+      res.status(200).json({ success: true, dislikes });
     });
   } catch (error) {
     next(error);
@@ -22,11 +25,13 @@ const getVideoDisLikes = async (req, res, next) => {
 
 const addDisLike = async (req, res, next) => {
   try {
-    const { videoId, uId, commentId } = req.body;
+    const { videoId, uId, commentId, blogId } = req.body;
     let data = {};
 
     if (videoId) {
       data = { videoId, uId };
+    } else if (blogId) {
+      data = { blogId, uId };
     } else {
       data = { commentId, uId };
     }
@@ -49,9 +54,12 @@ const addDisLike = async (req, res, next) => {
 const removeDisLike = async (req, res, next) => {
   try {
     let query = {};
-    const { videoId, uId, commentId } = req.body;
+    const { videoId, uId, commentId, blogId } = req.body;
+
     if (videoId) {
       query = { videoId, uId };
+    } else if (blogId) {
+      query = { blogId, uId };
     } else {
       query = { commentId, uId };
     }
@@ -66,7 +74,7 @@ const removeDisLike = async (req, res, next) => {
 };
 
 module.exports = {
-  getVideoDisLikes,
+  getDisLikes,
   addDisLike,
   removeDisLike,
 };
