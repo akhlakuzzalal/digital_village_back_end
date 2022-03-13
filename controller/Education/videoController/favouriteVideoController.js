@@ -4,10 +4,8 @@ const getFavouriteVideos = async (req, res, next) => {
   try {
     const { uId } = req.query;
 
-    favouriteVideo.find({ uId }).exec((err, favouriteVideos) => {
-      if (err) return res.status(400).send(err);
-      res.status(200).json({ success: true, favouriteVideos });
-    });
+    const response = await favouriteVideo.find({ uId }).populate('videoId');
+    res.json(response);
   } catch (error) {
     next(error);
   }
@@ -19,10 +17,7 @@ const addToFavourite = async (req, res, next) => {
     const favouritedVideo = new favouriteVideo({ uId, videoId });
     //save the favourite video information data in MongoDB
     const response = await favouritedVideo.save();
-    res.json({
-      success: true,
-      response,
-    });
+    res.json(response);
   } catch (error) {
     next(error);
   }
@@ -31,10 +26,8 @@ const addToFavourite = async (req, res, next) => {
 const removeFromFavourite = async (req, res, next) => {
   try {
     const { uId, videoId } = req.body;
-    favouriteVideo.findOneAndDelete({ uId, videoId }).exec((err, result) => {
-      if (err) return res.status(400).json({ success: false, err });
-      res.status(200).json({ success: true });
-    });
+    const response = await favouriteVideo.findOneAndDelete({ uId, videoId });
+    res.json(response);
   } catch (error) {
     next(error);
   }

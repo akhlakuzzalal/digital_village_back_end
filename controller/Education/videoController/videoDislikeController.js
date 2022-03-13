@@ -23,20 +23,20 @@ const getVideoDisLikes = async (req, res, next) => {
 const addDisLike = async (req, res, next) => {
   try {
     const { videoId, uId, commentId } = req.body;
-    let query = {};
-    console.log('adding dislike');
+    let data = {};
+
     if (videoId) {
-      query = { videoId, uId };
+      data = { videoId, uId };
     } else {
-      query = { commentId, uId };
+      data = { commentId, uId };
     }
 
-    const disLike = new VideoDisLike(query);
+    const disLike = new VideoDisLike(data);
     //save the like information data in MongoDB
     disLike.save((err, dislikeResult) => {
       if (err) return res.json({ success: false, err });
       // if like button is allready clicked then decrease it
-      videoLike.findOneAndDelete(query).exec((err, likeResult) => {
+      videoLike.findOneAndDelete(data).exec((err, likeResult) => {
         if (err) return res.status(400).json({ success: false, err });
         res.status(200).json({ success: true });
       });

@@ -66,7 +66,7 @@ app.use('/donation', donateRoutes);
 app.use('/comment', commentRoutes);
 app.use('/videoLike', videoLikeRoutes);
 app.use('/videoDisLike', videoDisLikeRoutes);
-app.use('/favouriteVideo', favouriteVideoRoutes);
+app.use('/favouriteVideos', favouriteVideoRoutes);
 app.use('/userReview', UserReviewRoutes);
 
 // Handles any requests that don't match the ones above
