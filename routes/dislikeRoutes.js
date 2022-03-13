@@ -1,12 +1,12 @@
 const express = require('express');
 const {
-  getVideoDisLikes,
+  getDisLikes,
   addDisLike,
   removeDisLike,
-} = require('../../../controller/Education/videoController/videoDislikeController');
+} = require('../controller/dislikeController');
 const router = express.Router();
 
-router.post('/getAll', getVideoDisLikes);
+router.post('/all', getDisLikes);
 router.post('/add', addDisLike);
 router.post('/remove', removeDisLike);
 

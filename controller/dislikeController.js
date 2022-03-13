@@ -1,19 +1,22 @@
-const VideoDisLike = require('../../../schemas/videoDislikeSchema/videoDislikeSchema');
-const videoLike = require('../../../schemas/VideoLikeSchema/VideoLikeSchema');
+const DisLike = require('../schemas/DislikeSchema/DislikeSchema');
+const Like = require('../schemas/LikeSchema/LikeSchema');
 
-const getVideoDisLikes = async (req, res, next) => {
+const getDisLikes = async (req, res, next) => {
   try {
-    const { videoId, commentId } = req.body;
-    let query;
+    const { videoId, commentId, blogId } = req.body;
+    let query = {};
+
     if (videoId) {
       query = { videoId };
+    } else if (blogId) {
+      query = { blogId };
     } else {
       query = { commentId };
     }
 
-    VideoDisLike.find(query).exec((err, videoDisLikes) => {
+    DisLike.find(query).exec((err, dislikes) => {
       if (err) return res.status(400).send(err);
-      res.status(200).json({ success: true, videoDisLikes });
+      res.status(200).json({ success: true, dislikes });
     });
   } catch (error) {
     next(error);
@@ -22,21 +25,23 @@ const getVideoDisLikes = async (req, res, next) => {
 
 const addDisLike = async (req, res, next) => {
   try {
-    const { videoId, uId, commentId } = req.body;
-    let query = {};
-    console.log('adding dislike');
+    const { videoId, uId, commentId, blogId } = req.body;
+    let data = {};
+
     if (videoId) {
-      query = { videoId, uId };
+      data = { videoId, uId };
+    } else if (blogId) {
+      data = { blogId, uId };
     } else {
-      query = { commentId, uId };
+      data = { commentId, uId };
     }
 
-    const disLike = new VideoDisLike(query);
+    const disLike = new DisLike(data);
     //save the like information data in MongoDB
     disLike.save((err, dislikeResult) => {
       if (err) return res.json({ success: false, err });
       // if like button is allready clicked then decrease it
-      videoLike.findOneAndDelete(query).exec((err, likeResult) => {
+      Like.findOneAndDelete(data).exec((err, likeResult) => {
         if (err) return res.status(400).json({ success: false, err });
         res.status(200).json({ success: true });
       });
@@ -49,14 +54,17 @@ const addDisLike = async (req, res, next) => {
 const removeDisLike = async (req, res, next) => {
   try {
     let query = {};
-    const { videoId, uId, commentId } = req.body;
+    const { videoId, uId, commentId, blogId } = req.body;
+
     if (videoId) {
       query = { videoId, uId };
+    } else if (blogId) {
+      query = { blogId, uId };
     } else {
       query = { commentId, uId };
     }
 
-    VideoDisLike.findOneAndDelete(query).exec((err, result) => {
+    DisLike.findOneAndDelete(query).exec((err, result) => {
       if (err) return res.status(400).json({ success: false, err });
       res.status(200).json({ success: true });
     });
@@ -66,7 +74,7 @@ const removeDisLike = async (req, res, next) => {
 };
 
 module.exports = {
-  getVideoDisLikes,
+  getDisLikes,
   addDisLike,
   removeDisLike,
 };

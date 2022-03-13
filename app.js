@@ -17,8 +17,8 @@ const eventRoutes = require('./routes/eventRoutes');
 const reviewRoutes = require('./routes/reviewRoutes');
 const appointmentRoutes = require('./routes/appointmentRoutes');
 const commentRoutes = require('./routes/commentRoutes');
-const videoLikeRoutes = require('./routes/Education/videoRoutes/videoLikeRoutes');
-const videoDisLikeRoutes = require('./routes/Education/videoRoutes/videoDislikeRoutes');
+const likeRoutes = require('./routes/likeRoutes');
+const dislikeRoutes = require('./routes/dislikeRoutes');
 const newsRoutes = require('./routes/NewsRoutes');
 const developmentRoutes = require('./routes/DevelopmentRoutes');
 const donateRoutes = require('./routes/donateRoutes');
@@ -27,7 +27,6 @@ const errorhandler = require('./middlewares/errorhandler');
 const vaccineRegistrationRoutes = require('./routes/vaccineRegistrationRoutes');
 const availableAppointmentRoutes = require('./routes/availableAppointmentRoutes');
 const UserReviewRoutes = require('./routes/UserReviewRoutes');
-const { dir } = require('console');
 
 const app = express();
 
@@ -64,9 +63,9 @@ app.use('/vaccine', vaccineRegistrationRoutes);
 app.use('/availableAppointment', availableAppointmentRoutes);
 app.use('/donation', donateRoutes);
 app.use('/comment', commentRoutes);
-app.use('/videoLike', videoLikeRoutes);
-app.use('/videoDisLike', videoDisLikeRoutes);
-app.use('/favouriteVideo', favouriteVideoRoutes);
+app.use('/like', likeRoutes);
+app.use('/disLike', dislikeRoutes);
+app.use('/favouriteVideos', favouriteVideoRoutes);
 app.use('/userReview', UserReviewRoutes);
 
 // Handles any requests that don't match the ones above

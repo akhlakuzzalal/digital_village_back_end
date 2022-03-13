@@ -7,10 +7,7 @@ const commentSchema = Schema(
       type: Schema.Types.ObjectId,
       ref: 'User',
     },
-    postId: {
-      type: Schema.Types.ObjectId,
-      ref: 'Video',
-    },
+    postId: Schema.Types.ObjectId,
     responseTo: {
       type: Schema.Types.ObjectId,
       ref: 'User',
