@@ -1,5 +1,5 @@
-const VideoDisLike = require('../../../schemas/videoDislikeSchema/videoDislikeSchema');
-const videoLike = require('../../../schemas/VideoLikeSchema/VideoLikeSchema');
+const DisLike = require('../../../schemas/DislikeSchema/DislikeSchema');
+const Like = require('../../../schemas/LikeSchema/LikeSchema');
 
 const getVideoDisLikes = async (req, res, next) => {
   try {
@@ -11,7 +11,7 @@ const getVideoDisLikes = async (req, res, next) => {
       query = { commentId };
     }
 
-    VideoDisLike.find(query).exec((err, videoDisLikes) => {
+    DisLike.find(query).exec((err, videoDisLikes) => {
       if (err) return res.status(400).send(err);
       res.status(200).json({ success: true, videoDisLikes });
     });
@@ -31,12 +31,12 @@ const addDisLike = async (req, res, next) => {
       data = { commentId, uId };
     }
 
-    const disLike = new VideoDisLike(data);
+    const disLike = new DisLike(data);
     //save the like information data in MongoDB
     disLike.save((err, dislikeResult) => {
       if (err) return res.json({ success: false, err });
       // if like button is allready clicked then decrease it
-      videoLike.findOneAndDelete(data).exec((err, likeResult) => {
+      Like.findOneAndDelete(data).exec((err, likeResult) => {
         if (err) return res.status(400).json({ success: false, err });
         res.status(200).json({ success: true });
       });
@@ -56,7 +56,7 @@ const removeDisLike = async (req, res, next) => {
       query = { commentId, uId };
     }
 
-    VideoDisLike.findOneAndDelete(query).exec((err, result) => {
+    DisLike.findOneAndDelete(query).exec((err, result) => {
       if (err) return res.status(400).json({ success: false, err });
       res.status(200).json({ success: true });
     });
