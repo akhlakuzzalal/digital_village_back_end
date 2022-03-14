@@ -1,12 +1,12 @@
 const express = require('express');
 const router = express.Router();
 const {
+  getFavourites,
   addToFavourite,
   removeFromFavourite,
-  getFavouriteVideos,
-} = require('../../../controller/Education/videoController/favouriteVideoController');
+} = require('../controller/favouriteController');
 
-router.get('/all', getFavouriteVideos);
+router.get('/all', getFavourites);
 router.post('/add', addToFavourite);
 router.post('/remove', removeFromFavourite);
 
