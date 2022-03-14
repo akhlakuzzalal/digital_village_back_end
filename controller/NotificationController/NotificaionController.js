@@ -3,8 +3,6 @@ const Notification = require('../../schemas/NotificationsSchema/NotificationsSch
 const getAllNotification = async (req, res, next) => {
   try {
     const response = await Notification.find();
-    console.log(response);
-    res.status(201);
     res.json(response);
   } catch (error) {
     next(error);
