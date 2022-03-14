@@ -1,7 +1,7 @@
 const Video = require('../../schemas/Education/VideoSchema/Video');
 const Blog = require('../../schemas/Education/BlogSchema/Blog');
 const Roles = require('../../config/roles');
-const { filter } = require('../../utilities/Filter');
+const { filterBlogAndVideo } = require('../../utilities/Filter');
 
 const getallVideos = async (req, res, next) => {
   let { page, size, roles, search } = req.query;
@@ -16,7 +16,7 @@ const getallVideos = async (req, res, next) => {
     if (isAdmin) {
       if (search && page && size) {
         const allVideos = await Video.find();
-        const allFilteredVideos = filter(allVideos, search);
+        const allFilteredVideos = filterBlogAndVideo(allVideos, search);
         count = allFilteredVideos.length; // count will be only filtered videos from all videos
 
         const sendVideos = parseInt(page)
@@ -35,7 +35,10 @@ const getallVideos = async (req, res, next) => {
     } else {
       if (search && page && size) {
         const allVerifiedVideos = await Video.find({ isVerified: true });
-        const allVerifiedFilteredVideos = filter(allVerifiedVideos, search);
+        const allVerifiedFilteredVideos = filterBlogAndVideo(
+          allVerifiedVideos,
+          search
+        );
         count = allVerifiedFilteredVideos.length; // count will be all filtered videos from filtered videos
         const sendVideos = parseInt(page)
           ? parseInt(page) < parseInt(size)
@@ -113,7 +116,7 @@ const getallBlogs = async (req, res, next) => {
     if (isAdmin) {
       if (search && page && size) {
         const allBlogs = await Blog.find();
-        const allFilteredBlogs = filter(allBlogs, search);
+        const allFilteredBlogs = filterBlogAndVideo(allBlogs, search);
         count = allFilteredBlogs.length; // count will be only filtered blogs from all blogs
         console.log('api hitted in admin');
         const sendBlogs = parseInt(page)
@@ -132,7 +135,10 @@ const getallBlogs = async (req, res, next) => {
     } else {
       if (search && page && size) {
         const allVerifiedBlogs = await Blog.find({ isVerified: true });
-        const allVerifiedFilteredBlogs = filter(allVerifiedBlogs, search);
+        const allVerifiedFilteredBlogs = filterBlogAndVideo(
+          allVerifiedBlogs,
+          search
+        );
         count = allVerifiedFilteredBlogs.length; // count will be all filtered blogs from filtered blogs
         const sendBlogs = parseInt(page)
           ? parseInt(page) < parseInt(size)
