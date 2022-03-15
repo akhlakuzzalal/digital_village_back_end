@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/static/css/main.c5ffa559.css",
-    "main.js": "/static/js/main.29816626.js",
+    "main.css": "/static/css/main.d8fc2b4c.css",
+    "main.js": "/static/js/main.abe8b7c7.js",
     "static/js/498.56cf3c8a.chunk.js": "/static/js/498.56cf3c8a.chunk.js",
     "static/js/703.26df448e.chunk.js": "/static/js/703.26df448e.chunk.js",
     "static/js/513.7c61961e.chunk.js": "/static/js/513.7c61961e.chunk.js",
@@ -18,25 +18,26 @@
     "static/media/notification.png": "/static/media/notification.3e02ab34746eba3640c1.png",
     "static/media/mediBanner.png": "/static/media/mediBanner.5c1b5ec8dcada2e6bef0.png",
     "static/media/study.png": "/static/media/study.fd96f4b2d4665a0a6523.png",
-    "static/media/vaccineinfo.png": "/static/media/vaccineinfo.67f749ab7d495ca2cc86.png",
     "static/media/Add events.PNG": "/static/media/Add events.e9894cdf9c5448adf769.PNG",
-    "static/media/message.png": "/static/media/message.1e3ed1c8badd7b6db6f6.png",
     "static/media/donatebanner.jpg": "/static/media/donatebanner.b12bf1bdaa8a8b4a3578.jpg",
+    "static/media/polio.jpg": "/static/media/polio.6d69198714422802dbe3.jpg",
+    "static/media/COVAX.jpg": "/static/media/COVAX.2d7614473e09feff1661.jpg",
     "static/media/who we are.jpg": "/static/media/who we are.7bf090b2f9e4ebdef7be.jpg",
     "static/media/event.png": "/static/media/event.6a532e097c3856cded41.png",
     "static/media/contact.jpg": "/static/media/contact.eda293f56e17569aefd6.jpg",
+    "static/media/hepatitis.jpg": "/static/media/hepatitis.1c73fee152da98fc9151.jpg",
     "static/media/review.jpg": "/static/media/review.058940d89f72b3a25ee0.jpg",
     "static/media/logo.png": "/static/media/logo.05ff88cd21b64e34144e.png",
     "index.html": "/index.html",
-    "main.c5ffa559.css.map": "/static/css/main.c5ffa559.css.map",
-    "main.29816626.js.map": "/static/js/main.29816626.js.map",
+    "main.d8fc2b4c.css.map": "/static/css/main.d8fc2b4c.css.map",
+    "main.abe8b7c7.js.map": "/static/js/main.abe8b7c7.js.map",
     "498.56cf3c8a.chunk.js.map": "/static/js/498.56cf3c8a.chunk.js.map",
     "703.26df448e.chunk.js.map": "/static/js/703.26df448e.chunk.js.map",
     "513.7c61961e.chunk.js.map": "/static/js/513.7c61961e.chunk.js.map",
     "787.31f30833.chunk.js.map": "/static/js/787.31f30833.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.c5ffa559.css",
-    "static/js/main.29816626.js"
+    "static/css/main.d8fc2b4c.css",
+    "static/js/main.abe8b7c7.js"
   ]
 }
