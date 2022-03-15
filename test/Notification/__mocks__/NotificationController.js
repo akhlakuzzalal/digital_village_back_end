@@ -1,4 +1,4 @@
-const notifications = [
+let notifications = [
   {
     _id: '621a7604dcd296f259e277b8',
     title: 'Notification3',
@@ -99,7 +99,22 @@ const addANotification = (req, res) => {
   res.status(201).json(notifications);
 };
 
+const addOneNotification = (req, res) => {
+  res.json({ _id: 0 });
+};
+
+const deleteANotification = (req, res) => {
+  const { _id } = req.query;
+  const filteredNotificaitons = notifications.filter((n) => n._id !== _id);
+  notifications = filteredNotificaitons;
+  console.log(filteredNotificaitons.length);
+  res.status(204);
+  res.json(notifications);
+};
+
 module.exports = {
   getAllNotification,
   addANotification,
+  deleteANotification,
+  addOneNotification,
 };

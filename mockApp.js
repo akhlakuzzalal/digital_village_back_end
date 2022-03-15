@@ -3,6 +3,8 @@ const notificationRoutes = require('./test/Notification/__mocks__/NotificationRo
 
 const app = express();
 
+app.use(express.json());
+
 app.use('/notification', notificationRoutes);
 
 module.exports = app;
