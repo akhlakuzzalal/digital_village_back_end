@@ -31,13 +31,15 @@ const socialRoutes = require('./routes/socialRoutes');
 
 const app = express();
 
-mongoose
-  .connect(appConfig.MONGODB_URI, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  })
-  .then(() => console.log('connection successfull'))
-  .catch((err) => console.log(err));
+process.env.NODE_ENV !== 'test'
+  ? mongoose
+      .connect(appConfig.MONGODB_URI, {
+        useNewUrlParser: true,
+        useUnifiedTopology: true,
+      })
+      .then(() => console.log('connection successfull'))
+      .catch((err) => console.log(err))
+  : console.log('In testing mode');
 
 // midlewares
 app.use(credentials);
