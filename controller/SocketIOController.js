@@ -8,10 +8,16 @@ const io = new Server(httpServer, {
   /* options */
 });
 
-io.on('connection', (socket) => {
-  socket.on('message', ({ name, message }) => {
-    io.emit('message', { name, message });
+const socketController = () => {
+  io.on('connection', (socket) => {
+    socket.on('message', ({ name, message }) => {
+      io.emit('message', { name, message });
+    });
   });
-});
+};
 
 httpServer.listen(3000);
+
+module.exports = {
+  socketController,
+};
