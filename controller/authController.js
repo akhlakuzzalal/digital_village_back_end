@@ -1,4 +1,4 @@
-const User = require('../schemas/UsersSchema/User');
+const User = require('../schemas/UsersSchema/UserSchema');
 const hashPassword = require('../utilities/hashPassword');
 const jwt = require('jsonwebtoken');
 
@@ -197,7 +197,7 @@ const handleLogin = async (req, res, next) => {
   }
 };
 
-// handle log out
+// HANDLE LOG OUT
 const handleLogout = async (req, res, next) => {
   const cookies = req.cookies;
 

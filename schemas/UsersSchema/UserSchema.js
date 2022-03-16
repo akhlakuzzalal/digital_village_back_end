@@ -27,7 +27,7 @@ const userSchema = new mongoose.Schema(
       enum: ['employed', 'unemployed'],
     },
     phone: String,
-    yearlyIncome: String,
+    yearlyIncome: Number,
     religion: String,
     roles: Object,
     photo: Object,
