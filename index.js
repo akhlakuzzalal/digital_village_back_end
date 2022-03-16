@@ -22,7 +22,7 @@ const donateRoutes = require('./routes/donateRoutes');
 const errorhandler = require('./middlewares/errorhandler');
 const vaccineRegistrationRoutes = require('./routes/vaccineRegistrationRoutes');
 const availableAppointmentRoutes = require('./routes/availableAppointmentRoutes');
-
+const sslCommerzRoutes = require("./routes/sslCommerzRoutes/sslCommerzRoutes");
 // midlewares
 const app = express();
 app.use(credentials);
@@ -61,6 +61,7 @@ async function run() {
     app.use('/vaccine', vaccineRegistrationRoutes);
     app.use('/availableAppointment', availableAppointmentRoutes);
     app.use('/donation', donateRoutes);
+    app.use("/sslpayment", sslCommerzRoutes);
   } catch (error) {
     console.log(error.message);
   }
