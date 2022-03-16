@@ -77,7 +77,6 @@ const handleDeleteMyBookingEvents = async (req, res, next) => {
   try {
     const { email, id } = req.query;
     const myBooking = await Event.find({ _id: id });
-    console.log(myBooking);
     const newParticipantArray = myBooking[0].participants.filter(
       (e) => e !== email
     );

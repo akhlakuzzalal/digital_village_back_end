@@ -4,7 +4,6 @@ const handleInfo = async (req, res, next) => {
   try {
     const newVaccine = req.body;
     const response = await VaccineRegistration.insertMany(newVaccine);
-    console.log(response);
     res.json(response);
   } catch (error) {
     next(error);

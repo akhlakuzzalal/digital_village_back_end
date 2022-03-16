@@ -1,10 +1,10 @@
 const express = require('express');
 const notificationRoutes = require('./test/Notification/__mocks__/NotificationRoutes');
 
-const app = express();
+const mockApp = express();
 
-app.use(express.json());
+mockApp.use(express.json());
 
-app.use('/notification', notificationRoutes);
+mockApp.use('/notification', notificationRoutes);
 
-module.exports = app;
+module.exports = mockApp;

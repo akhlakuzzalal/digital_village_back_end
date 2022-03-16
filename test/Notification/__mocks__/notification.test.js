@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+// const mongoose = require('mongoose');
 const supertest = require('supertest');
 const mockApp = require('../../../mockApp');
 
@@ -29,7 +29,6 @@ describe('test notification api is working properly', () => {
     const response2 = await api.post('/notification/delete').query({
       _id: '621a7604dcd296f259e277b8',
     });
-    console.log(response1.body.length);
 
     // const isRemoved = response1.body.length - 1 === response2.body.length;
     // expect(isRemoved).toBe(true);
@@ -45,12 +44,10 @@ describe('test notification api is working properly', () => {
         'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Illum ad sed, dolorum beatae asperiores corporis vero quam harum officia culpa delectus nulla pariatur possimus error quo voluptates provident. Molestiae, facilis. Nobis quam atque, culpa odit ad eaque quidem totam cumque. Obcaecati consectetur voluptate fugit aspernatur amet voluptatem harum consequatur minima!',
     });
 
-    console.log(response.body);
-
     expect(response.body._id).toBeDefined();
   });
 });
 
-afterAll(() => {
-  mongoose.connection.close();
-});
+// afterAll(() => {
+//   mongoose.connection.close();
+// });

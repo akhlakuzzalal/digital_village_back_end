@@ -1,6 +1,4 @@
-const { use } = require('../routes/socialRoutes');
-const { findOne, findByIdAndUpdate } = require('../schemas/UsersSchema/User');
-const User = require('../schemas/UsersSchema/User');
+const User = require('../schemas/UsersSchema/UserSchema');
 
 const findAllUser = async (req, res, next) => {
   const email = req.query.email;

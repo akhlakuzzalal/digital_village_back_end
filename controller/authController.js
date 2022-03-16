@@ -1,4 +1,4 @@
-const User = require('../schemas/UsersSchema/User');
+const User = require('../schemas/UsersSchema/UserSchema');
 const hashPassword = require('../utilities/hashPassword');
 const jwt = require('jsonwebtoken');
 
@@ -14,7 +14,6 @@ const handleRegister = async (req, res, next) => {
 
     // USER ALLREADY EXIST SO LOGIN HIM
     if (response && response[0]?.name) {
-      console.log('enter 1');
       // GIVE THE USE AN ACCESS TOKEN
       const accessToken = jwt.sign(
         {
@@ -198,7 +197,7 @@ const handleLogin = async (req, res, next) => {
   }
 };
 
-// handle log out
+// HANDLE LOG OUT
 const handleLogout = async (req, res, next) => {
   const cookies = req.cookies;
 
@@ -286,23 +285,9 @@ const useRefreshToken = async (req, res, next) => {
   }
 };
 
-// Update User
-
-const handleUpdateUser = async (req, res, next) => {
-  try {
-    const user = await User.findOne({ email: req.params.email });
-    Object.assign(user, req.body);
-    user.save();
-    res.send(user);
-  } catch (error) {
-    next(error);
-  }
-};
-
 module.exports = {
   handleLogin,
   handleRegister,
   handleLogout,
   useRefreshToken,
-  handleUpdateUser,
 };

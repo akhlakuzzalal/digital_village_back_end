@@ -52,9 +52,9 @@ app.use('/uploads', express.static(path.join(__dirname, 'uploads'))); // Serve t
 
 // API
 app.use('/auth', authRoutes);
+app.use('/user', userRoutes);
 app.use('/teacher', teacherRoutes);
 app.use('/student', studentRoutes);
-app.use('/user', userRoutes);
 app.use('/notification', notificationRoutes);
 app.use('/event', eventRoutes);
 app.use('/review', reviewRoutes);

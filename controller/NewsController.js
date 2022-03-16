@@ -26,7 +26,6 @@ const handleAddNews = async (req, res, next) => {
   try {
     const response = await News.insertMany(newNews);
     res.json(response);
-    console.log(newNews);
   } catch (error) {
     next(error);
   }
