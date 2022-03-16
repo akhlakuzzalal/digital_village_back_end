@@ -1,4 +1,4 @@
-const User = require('../../schemas/UsersSchema/User');
+const User = require('../../schemas/UsersSchema/UserSchema');
 
 const getAllUsers = async (req, res, next) => {
   try {

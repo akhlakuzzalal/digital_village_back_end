@@ -1,6 +1,6 @@
 const Video = require('../../schemas/Education/VideoSchema/Video');
 const Blog = require('../../schemas/Education/BlogSchema/Blog');
-const User = require('../../schemas/UsersSchema/User');
+const User = require('../../schemas/UsersSchema/UserSchema');
 const Teacher = require('../../schemas/Education/TeacherSchema/Teacher');
 const fileSizeFormatter = require('../../utilities/fileSizeFormatter');
 

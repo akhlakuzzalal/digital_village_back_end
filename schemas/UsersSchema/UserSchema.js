@@ -18,25 +18,22 @@ const userSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    phone: String,
-    yearlyIncome: String,
-    employmentStatus: String,
     meritialStatus: {
       type: String,
       enum: ['married', 'unmarried'],
     },
+    employmentStatus: {
+      type: String,
+      enum: ['employed', 'unemployed'],
+    },
+    phone: String,
+    yearlyIncome: String,
     religion: String,
     roles: Object,
-    photo: String,
+    photo: Object,
     refreshToken: String,
   },
   { versionKey: false }
 );
-
-userSchema.methods = {
-  findMarriedUser: function () {
-    mongoose.model('User').find({ meritialStatus: 'unmarried' });
-  },
-};
 
 module.exports = mongoose.model('User', userSchema);
