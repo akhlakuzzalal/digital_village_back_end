@@ -16,7 +16,21 @@ const updateRoles = () => {
   }
 };
 
+// Update User
+
+const handleUpdateUser = async (req, res, next) => {
+  try {
+    const user = await User.findOne({ email: req.params.email });
+    Object.assign(user, req.body);
+    user.save();
+    res.send(user);
+  } catch (error) {
+    next(error);
+  }
+};
+
 module.exports = {
   updateRoles,
   getAllUsers,
+  handleUpdateUser,
 };

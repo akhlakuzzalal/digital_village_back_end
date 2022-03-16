@@ -9,7 +9,6 @@ const {
   handleRegister,
   useRefreshToken,
   handleLogout,
-  handleUpdateUser,
 } = require('../controller/authController');
 const { getAllUsers } = require('../controller/admin/userController');
 
@@ -18,5 +17,4 @@ router.post('/login', handleLogin);
 router.get('/logout', handleLogout);
 router.get('/refresh', useRefreshToken);
 router.get('/allUsers', validateUser, getAllUsers);
-router.put('/update/:email', handleUpdateUser);
 module.exports = router;
