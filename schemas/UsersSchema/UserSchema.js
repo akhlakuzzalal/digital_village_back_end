@@ -32,6 +32,9 @@ const userSchema = new mongoose.Schema(
     roles: Object,
     photo: Object,
     refreshToken: String,
+    requested: Array,
+    requesting: Array,
+    connection: Array,
   },
   { versionKey: false }
 );

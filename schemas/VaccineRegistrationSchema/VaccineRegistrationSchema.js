@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 
 const vaccineRegistrationSchema = new mongoose.Schema(
   {
-     email: {
+    email: {
       type: String,
       required: true,
     },
@@ -10,7 +10,7 @@ const vaccineRegistrationSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-   
+
     fatherName: {
       type: String,
       required: true,
@@ -32,6 +32,10 @@ const vaccineRegistrationSchema = new mongoose.Schema(
       required: true,
     },
     address: {
+      type: String,
+      required: true,
+    },
+    center: {
       type: String,
       required: true,
     },
