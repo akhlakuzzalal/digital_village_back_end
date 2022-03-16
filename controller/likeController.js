@@ -11,7 +11,6 @@ const getLikes = async (req, res, next) => {
     } else if (blogId) {
       query = { blogId };
     } else {
-      console.log(commentId);
       query = { commentId };
     }
 

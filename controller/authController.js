@@ -14,7 +14,6 @@ const handleRegister = async (req, res, next) => {
 
     // USER ALLREADY EXIST SO LOGIN HIM
     if (response && response[0]?.name) {
-      console.log('enter 1');
       // GIVE THE USE AN ACCESS TOKEN
       const accessToken = jwt.sign(
         {

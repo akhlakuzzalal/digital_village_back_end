@@ -101,7 +101,6 @@ const publishBlog = async (req, res, next) => {
 
 const getallBlogs = async (req, res, next) => {
   const { page, size } = req.query;
-  console.log(page, size);
 
   try {
     let count;

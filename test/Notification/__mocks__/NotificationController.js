@@ -107,7 +107,6 @@ const deleteANotification = (req, res) => {
   const { _id } = req.query;
   const filteredNotificaitons = notifications.filter((n) => n._id !== _id);
   notifications = filteredNotificaitons;
-  console.log(filteredNotificaitons.length);
   res.status(204);
   res.json(notifications);
 };

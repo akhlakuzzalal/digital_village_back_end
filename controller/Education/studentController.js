@@ -118,7 +118,6 @@ const getallBlogs = async (req, res, next) => {
         const allBlogs = await Blog.find();
         const allFilteredBlogs = filterBlogAndVideo(allBlogs, search);
         count = allFilteredBlogs.length; // count will be only filtered blogs from all blogs
-        console.log('api hitted in admin');
         const sendBlogs = parseInt(page)
           ? parseInt(page) < parseInt(size)
             ? allFilteredBlogs.slice(parseInt(page) * 10)
@@ -148,7 +147,6 @@ const getallBlogs = async (req, res, next) => {
                 parseInt(size)
               )
           : allVerifiedFilteredBlogs.slice(parseInt(page), parseInt(size));
-        console.log('api hitted with search query');
 
         return res.json({
           count,
