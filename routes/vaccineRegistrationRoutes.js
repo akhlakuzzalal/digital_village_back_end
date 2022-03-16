@@ -12,5 +12,5 @@ const {
 router.post('/addInfo', handleInfo);
 router.get('/findInfo', handleFindInfo);
 router.get('/findAllInfo', handleAllFindInfo);
-router.get('/updateInfo', handleUpdateInfo);
+router.put('/updateInfo', handleUpdateInfo);
 module.exports = router;
