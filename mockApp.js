@@ -1,8 +1,10 @@
 const express = require('express');
-const { getAllUser } = require('./tests/__mock__/mockController');
+const notificationRoutes = require('./test/Notification/__mocks__/NotificationRoutes');
 
 const app = express();
 
-app.use('/user', getAllUser);
+app.use(express.json());
+
+app.use('/notification', notificationRoutes);
 
 module.exports = app;

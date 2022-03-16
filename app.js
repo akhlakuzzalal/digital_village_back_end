@@ -27,16 +27,19 @@ const errorhandler = require('./middlewares/errorhandler');
 const vaccineRegistrationRoutes = require('./routes/vaccineRegistrationRoutes');
 const availableAppointmentRoutes = require('./routes/availableAppointmentRoutes');
 const UserReviewRoutes = require('./routes/UserReviewRoutes');
+const socialRoutes = require('./routes/socialRoutes');
 
 const app = express();
 
-mongoose
-  .connect(appConfig.MONGODB_URI, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  })
-  .then(() => console.log('connection successfull'))
-  .catch((err) => console.log(err));
+process.env.NODE_ENV !== 'test'
+  ? mongoose
+      .connect(appConfig.MONGODB_URI, {
+        useNewUrlParser: true,
+        useUnifiedTopology: true,
+      })
+      .then(() => console.log('connection successfull'))
+      .catch((err) => console.log(err))
+  : console.log('In testing mode');
 
 // midlewares
 app.use(credentials);
@@ -67,6 +70,7 @@ app.use('/like', likeRoutes);
 app.use('/disLike', dislikeRoutes);
 app.use('/favourites', favouriteRoutes);
 app.use('/userReview', UserReviewRoutes);
+app.use('/social', socialRoutes);
 
 // Handles any requests that don't match the ones above
 app.get('*', (req, res) => {
