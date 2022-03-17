@@ -34,13 +34,9 @@ const handleUpdateInfo = async (req, res, next) => {
     const info = req.body;
     console.log(info);
     const filter = { email: info.email };
-    const options = { upsert: true };
+
     const updateDoc = { $set: { status: 'approved' } };
-    const response = await VaccineRegistration.updateOne(
-      filter,
-      updateDoc,
-      options
-    );
+    const response = await VaccineRegistration.updateOne(filter, updateDoc);
     res.json(response);
   } catch (error) {
     next(error);
