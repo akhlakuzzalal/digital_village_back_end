@@ -10,7 +10,7 @@ const validateUser = require('../../middlewares/validateUser');
 
 const router = express.Router();
 
-router.get('/all', validateUser, getAllUsers);
+router.get('/all', getAllUsers);
 router.get('/singleUserInfo', getASingleUser);
 router.put('/update', upload.single('file'), updateUser);
 router.put('/updateWithoutProfileImg', updateUserWithoutProfileImg);

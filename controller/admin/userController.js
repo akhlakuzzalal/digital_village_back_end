@@ -2,9 +2,23 @@ const User = require('../../schemas/UsersSchema/UserSchema');
 const fileSizeFormatter = require('../../utilities/fileSizeFormatter');
 
 const getAllUsers = async (req, res, next) => {
+  let { page, size } = req.query;
+
   try {
-    const allusers = await User.find();
-    res.json(allusers);
+    let count = await User.count();
+    let allUsers;
+    if (page && size) {
+      allUsers = await User.find()
+        .skip(parseInt(page) * parseInt(size))
+        .limit(parseInt(size)); // send users with pagination
+    } else {
+      allUsers = await User.find(); // send all user
+    }
+
+    res.json({
+      count,
+      allUsers,
+    });
   } catch (error) {
     next(error);
   }
