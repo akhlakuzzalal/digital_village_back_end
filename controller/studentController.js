@@ -1,7 +1,7 @@
-const Video = require('../../schemas/Education/VideoSchema/Video');
-const Blog = require('../../schemas/Education/BlogSchema/Blog');
-const Roles = require('../../config/roles');
-const { filterBlogAndVideo } = require('../../utilities/Filter');
+const Video = require('../schemas/VideoSchema');
+const Blog = require('../schemas/BlogSchema');
+const Roles = require('../config/roles');
+const { filterBlogAndVideo } = require('../utilities/Filter');
 
 const getallVideos = async (req, res, next) => {
   let { page, size, roles, search } = req.query;

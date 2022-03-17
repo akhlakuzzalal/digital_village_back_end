@@ -1,4 +1,4 @@
-const favourite = require('../schemas/FavouriteSchema/FavouriteSchema');
+const favourite = require('../schemas/FavouriteSchema');
 
 const getFavourites = async (req, res, next) => {
   try {

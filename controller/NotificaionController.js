@@ -1,4 +1,4 @@
-const Notification = require('../../schemas/NotificationsSchema/NotificationsSchema');
+const Notification = require('../schemas/NotificationsSchema');
 
 const getAllNotification = async (req, res, next) => {
   try {

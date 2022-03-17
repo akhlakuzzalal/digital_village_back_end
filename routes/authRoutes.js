@@ -10,7 +10,7 @@ const {
   useRefreshToken,
   handleLogout,
 } = require('../controller/authController');
-const { getAllUsers } = require('../controller/admin/userController');
+const { getAllUsers } = require('../controller/userController');
 
 router.post('/register', handleRegister);
 router.post('/login', handleLogin);

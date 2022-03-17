@@ -1,6 +1,6 @@
 // const mongoose = require('mongoose');
 const supertest = require('supertest');
-const mockApp = require('../../../mockApp');
+const mockApp = require('../../mockApp');
 
 const api = supertest(mockApp);
 

@@ -1,4 +1,4 @@
-const UserReview = require('../schemas/UserReviewSchema/UserReviewSchema');
+const UserReview = require('../schemas/UserReviewSchema');
 
 const getAllUserReview = async (req, res, next) => {
   try {

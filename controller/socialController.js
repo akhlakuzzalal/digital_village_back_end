@@ -1,4 +1,4 @@
-const User = require('../schemas/UsersSchema/UserSchema');
+const User = require('../schemas/UserSchema');
 
 const findAllUser = async (req, res, next) => {
   const email = req.query.email;

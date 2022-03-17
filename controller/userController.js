@@ -1,5 +1,5 @@
-const User = require('../../schemas/UsersSchema/UserSchema');
-const fileSizeFormatter = require('../../utilities/fileSizeFormatter');
+const User = require('../schemas/UserSchema');
+const fileSizeFormatter = require('../utilities/fileSizeFormatter');
 
 const getAllUsers = async (req, res, next) => {
   let { page, size } = req.query;

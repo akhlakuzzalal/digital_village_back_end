@@ -1,8 +1,8 @@
-const Video = require('../../schemas/Education/VideoSchema/Video');
-const Blog = require('../../schemas/Education/BlogSchema/Blog');
-const User = require('../../schemas/UsersSchema/UserSchema');
-const Teacher = require('../../schemas/Education/TeacherSchema/Teacher');
-const fileSizeFormatter = require('../../utilities/fileSizeFormatter');
+const Video = require('../schemas/VideoSchema');
+const Blog = require('../schemas/BlogSchema');
+const User = require('../schemas/UserSchema');
+const Teacher = require('../schemas/TeacherSchema');
+const fileSizeFormatter = require('../utilities/fileSizeFormatter');
 
 const publishVideo = async (req, res, next) => {
   const file = {

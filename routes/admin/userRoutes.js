@@ -4,7 +4,7 @@ const {
   getASingleUser,
   updateUserWithoutProfileImg,
   updateUser,
-} = require('../../controller/admin/userController');
+} = require('../../controller/userController');
 const upload = require('../../middlewares/upload');
 const validateUser = require('../../middlewares/validateUser');
 

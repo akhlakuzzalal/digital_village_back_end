@@ -1,5 +1,5 @@
 const Roles = require('../config/roles');
-const Products = require('../schemas/EMarketSchema/ProductsSchema');
+const Products = require('../schemas/ProductsSchema');
 const { filterProducts } = require('../utilities/Filter');
 
 // get all Products
