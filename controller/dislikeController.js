@@ -1,5 +1,5 @@
-const DisLike = require('../schemas/DislikeSchema/DislikeSchema');
-const Like = require('../schemas/LikeSchema/LikeSchema');
+const DisLike = require('../schemas/DislikeSchema');
+const Like = require('../schemas/LikeSchema');
 
 const getDisLikes = async (req, res, next) => {
   try {

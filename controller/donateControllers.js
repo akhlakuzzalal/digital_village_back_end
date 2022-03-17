@@ -1,4 +1,4 @@
-const Donate = require('../schemas/donateSchema/DonateSchema');
+const Donate = require('../schemas/DonateSchema');
 // const ObjectId = require('mongodb').ObjectId;
 
 // add a new donation cuase administrator Post == ok

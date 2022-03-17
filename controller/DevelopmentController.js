@@ -1,4 +1,4 @@
-const Development = require('../schemas/DevelopmentSchema/DevelopmentSchema');
+const Development = require('../schemas/DevelopmentSchema');
 const fileSizeFormatter = require('../utilities/fileSizeFormatter');
 
 const getAllDevelopment = async (req, res, next) => {

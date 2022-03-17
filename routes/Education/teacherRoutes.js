@@ -14,7 +14,7 @@ const {
   editAVideo,
   getSingleBlog,
   editABlog,
-} = require('../../controller/Education/teacherController');
+} = require('../../controller/teacherController');
 
 router.get('/video/all', getallVideo);
 router.get('/myVideos', getMyVideos);

@@ -1,18 +1,18 @@
 const express = require('express');
 const {
-  updateRoles,
   getAllUsers,
-  handleUpdateUser,
   getASingleUser,
-} = require('../../controller/admin/userController');
+  updateUserWithoutProfileImg,
+  updateUser,
+} = require('../../controller/userController');
 const upload = require('../../middlewares/upload');
 const validateUser = require('../../middlewares/validateUser');
 
 const router = express.Router();
 
-router.get('/all', validateUser, getAllUsers);
+router.get('/all', getAllUsers);
 router.get('/singleUserInfo', getASingleUser);
-router.put('/update', upload.single('file'), handleUpdateUser);
-// router.put('/updateRoles', updateRoles);
+router.put('/update', upload.single('file'), updateUser);
+router.put('/updateWithoutProfileImg', updateUserWithoutProfileImg);
 
 module.exports = router;

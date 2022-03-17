@@ -1,4 +1,4 @@
-const VaccineRegistration = require('../schemas/VaccineRegistrationSchema/VaccineRegistrationSchema');
+const VaccineRegistration = require('../schemas/VaccineRegistrationSchema');
 
 const handleInfo = async (req, res, next) => {
   try {
