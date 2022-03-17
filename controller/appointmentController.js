@@ -15,7 +15,8 @@ const handleAppointment = async (req, res, next) => {
 const handleUserAppointment = async (req, res, next) => {
   try {
     const { email } = req.query;
-    const date = new Date(req.query.date).toDateString();
+    const date = new Date(req.query.date).toLocaleDateString();
+    console.log(date);
     const response = await Appointment.find({ email, date });
     console.log(response);
     res.json(response);
