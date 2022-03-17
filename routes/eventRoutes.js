@@ -8,6 +8,8 @@ const {
   getUpcomingEvents,
   handleDeleteEvents,
   handleParticipants,
+  getEventWithEmail,
+  handleDeleteMyBookingEvents,
 } = require('../controller/eventController.js');
 
 router.post('/addEvent', handleAddEvent);
@@ -16,5 +18,7 @@ router.get('/archivedEvents', getArchivedEvents);
 router.get('/upcomingEvents', getUpcomingEvents);
 router.delete('/deleteEvent', handleDeleteEvents);
 router.put('/participant', handleParticipants);
+router.get('/myBookingEvents', getEventWithEmail);
+router.put('/deleteMyBooking', handleDeleteMyBookingEvents);
 
 module.exports = router;

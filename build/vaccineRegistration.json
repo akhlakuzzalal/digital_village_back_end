@@ -1,0 +1,12 @@
+[
+  {
+    "email": "user1@gmail.com",
+    "name": "user1",
+    "fatherName": "user2",
+    "motherName": "user3",
+    "date": "01-02-1998",
+    "nid": "123456789",
+    "mobile": "0171111111",
+    "address": "3/5 abc"
+  }
+]

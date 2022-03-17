@@ -1,0 +1,96 @@
+const { use } = require('../routes/socialRoutes');
+const { findOne, findByIdAndUpdate } = require('../schemas/UsersSchema/User');
+const User = require('../schemas/UsersSchema/User');
+
+const findAllUser = async (req, res, next) => {
+  const email = req.query.email;
+  try {
+    const user = await User.find({ email: email });
+    const allUsersIncludingUser = await User.find({});
+    const allUsers = allUsersIncludingUser?.filter(
+      (user) => user.email !== email
+    );
+    const result = {
+      user,
+      allUsers,
+    };
+    res.json(result);
+  } catch (err) {
+    next(err);
+  }
+  const responce = await User.find({});
+};
+
+const requestFriend = async (req, res, next) => {
+  const { userID, requestedUserID } = req.body;
+  const user = await User.find({ _id: userID });
+  const requestedUser = await User.find({ _id: requestedUserID });
+  if (
+    !user[0]?.requesting.includes(requestedUserID) &&
+    !user[0]?.requested.includes(requestedUserID) &&
+    !user[0]?.connection.includes(requestedUserID)
+  ) {
+    try {
+      const updateUser = await User.findByIdAndUpdate(
+        { _id: userID },
+        { requesting: [...user[0]?.requesting, requestedUserID] }
+      );
+      const updateReqUser = await User.findByIdAndUpdate(
+        { _id: requestedUserID },
+        { requested: [...requestedUser[0]?.requested, userID] }
+      );
+      res.json('Succesfully Requested');
+    } catch (err) {
+      next(err);
+    }
+  } else {
+    res.json('Already Requested');
+  }
+};
+
+const acceptFriend = async (req, res, next) => {
+  const { userID, requestingUserID } = req.body;
+  const user = await User.find({ _id: userID });
+  const requestingUser = await User.find({ _id: requestingUserID });
+  if (
+    user[0]?.requested.includes(requestingUserID) &&
+    requestingUser[0]?.requesting.includes(userID) &&
+    !user[0]?.connection.includes(requestingUserID)
+  ) {
+    //   user pending request
+    const userRequested = user[0]?.requested.filter(
+      (id) => id !== requestingUserID
+    );
+    // sender request
+    const reqUserRequesting = requestingUser[0]?.requesting.filter(
+      (id) => id !== userID
+    );
+    // user connection
+    const userconnections = [...user[0]?.connection, requestingUserID];
+    // requesting user connection
+    const reqUserCnnections = [...requestingUser[0]?.connection, userID];
+    try {
+      // set user
+      await User.findByIdAndUpdate(
+        { _id: userID },
+        { connection: userconnections, requested: userRequested }
+      );
+      //   set req User
+      await User.findByIdAndUpdate(
+        { _id: requestingUserID },
+        { connection: reqUserCnnections, requesting: reqUserRequesting }
+      );
+      res.json('accept');
+    } catch (err) {
+      next(err);
+    }
+  } else {
+    res.json('you are already Connected');
+  }
+};
+
+module.exports = {
+  findAllUser,
+  requestFriend,
+  acceptFriend,
+};

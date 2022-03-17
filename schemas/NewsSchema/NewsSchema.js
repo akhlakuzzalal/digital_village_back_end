@@ -6,23 +6,25 @@ const NewsSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    date: {
+    description: {
       type: String,
       required: true,
     },
-    time: {
-        type: String,
-        required: true,
-      },
-      image: {
-        type: String,
-        required: true,
-      },
-      description: {
-        type: String,
-        required: true,
-      },
-  
+    content: {
+      type: String,
+      required: true,
+    },
+    bannerImg: Object,
+    publishDate: {
+      type: String,
+      required: true,
+    },
+    publishTime: {
+      type: String,
+      required: true,
+    },
+    rating: String,
+    comments: Array,
   },
   { versionKey: false }
 );

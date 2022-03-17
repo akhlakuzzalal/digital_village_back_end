@@ -1,10 +1,10 @@
-const { response } = require('express');
-const VaccineRegistration = require('../schemas/vaccineRegistrationSchema/vaccineRegistrationSchema');
+const VaccineRegistration = require('../schemas/VaccineRegistrationSchema/VaccineRegistrationSchema');
 
 const handleInfo = async (req, res, next) => {
   try {
     const newVaccine = req.body;
     const response = await VaccineRegistration.insertMany(newVaccine);
+    console.log(response);
     res.json(response);
   } catch (error) {
     next(error);

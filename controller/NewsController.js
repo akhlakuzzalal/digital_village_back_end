@@ -1,4 +1,5 @@
 const News = require('../schemas/NewsSchema/NewsSchema');
+const fileSizeFormatter = require('../utilities/fileSizeFormatter');
 
 const getAllNews = async (req, res, next) => {
   try {
@@ -10,10 +11,22 @@ const getAllNews = async (req, res, next) => {
 };
 
 const handleAddNews = async (req, res, next) => {
+  const file = {
+    name: req.file.originalname,
+    path: req.file.path,
+    type: req.file.mimetype,
+    size: fileSizeFormatter(req.file.size, 2), // 0.00
+  };
+
+  const newNews = {
+    ...JSON.parse(req.body.news),
+    bannerImg: file,
+    isVerified: false,
+  };
   try {
-    const news = req.body;
-    const response = await News.insertMany(news);
+    const response = await News.insertMany(newNews);
     res.json(response);
+    console.log(newNews);
   } catch (error) {
     next(error);
   }
@@ -21,7 +34,7 @@ const handleAddNews = async (req, res, next) => {
 
 const handleDeleteNews = async (req, res, next) => {
   try {
-    const { id } = req.query;
+    const id = req.params.id;
     const data = { _id: id };
     const response = await News.deleteOne(data);
     res.json(response);
