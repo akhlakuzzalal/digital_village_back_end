@@ -11,7 +11,7 @@ const teacherRoutes = require('./routes/Education/teacherRoutes');
 const paymentRoute = require('./routes/paymentRoute');
 const eMarketRoutes = require('./routes/eMarketRoutes');
 const notificationRoutes = require('./routes/NotificationRoutes');
-const userRoutes = require('./routes/admin/userRoutes');
+const userRoutes = require('./routes/userRoutes');
 const studentRoutes = require('./routes/Education/studentRoutes');
 const eventRoutes = require('./routes/eventRoutes');
 const reviewRoutes = require('./routes/reviewRoutes');
@@ -28,7 +28,7 @@ const vaccineRegistrationRoutes = require('./routes/vaccineRegistrationRoutes');
 const availableAppointmentRoutes = require('./routes/availableAppointmentRoutes');
 const UserReviewRoutes = require('./routes/UserReviewRoutes');
 const socialRoutes = require('./routes/socialRoutes');
-const sslCommerzRoutes = require("./routes/sslCommerzRoutes/sslCommerzRoutes");
+const sslCommerzRoutes = require('./routes/sslCommerzRoutes');
 
 const app = express();
 
@@ -72,7 +72,7 @@ app.use('/disLike', dislikeRoutes);
 app.use('/favourites', favouriteRoutes);
 app.use('/userReview', UserReviewRoutes);
 app.use('/social', socialRoutes);
-app.use("/sslpayment", sslCommerzRoutes);
+app.use('/sslpayment', sslCommerzRoutes);
 
 // Handles any requests that don't match the ones above
 app.get('*', (req, res) => {
