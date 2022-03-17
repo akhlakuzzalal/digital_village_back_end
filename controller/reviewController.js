@@ -1,4 +1,3 @@
-const { ObjectID } = require('bson');
 const Review = require('../schemas/Review');
 
 const handleAddReview = async (req, res, next) => {

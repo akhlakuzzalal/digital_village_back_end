@@ -1,6 +1,6 @@
 // const mongoose = require('mongoose');
 const supertest = require('supertest');
-const mockApp = require('../../mockApp');
+const mockApp = require('../../../mockApp');
 
 const api = supertest(mockApp);
 
@@ -11,14 +11,14 @@ describe('test notification api is working properly', () => {
   });
 
   test('should return 201 after creation and increase 1', async () => {
-    const response1 = await api.get('/notification/all');
+    const response1 = await api.get('/notification/all'); // 11
     const response2 = await api.post('/notification/add').send({
       title: 'Notification3',
       email: 'user2@gmail.com',
       date: '02/02/2022',
       description:
         'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Illum ad sed, dolorum beatae asperiores corporis vero quam harum officia culpa delectus nulla pariatur possimus error quo voluptates provident. Molestiae, facilis. Nobis quam atque, culpa odit ad eaque quidem totam cumque. Obcaecati consectetur voluptate fugit aspernatur amet voluptatem harum consequatur minima!',
-    });
+    }); // 12
     const isAdded = response1.body.length === response2.body.length - 1;
     expect(isAdded).toBe(true);
     expect(response2.status).toBe(201);
