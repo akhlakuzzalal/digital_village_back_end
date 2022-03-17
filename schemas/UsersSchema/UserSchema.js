@@ -18,7 +18,7 @@ const userSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    meritialStatus: {
+    maritialStatus: {
       type: String,
       enum: ['married', 'unmarried'],
     },
@@ -28,7 +28,16 @@ const userSchema = new mongoose.Schema(
     },
     phone: String,
     yearlyIncome: Number,
-    religion: String,
+    religion: {
+      type: String,
+      enum: ['Islam', 'Christianity', 'Hinduism', 'Buddhism', 'others'],
+    },
+    gender: {
+      type: String,
+      enum: ['male', 'female', 'others'],
+    },
+    about: String,
+    occupation: String,
     roles: Object,
     photo: Object,
     refreshToken: String,

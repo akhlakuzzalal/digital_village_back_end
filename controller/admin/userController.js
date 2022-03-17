@@ -1,4 +1,5 @@
 const User = require('../../schemas/UsersSchema/UserSchema');
+const fileSizeFormatter = require('../../utilities/fileSizeFormatter');
 
 const getAllUsers = async (req, res, next) => {
   try {
@@ -26,7 +27,7 @@ const getASingleUser = async (req, res, next) => {
   }
 };
 
-const handleUpdateUser = async (req, res, next) => {
+const updateUser = async (req, res, next) => {
   const { id } = req.query;
   const file = {
     name: req.file.originalname,
@@ -37,7 +38,7 @@ const handleUpdateUser = async (req, res, next) => {
 
   const userInfo = {
     ...JSON.parse(req.body.user),
-    profile: file,
+    photo: file,
   };
 
   try {
@@ -50,9 +51,23 @@ const handleUpdateUser = async (req, res, next) => {
   }
 };
 
+const updateUserWithoutProfileImg = async (req, res, next) => {
+  const { id } = req.query;
+
+  try {
+    const response = await User.findOneAndUpdate({ _id: id }, req.body, {
+      new: true,
+    });
+    res.json(response);
+  } catch (error) {
+    next(error);
+  }
+};
+
 module.exports = {
   updateRoles,
   getAllUsers,
-  handleUpdateUser,
+  updateUser,
   getASingleUser,
+  updateUserWithoutProfileImg,
 };
