@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 
 const PostSchema = new mongoose.Schema(
   {
-    userID: {
+    userEmail: {
       type: String,
       required: true,
     },
@@ -11,6 +11,8 @@ const PostSchema = new mongoose.Schema(
       required: true,
     },
     loves: Array,
+    photo: Object,
+    time: String,
   },
   { versionKey: false }
 );
