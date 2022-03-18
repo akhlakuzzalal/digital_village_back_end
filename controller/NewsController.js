@@ -32,6 +32,17 @@ const handleAddNews = async (req, res, next) => {
   }
 };
 
+
+const getSingleNews = async (req, res, next) => {
+  try {
+    const { id } = req.query;
+    const news = await News.findOne({ _id: id });
+    res.json(news);
+  } catch (error) {
+    next(error);
+  }
+};
+
 const handleDeleteNews = async (req, res, next) => {
   try {
     const id = req.params.id;
@@ -43,8 +54,34 @@ const handleDeleteNews = async (req, res, next) => {
   }
 };
 
+const handleEditNews= async (req, res, next) => {
+  const { id } = req.query;
+  const file = {
+    name: req.file.originalname,
+    path: req.file.path,
+    type: req.file.mimetype,
+    size: fileSizeFormatter(req.file.size, 2), // 0.00
+  };
+
+  const editNews = {
+    ...JSON.parse(req.body.news),
+    bannerImg: file,
+  };
+
+  try {
+    const response = await News.findOneAndUpdate({ _id: id }, editNews);
+    res.json({
+      success: true,
+      response,
+    });
+  } catch (error) {
+    next(error);
+  }
+};
 module.exports = {
   getAllNews,
   handleAddNews,
   handleDeleteNews,
+  handleEditNews,
+  getSingleNews
 };

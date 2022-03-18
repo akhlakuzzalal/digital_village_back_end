@@ -84,7 +84,7 @@ const updeteCuase = async (req, res, next) => {
   } catch (error) {
     next(error);
   }
-};
+}; 
 
 // exports all module
 
