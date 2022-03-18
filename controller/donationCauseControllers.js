@@ -1,11 +1,11 @@
-const Donate = require('../schemas/DonateSchema');
+const DonationCause = require('../schemas/DonationCauseSchema');
 // const ObjectId = require('mongodb').ObjectId;
 
 // add a new donation cuase administrator Post == ok
 const handleAddDonateCuase = async (req, res, next) => {
   try {
     const newCuase = req.body;
-    const result = await Donate.insertMany(newCuase);
+    const result = await DonationCause.insertMany(newCuase);
     res.json(result);
   } catch (error) {
     next(error);
@@ -16,7 +16,7 @@ const handleAddDonateCuase = async (req, res, next) => {
 const AddDonarPayment = async (req, res, next) => {
   try {
     const newDonarPayment = req.body;
-    const result = await Donate.insertMany(newDonarPayment);
+    const result = await DonationCause.insertMany(newDonarPayment);
     res.json(result);
   } catch (error) {
     next(error);
@@ -26,7 +26,7 @@ const AddDonarPayment = async (req, res, next) => {
 // Get All Cuases ==ok
 const getAllCuases = async (req, res, next) => {
   try {
-    const allCuases = await Donate.find({});
+    const allCuases = await DonationCause.find({});
     res.json(allCuases);
   } catch (error) {
     next(error);
@@ -36,7 +36,7 @@ const getAllCuases = async (req, res, next) => {
 // Get All Payments == not try
 const getAllPayments = async (req, res, next) => {
   try {
-    const allPayments = await Donate.find({});
+    const allPayments = await DonationCause.find({});
     res.json(allPayments);
   } catch (error) {
     next(error);
@@ -48,7 +48,7 @@ const getSigleCuase = async (req, res, next) => {
   try {
     const id = req.query.id;
     const query = { _id: id };
-    const sigleCuase = await Donate.findOne(query);
+    const sigleCuase = await DonationCause.findOne(query);
     res.json(sigleCuase);
   } catch (error) {
     next(error);
@@ -60,7 +60,7 @@ const deleteCuase = async (req, res, next) => {
   try {
     const id = req.query.id;
     const query = { _id: id };
-    const sigleCuasedelete = await Donate.findOneAndDelete(query);
+    const sigleCuasedelete = await DonationCause.findOneAndDelete(query);
     res.json(sigleCuasedelete);
   } catch (error) {
     next(error);
@@ -74,7 +74,7 @@ const updeteCuase = async (req, res, next) => {
     const updateCuase = req.body;
     const filter = { _id: id };
 
-    const response = await Donate.findOneAndReplace(filter, updateCuase);
+    const response = await DonationCause.findOneAndReplace(filter, updateCuase);
     res.json(response);
   } catch (error) {
     next(error);

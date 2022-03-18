@@ -8,7 +8,7 @@ const {
   AddDonarPayment,
   deleteCuase,
   updeteCuase,
-} = require('../controller/donateControllers');
+} = require('../controller/donationCauseControllers');
 
 router.get('/cuases', getAllCuases);
 router.get('/causedetails', getSigleCuase);
