@@ -55,6 +55,7 @@ const handleDeleteNews = async (req, res, next) => {
 
 const handleEditNews= async (req, res, next) => {
   const { id } = req.query;
+  console.log(req.file)
   const file = {
     name: req.file.originalname,
     path: req.file.path,

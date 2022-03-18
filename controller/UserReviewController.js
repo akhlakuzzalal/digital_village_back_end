@@ -42,15 +42,15 @@ const handleDeleteUserReview = async (req, res, next) => {
 
 
 const handleReviewUpdate = async (req, res, next) => {
-  console.log('check this data hit', req.body);
+  // console.log('check this data hit', req.body);
 
   try {
     const id = req.query.id;
     const updateReview = req.body;
     const filter = { _id: id };
-
     const response = await UserReview.findOneAndReplace(filter, updateReview);
     res.json(response);
+    console.log(response)
   } catch (error) {
     next(error);
   }

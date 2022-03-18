@@ -3,6 +3,7 @@ const Donate = require('../schemas/DonateSchema');
 
 // add a new donation cuase administrator Post == ok
 const handleAddDonateCuase = async (req, res, next) => {
+  console.log('hitted');
   try {
     const newCuase = req.body;
     const result = await Donate.insertMany(newCuase);
@@ -14,6 +15,7 @@ const handleAddDonateCuase = async (req, res, next) => {
 
 // add a new donation cuase payment a donar Post == not try
 const AddDonarPayment = async (req, res, next) => {
+  console.log('hitted');
   try {
     const newDonarPayment = req.body;
     const result = await Donate.insertMany(newDonarPayment);
@@ -57,6 +59,7 @@ const getSigleCuase = async (req, res, next) => {
 
 // Delete sigle Cuase
 const deleteCuase = async (req, res, next) => {
+  console.log('hitted');
   try {
     const id = req.query.id;
     const query = { _id: id };
@@ -69,6 +72,8 @@ const deleteCuase = async (req, res, next) => {
 
 //Update sigle Cuase
 const updeteCuase = async (req, res, next) => {
+  console.log('hitted', req.body);
+
   try {
     const id = req.query.id;
     const updateCuase = req.body;
@@ -79,7 +84,7 @@ const updeteCuase = async (req, res, next) => {
   } catch (error) {
     next(error);
   }
-}; 
+};
 
 // exports all module
 
