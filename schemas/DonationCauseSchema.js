@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
 
 const donationCauseSchema = new mongoose.Schema({
   requesterName: String,
@@ -26,7 +27,12 @@ const donationCauseSchema = new mongoose.Schema({
   raised: {
     type: Number,
   },
-  donars: Array,
+  donars: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: 'User',
+    },
+  ],
   date: {
     type: String,
     required: true,

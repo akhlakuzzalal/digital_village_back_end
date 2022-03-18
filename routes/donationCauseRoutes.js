@@ -4,17 +4,15 @@ const router = express.Router();
 const {
   handleAddDonateCuase,
   getAllCuases,
-  getSigleCuase,
   AddDonarPayment,
   deleteCuase,
   updeteCuase,
 } = require('../controller/donationCauseControllers');
 
-router.get('/cuases', getAllCuases);
-router.get('/causedetails', getSigleCuase);
-router.post('/addcuase', handleAddDonateCuase);
+router.get('/all', getAllCuases);
+router.post('/add', handleAddDonateCuase);
 router.post('/donarpayment', AddDonarPayment);
-router.put('/updatecuase', updeteCuase);
-router.delete('/deletecuase', deleteCuase);
+router.put('/update', updeteCuase);
+router.delete('/delete', deleteCuase);
 
 module.exports = router;

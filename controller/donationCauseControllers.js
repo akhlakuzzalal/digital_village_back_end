@@ -43,18 +43,6 @@ const getAllPayments = async (req, res, next) => {
   }
 };
 
-// Get sigle Cuase == ok
-const getSigleCuase = async (req, res, next) => {
-  try {
-    const id = req.query.id;
-    const query = { _id: id };
-    const sigleCuase = await DonationCause.findOne(query);
-    res.json(sigleCuase);
-  } catch (error) {
-    next(error);
-  }
-};
-
 // Delete sigle Cuase
 const deleteCuase = async (req, res, next) => {
   try {
@@ -86,7 +74,6 @@ const updeteCuase = async (req, res, next) => {
 module.exports = {
   handleAddDonateCuase,
   getAllCuases,
-  getSigleCuase,
   AddDonarPayment,
   deleteCuase,
   updeteCuase,

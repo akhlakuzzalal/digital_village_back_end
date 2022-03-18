@@ -65,7 +65,7 @@ app.use('/news', newsRoutes);
 app.use('/development', developmentRoutes);
 app.use('/vaccine', vaccineRegistrationRoutes);
 app.use('/availableAppointment', availableAppointmentRoutes);
-app.use('/donation', donationCauseRoutes);
+app.use('/donationCause', donationCauseRoutes);
 app.use('/comment', commentRoutes);
 app.use('/like', likeRoutes);
 app.use('/disLike', dislikeRoutes);
