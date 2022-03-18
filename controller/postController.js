@@ -5,6 +5,7 @@ const fileSizeFormatter = require('../utilities/fileSizeFormatter');
 // add Post
 const addPost = async (req, res, next) => {
   const postData = req.body;
+  console.log(postData);
   try {
     const responce = await Post.insertMany(postData);
     res.json(responce);

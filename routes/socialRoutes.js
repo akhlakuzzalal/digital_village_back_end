@@ -12,12 +12,14 @@ const {
   requestFriend,
   acceptFriend,
   cancleRequest,
+  usersofMedia,
 } = require('../controller/socialController');
 const { socketController } = require('../controller/SocketIOController');
 const router = express.Router();
 const upload = require('../middlewares/upload');
 // account related
 router.get('/allUsers', findAllUser);
+router.get('/usersofMedia', usersofMedia);
 router.put('/request', requestFriend);
 router.put('/accept', acceptFriend);
 router.put('/cancel', cancleRequest);

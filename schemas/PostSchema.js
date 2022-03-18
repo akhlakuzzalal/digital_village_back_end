@@ -6,10 +6,7 @@ const PostSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    post: {
-      type: String,
-      required: true,
-    },
+    post: String,
     loves: Array,
     photo: Object,
     time: String,
