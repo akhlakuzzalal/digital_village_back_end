@@ -1,4 +1,4 @@
-const News = require('../schemas/NewsSchema/NewsSchema');
+const News = require('../schemas/NewsSchema');
 const fileSizeFormatter = require('../utilities/fileSizeFormatter');
 
 const getAllNews = async (req, res, next) => {
@@ -26,7 +26,6 @@ const handleAddNews = async (req, res, next) => {
   try {
     const response = await News.insertMany(newNews);
     res.json(response);
-    console.log(newNews);
   } catch (error) {
     next(error);
   }
