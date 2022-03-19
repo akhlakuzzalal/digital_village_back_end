@@ -6,13 +6,16 @@ const {
   getAllCuases,
   AddDonarPayment,
   deleteCuase,
-  updeteCuase,
+  updateACause,
+  takeDonations,
 } = require('../controller/donationCauseControllers');
+const upload = require('../middlewares/upload');
 
 router.get('/all', getAllCuases);
-router.post('/add', handleAddDonateCuase);
+router.post('/add', upload.single('file'), handleAddDonateCuase);
 router.post('/donarpayment', AddDonarPayment);
-router.put('/update', updeteCuase);
+router.put('/update', upload.single('file'), updateACause);
+router.put('/take', takeDonations);
 router.delete('/delete', deleteCuase);
 
 module.exports = router;
