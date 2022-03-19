@@ -13,7 +13,11 @@ const getAllProducts = async (req, res, next) => {
     const isAdmin = roles && roles.length > 0 && roles.includes(Roles.Admin);
 
     if (isAdmin) {
-      if (search && page && size) {
+      if (
+        search !== 'undefined' &&
+        page !== 'undefined' &&
+        size !== 'undefined'
+      ) {
         const allProducts = await Products.find();
         const allFilteredProducts = filterProducts(allProducts, search);
         count = allFilteredProducts.length; // count will be only filtered products from all products
@@ -32,7 +36,11 @@ const getAllProducts = async (req, res, next) => {
         count = await Products.count({}); // count will be all products
       }
     } else {
-      if (search && page && size) {
+      if (
+        search !== 'undefined' &&
+        page !== 'undefined' &&
+        size !== 'undefined'
+      ) {
         const allVerifiedProducts = await Products.find({ isVerified: true });
         const allVerifiedFilteredProducts = filterProducts(
           allVerifiedProducts,
@@ -60,7 +68,7 @@ const getAllProducts = async (req, res, next) => {
     let products;
 
     if (isAdmin) {
-      if (page && size) {
+      if (page !== 'undefined' && size !== 'undefined') {
         products = await Products.find() // admin can access all products
           .skip(parseInt(page) * parseInt(size))
           .limit(parseInt(size));
@@ -68,7 +76,7 @@ const getAllProducts = async (req, res, next) => {
         products = await Products.find(); // send all if pagination query is not avialble
       }
     } else {
-      if (page && size) {
+      if (page !== 'undefined' && size !== 'undefined') {
         products = await Products.find({ isVerified: true })
           .skip(parseInt(page) * parseInt(size))
           .limit(parseInt(size)); // a normal user can only see products that are verified
