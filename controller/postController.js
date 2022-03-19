@@ -5,7 +5,6 @@ const fileSizeFormatter = require('../utilities/fileSizeFormatter');
 // add Post
 const addPost = async (req, res, next) => {
   const postData = req.body;
-  console.log(postData);
   try {
     const responce = await Post.insertMany(postData);
     res.json(responce);
@@ -55,7 +54,7 @@ const updatePost = async (req, res, next) => {
     const post = await Post.find({ _id: id });
     if (post[0]?.userEmail === email) {
       const responce = await Post.findByIdAndUpdate({ _id: id }, data);
-      res.json(responce);
+      res.json({ update: true });
     } else res.json('user not match with this post');
   } catch (err) {
     next(err);
