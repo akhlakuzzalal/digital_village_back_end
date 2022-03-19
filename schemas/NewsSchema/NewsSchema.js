@@ -42,7 +42,10 @@ const NewsSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    
+    tags: {
+      type: Array,
+      required: true,
+    },
     publishDate: {
       type: String,
       required: true,
