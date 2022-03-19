@@ -1,5 +1,6 @@
 const DonationCause = require('../schemas/DonationCauseSchema');
 const fileSizeFormatter = require('../utilities/fileSizeFormatter');
+const User = require('../schemas/UserSchema');
 // const ObjectId = require('mongodb').ObjectId;
 
 // add a new donation cuase administrator Post == ok
@@ -156,6 +157,31 @@ const takeDonations = async (req, res, next) => {
   }
 };
 
+const getAllDonarInfo = async (req, res, next) => {
+  try {
+    const allCauses = await DonationCause.find();
+    const allUsers = await User.find();
+    allDonars = [];
+    if (allCauses && allCauses.length >= 1) {
+      console.log('entered');
+      allDonars = allCauses.map((cause) => {
+        console.log(cause.donarId); // problem here cause.donarId is not defined
+
+        if (cause?.donars && cause?.donars.length >= 1) {
+          donar = allUsers.filter((user) => {
+            console.log(user._id, cause.donarId); // user._id is objectId
+            return user._id === cause.donarId;
+          });
+        }
+        return { donar, amount: cause.amount };
+      });
+    }
+    res.json(allDonars);
+  } catch (error) {
+    next(error);
+  }
+};
+
 // exports all module
 
 module.exports = {
@@ -166,4 +192,5 @@ module.exports = {
   updateACause,
   getAllPayments,
   takeDonations,
+  getAllDonarInfo,
 };
