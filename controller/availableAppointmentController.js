@@ -1,9 +1,8 @@
-const AvailableAppointment = require('../schemas/AppointmentSchema/AvailableAppointment');
+const AvailableAppointment = require('../schemas/AvailableAppointment');
 
 const handleSaveAppointment = async (req, res, next) => {
   try {
     const newAppointment = req.body;
-    console.log(newAppointment);
     const response = await AvailableAppointment.insertMany(newAppointment);
     res.json(response);
   } catch (error) {
@@ -14,7 +13,6 @@ const handleSaveAppointment = async (req, res, next) => {
 const handleGetAppointment = async (req, res, next) => {
   try {
     const response = await AvailableAppointment.find({});
-    console.log(response);
     res.json(response);
   } catch (error) {
     next(error);

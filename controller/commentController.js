@@ -1,4 +1,4 @@
-const Comment = require('../schemas/CommentSchema/CommentSchema');
+const Comment = require('../schemas/CommentSchema');
 
 const getAllComment = async (req, res, next) => {
   try {

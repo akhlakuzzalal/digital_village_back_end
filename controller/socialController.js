@@ -1,6 +1,4 @@
-const { use } = require('../routes/socialRoutes');
-const { findOne, findByIdAndUpdate } = require('../schemas/UsersSchema/User');
-const User = require('../schemas/UsersSchema/User');
+const User = require('../schemas/UserSchema');
 
 const findAllUser = async (req, res, next) => {
   const email = req.query.email;
@@ -18,11 +16,21 @@ const findAllUser = async (req, res, next) => {
   } catch (err) {
     next(err);
   }
-  const responce = await User.find({});
+};
+
+// find every user
+const usersofMedia = async (req, res, next) => {
+  try {
+    const responce = await User.find({});
+    res.json(responce);
+  } catch (err) {
+    next(err);
+  }
 };
 
 const requestFriend = async (req, res, next) => {
   const { userID, requestedUserID } = req.body;
+  console.log(req.body);
   const user = await User.find({ _id: userID });
   const requestedUser = await User.find({ _id: requestedUserID });
   if (
@@ -89,8 +97,42 @@ const acceptFriend = async (req, res, next) => {
   }
 };
 
+const cancleRequest = async (req, res, next) => {
+  const { userID, requestingUserID } = req.body;
+  const user = await User.find({ _id: userID });
+  const requestingUser = await User.find({ _id: requestingUserID });
+  try {
+    if (
+      user[0]?.requesting.includes(requestingUserID) &&
+      requestingUser[0]?.requested.includes(userID)
+    ) {
+      const newRequeesting = user[0]?.requesting.filter(
+        (id) => id !== requestingUserID
+      );
+      const newRequested = requestingUser[0]?.requested.filter(
+        (id) => id !== userID
+      );
+      await User.findByIdAndUpdate(
+        { _id: userID },
+        { requesting: newRequeesting }
+      );
+      await User.findByIdAndUpdate(
+        { _id: requestingUserID },
+        { requested: newRequested }
+      );
+      res.json('Canceled Request');
+    } else {
+      res.json('Something Wrong');
+    }
+  } catch (err) {
+    next(err);
+  }
+};
+
 module.exports = {
   findAllUser,
   requestFriend,
   acceptFriend,
+  cancleRequest,
+  usersofMedia,
 };

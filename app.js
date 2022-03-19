@@ -11,7 +11,7 @@ const teacherRoutes = require('./routes/Education/teacherRoutes');
 const paymentRoute = require('./routes/paymentRoute');
 const eMarketRoutes = require('./routes/eMarketRoutes');
 const notificationRoutes = require('./routes/NotificationRoutes');
-const userRoutes = require('./routes/admin/userRoutes');
+const userRoutes = require('./routes/userRoutes');
 const studentRoutes = require('./routes/Education/studentRoutes');
 const eventRoutes = require('./routes/eventRoutes');
 const reviewRoutes = require('./routes/reviewRoutes');
@@ -21,13 +21,14 @@ const likeRoutes = require('./routes/likeRoutes');
 const dislikeRoutes = require('./routes/dislikeRoutes');
 const newsRoutes = require('./routes/NewsRoutes');
 const developmentRoutes = require('./routes/DevelopmentRoutes');
-const donateRoutes = require('./routes/donateRoutes');
+const donationCauseRoutes = require('./routes/donationCauseRoutes');
 const favouriteRoutes = require('./routes/favouriteRoutes');
 const errorhandler = require('./middlewares/errorhandler');
 const vaccineRegistrationRoutes = require('./routes/vaccineRegistrationRoutes');
 const availableAppointmentRoutes = require('./routes/availableAppointmentRoutes');
 const UserReviewRoutes = require('./routes/UserReviewRoutes');
 const socialRoutes = require('./routes/socialRoutes');
+const sslCommerzRoutes = require('./routes/sslCommerzRoutes');
 
 const app = express();
 
@@ -51,9 +52,9 @@ app.use('/uploads', express.static(path.join(__dirname, 'uploads'))); // Serve t
 
 // API
 app.use('/auth', authRoutes);
+app.use('/user', userRoutes);
 app.use('/teacher', teacherRoutes);
 app.use('/student', studentRoutes);
-app.use('/user', userRoutes);
 app.use('/notification', notificationRoutes);
 app.use('/event', eventRoutes);
 app.use('/review', reviewRoutes);
@@ -64,13 +65,14 @@ app.use('/news', newsRoutes);
 app.use('/development', developmentRoutes);
 app.use('/vaccine', vaccineRegistrationRoutes);
 app.use('/availableAppointment', availableAppointmentRoutes);
-app.use('/donation', donateRoutes);
+app.use('/donationCause', donationCauseRoutes);
 app.use('/comment', commentRoutes);
 app.use('/like', likeRoutes);
 app.use('/disLike', dislikeRoutes);
 app.use('/favourites', favouriteRoutes);
 app.use('/userReview', UserReviewRoutes);
 app.use('/social', socialRoutes);
+app.use('/sslpayment', sslCommerzRoutes);
 
 // Handles any requests that don't match the ones above
 app.get('*', (req, res) => {
