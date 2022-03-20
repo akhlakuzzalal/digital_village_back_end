@@ -1,4 +1,4 @@
-const { filterProducts } = require('../utilities/Filter');
+const { filterProducts } = require('../../utilities/Filter');
 
 const allProducts = [
   {

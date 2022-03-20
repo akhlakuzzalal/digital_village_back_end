@@ -47,7 +47,7 @@ app.use(cors(corsOptions));
 app.use(express.json());
 app.use(cookieParser()); // for cookies
 app.use(express.static(path.join(__dirname, '/build'))); // Serve the static files from the React app
-app.use('/uploads', express.static(path.join(__dirname, 'uploads'))); // Serve the static files from the React app
+app.use('/uploads', express.static(path.join(__dirname, 'uploads'))); // Serve the static files from upload folder
 
 // API
 app.use('/auth', authRoutes);

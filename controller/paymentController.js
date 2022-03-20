@@ -1,4 +1,4 @@
-const stripe = require('stripe')(process.env.STRIPE_SECRETE);
+const stripe = require('stripe')(process.env.STRIPE_SECRET);
 
 const handlePaymentStripe = async (req, res) => {
   const items = req.body;
