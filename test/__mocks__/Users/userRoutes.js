@@ -4,15 +4,13 @@ const {
   getASingleUser,
   updateUserWithoutProfileImg,
   updateUser,
-} = require('../controller/userController');
-const upload = require('../middlewares/upload');
-const validateUser = require('../middlewares/validateUser');
+} = require('./userController');
 
 const router = express.Router();
 
 router.get('/all', getAllUsers);
 router.get('/singleUserInfo', getASingleUser);
-router.put('/update', upload.single('file'), updateUser);
+router.put('/update', updateUser);
 router.put('/updateWithoutProfileImg', updateUserWithoutProfileImg);
 
 module.exports = router;

@@ -6,17 +6,16 @@ const {
   deletePost,
   getPostByUser,
   addPostwithImage,
-} = require('../controller/postController');
+} = require('./../Post/postController');
 const {
   findAllUser,
   requestFriend,
   acceptFriend,
   cancleRequest,
   usersofMedia,
-} = require('../controller/socialController');
-const { socketController } = require('../controller/SocketIOController');
+} = require('./socialController');
+const { socketController } = require('./../SocketIO/SocketIOController');
 const router = express.Router();
-const upload = require('../middlewares/upload');
 // account related
 router.get('/allUsers', findAllUser);
 router.get('/usersofMedia', usersofMedia);
@@ -28,7 +27,7 @@ router.get('/message', socketController);
 // post Crud
 router.get('/allPost', getPost);
 router.post('/addPost', addPost);
-router.post('/addPostwithImage', upload.single('file'), addPostwithImage);
+router.post('/addPostwithImage', addPostwithImage);
 router.put('/updatePost', updatePost);
 router.delete('/deletePost', deletePost);
 router.get('/postsByUser', getPostByUser);

@@ -5,7 +5,7 @@ const router = express.Router();
 const {
   handleAppointment,
   handleUserAppointment,
-} = require('../controller/appointmentController.js');
+} = require('./appointmentController.js');
 
 router.post('/addAppointment', handleAppointment);
 router.get('/findUserAppointment', handleUserAppointment);

@@ -5,7 +5,7 @@ const {
   handleAddReview,
   getAllReview,
   handleDeleteReview,
-} = require('../controller/reviewController');
+} = require('./reviewController');
 
 router.post('/addReview', handleAddReview);
 router.get('/allReview', getAllReview);

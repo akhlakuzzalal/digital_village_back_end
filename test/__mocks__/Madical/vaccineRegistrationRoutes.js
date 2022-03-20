@@ -1,5 +1,4 @@
 const express = require('express');
-
 const router = express.Router();
 
 const {
@@ -7,7 +6,7 @@ const {
   handleFindInfo,
   handleUpdateInfo,
   handleAllFindInfo,
-} = require('../controller/vaccineRegistrationController');
+} = require('./vaccineRegistrationController');
 
 router.post('/addInfo', handleInfo);
 router.get('/findInfo', handleFindInfo);

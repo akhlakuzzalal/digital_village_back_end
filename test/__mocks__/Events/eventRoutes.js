@@ -10,7 +10,7 @@ const {
   handleParticipants,
   getEventWithEmail,
   handleDeleteMyBookingEvents,
-} = require('../controller/eventController.js');
+} = require('./eventController.js');
 
 router.post('/addEvent', handleAddEvent);
 router.get('/allEvent', getAllEvent);

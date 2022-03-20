@@ -6,7 +6,7 @@ const {
   getAllFavouriteBlogs,
   getAllFavouriteVideos,
   getallVideos,
-} = require('../../controller/studentController');
+} = require('./studentController');
 const router = express.Router();
 
 router.get('/allVideos', getallVideos);

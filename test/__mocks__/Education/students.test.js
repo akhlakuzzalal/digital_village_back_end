@@ -1,4 +1,4 @@
-const mockApp = require('../../../utilities/mockApp');
+const api = require('../../../utilities/mockApp');
 
 
 describe('Your writing about test', () => {

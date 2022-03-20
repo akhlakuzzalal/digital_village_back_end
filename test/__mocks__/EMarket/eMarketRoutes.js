@@ -4,8 +4,7 @@ const {
   addProducts,
   deleteProduct,
   updeteProduct,
-} = require('../controller/eMarketController');
-const validateUser = require('../middlewares/validateUser');
+} = require('./eMarketController');
 const router = express.Router();
 
 router.get('/products', getAllProducts);

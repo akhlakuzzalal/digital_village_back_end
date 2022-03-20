@@ -4,7 +4,7 @@ const {
   getFavourites,
   addToFavourite,
   removeFromFavourite,
-} = require('../controller/favouriteController');
+} = require('./favouriteController');
 
 router.get('/all', getFavourites);
 router.post('/add', addToFavourite);
