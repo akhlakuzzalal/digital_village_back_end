@@ -1,5 +1,5 @@
 const { ObjectID } = require('bson');
-const Event = require('../schemas/EventSchema/Event');
+const Event = require('../schemas/Event');
 
 const handleAddEvent = async (req, res, next) => {
   try {

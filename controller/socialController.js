@@ -1,4 +1,4 @@
-const User = require('../schemas/UsersSchema/UserSchema');
+const User = require('../schemas/UserSchema');
 
 const findAllUser = async (req, res, next) => {
   const email = req.query.email;
@@ -13,6 +13,16 @@ const findAllUser = async (req, res, next) => {
       allUsers,
     };
     res.json(result);
+  } catch (err) {
+    next(err);
+  }
+};
+
+// find every user
+const usersofMedia = async (req, res, next) => {
+  try {
+    const responce = await User.find({});
+    res.json(responce);
   } catch (err) {
     next(err);
   }
@@ -124,4 +134,5 @@ module.exports = {
   requestFriend,
   acceptFriend,
   cancleRequest,
+  usersofMedia,
 };

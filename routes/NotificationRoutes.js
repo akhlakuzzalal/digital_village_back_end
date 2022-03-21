@@ -4,7 +4,7 @@ const {
   handleAddNotification,
   getSpecificUserNotification,
   handleDeleteNotification,
-} = require('../controller/NotificationController/NotificaionController');
+} = require('../controller/NotificaionController');
 const validateUser = require('../middlewares/validateUser');
 const router = express.Router();
 

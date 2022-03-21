@@ -1,4 +1,4 @@
-const User = require('../schemas/UsersSchema/UserSchema');
+const User = require('../schemas/UserSchema');
 const hashPassword = require('../utilities/hashPassword');
 const jwt = require('jsonwebtoken');
 

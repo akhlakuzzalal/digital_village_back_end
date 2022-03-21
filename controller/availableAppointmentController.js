@@ -1,4 +1,4 @@
-const AvailableAppointment = require('../schemas/AppointmentSchema/AvailableAppointment');
+const AvailableAppointment = require('../schemas/AvailableAppointment');
 
 const handleSaveAppointment = async (req, res, next) => {
   try {

@@ -1,5 +1,5 @@
 const Roles = require('../config/roles');
-const Products = require('../schemas/EMarketSchema/ProductsSchema');
+const Products = require('../schemas/ProductsSchema');
 const { filterProducts } = require('../utilities/Filter');
 
 // get all Products
@@ -13,7 +13,11 @@ const getAllProducts = async (req, res, next) => {
     const isAdmin = roles && roles.length > 0 && roles.includes(Roles.Admin);
 
     if (isAdmin) {
-      if (search && page && size) {
+      if (
+        search !== 'undefined' &&
+        page !== 'undefined' &&
+        size !== 'undefined'
+      ) {
         const allProducts = await Products.find();
         const allFilteredProducts = filterProducts(allProducts, search);
         count = allFilteredProducts.length; // count will be only filtered products from all products
@@ -32,8 +36,14 @@ const getAllProducts = async (req, res, next) => {
         count = await Products.count({}); // count will be all products
       }
     } else {
-      if (search && page && size) {
-        const allVerifiedProducts = await Products.find({ isVerified: true });
+      if (
+        search !== 'undefined' &&
+        page !== 'undefined' &&
+        size !== 'undefined'
+      ) {
+        const allVerifiedProducts = await Products.find({
+          isMedecine: false,
+        });
         const allVerifiedFilteredProducts = filterProducts(
           allVerifiedProducts,
           search
@@ -60,7 +70,7 @@ const getAllProducts = async (req, res, next) => {
     let products;
 
     if (isAdmin) {
-      if (page && size) {
+      if (page !== 'undefined' && size !== 'undefined') {
         products = await Products.find() // admin can access all products
           .skip(parseInt(page) * parseInt(size))
           .limit(parseInt(size));
@@ -68,12 +78,16 @@ const getAllProducts = async (req, res, next) => {
         products = await Products.find(); // send all if pagination query is not avialble
       }
     } else {
-      if (page && size) {
-        products = await Products.find({ isVerified: true })
+      if (page !== 'undefined' && size !== 'undefined') {
+        products = await Products.find({
+          isVerified: true,
+
+          cata,
+        })
           .skip(parseInt(page) * parseInt(size))
           .limit(parseInt(size)); // a normal user can only see products that are verified
       } else {
-        products = await Products.find({ isVerified: true }); // send all if pagination query is not avialble
+        products = await Products.find({ isVerified: true, isMedecine: false }); // send all if pagination query is not avialble
       }
     }
 
@@ -86,14 +100,33 @@ const getAllProducts = async (req, res, next) => {
   }
 };
 
+// Get medecines
+const getAllMedicine = async (req, res, next) => {
+  try {
+    const allMedicine = await Products.find({ isMedecine: true });
+    res.json(allMedicine);
+  } catch (err) {
+    next(err);
+  }
+};
+
 // Add Products
 const addProducts = async (req, res, next) => {
   try {
     const newProducts = req.body;
-    const response = await Products.insertMany({
-      ...newProducts,
-      isVerified: true,
-    });
+    let response;
+    if (newProducts.categorie !== 'medecine') {
+      response = await Products.insertMany({
+        ...newProducts,
+        isVerified: true,
+      });
+    } else {
+      response = await Products.insertMany({
+        ...newProducts,
+        isVerified: true,
+        isMedecine: true,
+      });
+    }
     res.json(response);
   } catch (error) {
     next(error);
@@ -128,10 +161,11 @@ const updeteProduct = async (req, res, next) => {
   }
 };
 
-//   export controllers
+//  export controllers
 module.exports = {
   getAllProducts,
   addProducts,
   deleteProduct,
   updeteProduct,
+  getAllMedicine,
 };

@@ -1,5 +1,5 @@
 const express = require('express');
-const notificationRoutes = require('./test/Notification/__mocks__/NotificationRoutes');
+const notificationRoutes = require('./test/__mocks__/Notification/NotificationRoutes');
 
 const mockApp = express();
 
