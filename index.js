@@ -9,3 +9,7 @@ const server = http.createServer(app);
 server.listen(appConfig.PORT, () => {
   console.log('server is running in localhost:', appConfig.PORT);
 });
+
+module.exports = {
+  server,
+};

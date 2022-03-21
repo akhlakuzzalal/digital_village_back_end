@@ -18,6 +18,16 @@ const findAllUser = async (req, res, next) => {
   }
 };
 
+// find every user
+const usersofMedia = async (req, res, next) => {
+  try {
+    const responce = await User.find({});
+    res.json(responce);
+  } catch (err) {
+    next(err);
+  }
+};
+
 const requestFriend = async (req, res, next) => {
   const { userID, requestedUserID } = req.body;
   console.log(req.body);
@@ -124,4 +134,5 @@ module.exports = {
   requestFriend,
   acceptFriend,
   cancleRequest,
+  usersofMedia,
 };
