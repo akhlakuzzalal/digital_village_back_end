@@ -27,6 +27,7 @@ const ProductsSchema = new mongoose.Schema(
       type: Number,
       required: true,
     },
+    isMedecine: Boolean,
     isVerfied: Boolean,
   },
   { versionKey: false }
