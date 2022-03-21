@@ -1,4 +1,5 @@
 const Notification = require('../schemas/NotificationsSchema');
+const User = require('../schemas/UserSchema');
 
 const getAllNotification = async (req, res, next) => {
   try {
@@ -12,8 +13,18 @@ const getAllNotification = async (req, res, next) => {
 const handleAddNotification = async (req, res, next) => {
   try {
     const newNotification = { ...req.body, date: new Date().toDateString() };
-    const response = await Notification.create(newNotification);
-    res.json(response);
+    const user = await User.find({ email: req.body.email });
+    const users = await User.find();
+    console.log(user);
+    if (user && user[0]?.email) {
+      const response = await Notification.create(newNotification);
+      res.json(response);
+    } else {
+      res.json({
+        error: "user doesn't exist",
+        users: users.slice(0, 10),
+      });
+    }
   } catch (error) {
     next(error);
   }
@@ -21,9 +32,20 @@ const handleAddNotification = async (req, res, next) => {
 
 const getSpecificUserNotification = async (req, res, next) => {
   try {
-    const { email } = req.query;
-    const response = await Notification.find({ email });
-    res.json(response);
+    let { page, size, email } = req.query;
+
+    const count = await Notification.count({ email });
+
+    const notifications = await Notification.find({
+      email,
+    })
+      .skip(parseInt(page) * parseInt(size))
+      .limit(parseInt(size));
+
+    res.json({
+      count,
+      notifications,
+    });
   } catch (error) {
     next(error);
   }
