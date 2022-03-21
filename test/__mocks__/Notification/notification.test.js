@@ -1,9 +1,4 @@
-// const mongoose = require('mongoose');
-const supertest = require('supertest');
-const mockApp = require('../../../mockApp');
-
-const api = supertest(mockApp);
-
+const api = require('../../setup');
 describe('test notification api is working properly', () => {
   test('Initially there should be 11 notification', async () => {
     const response = await api.get('/notification/all');
@@ -47,7 +42,3 @@ describe('test notification api is working properly', () => {
     expect(response.body._id).toBeDefined();
   });
 });
-
-// afterAll(() => {
-//   mongoose.connection.close();
-// });

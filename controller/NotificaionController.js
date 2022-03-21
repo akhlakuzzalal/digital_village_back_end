@@ -11,7 +11,7 @@ const getAllNotification = async (req, res, next) => {
 
 const handleAddNotification = async (req, res, next) => {
   try {
-    const newNotification = req.body;
+    const newNotification = { ...req.body, date: new Date().toDateString() };
     const response = await Notification.create(newNotification);
     res.json(response);
   } catch (error) {

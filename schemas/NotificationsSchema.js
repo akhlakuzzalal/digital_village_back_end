@@ -14,7 +14,7 @@ const NotificationsSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    description: {
+    message: {
       type: String,
       required: true,
     },

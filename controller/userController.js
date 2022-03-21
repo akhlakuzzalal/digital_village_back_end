@@ -33,8 +33,8 @@ const updateRoles = () => {
 
 const getASingleUser = async (req, res, next) => {
   try {
-    const { id } = req.query;
-    const user = await User.find({ _id: id });
+    const { email } = req.query;
+    const user = await User.find({ email });
     res.json(user);
   } catch (error) {
     next(error);

@@ -1,5 +1,6 @@
 const DonationCause = require('../schemas/DonationCauseSchema');
 const fileSizeFormatter = require('../utilities/fileSizeFormatter');
+const User = require('../schemas/UserSchema');
 // const ObjectId = require('mongodb').ObjectId;
 
 // add a new donation cuase administrator Post == ok
@@ -17,7 +18,7 @@ const handleAddDonateCuase = async (req, res, next) => {
   };
 
   try {
-    const response = await DonationCause.insertMany(newDonationCause);
+    const response = await DonationCause.create(newDonationCause);
     res.json(response);
   } catch (error) {
     next(error);
@@ -156,6 +157,61 @@ const takeDonations = async (req, res, next) => {
   }
 };
 
+const getAllDonarInfo = async (req, res, next) => {
+  try {
+    const allCauses = await DonationCause.find();
+    const allUsers = await User.find();
+    allDonars = [];
+    if (allCauses && allCauses.length >= 1) {
+      allDonars = allCauses
+        .map((cause) => {
+          if (cause?.donars && cause?.donars.length >= 1) {
+            const causeInfo = {
+              requesterName: cause?.requesterName,
+              requesterEmail: cause?.requesterEmail,
+              title: cause?.title,
+              image: cause?.image,
+              description: cause?.description,
+              category: cause?.category,
+              goal: cause?.goal,
+              raised: cause?.raised,
+              date: cause?.date,
+              isVerified: false,
+            };
+            return { causeInfo, donarInfo: cause?.donars };
+          } else {
+            return false;
+          }
+        })
+        .flat()
+        .filter((allInfo) => allInfo)
+        .map((info) => {
+          // get all the donarInfo from the user collection
+          const donarInfo = info.donarInfo.map((d) => {
+            const donar = allUsers.find(
+              (user) => user._id.toString() === d.donarId
+            );
+            const infoOfDonarWithAll = {
+              donar,
+              _id: d.donarId,
+              amount: d.amount,
+            };
+            return infoOfDonarWithAll;
+          });
+
+          const AllInfoOfDonar = {
+            causeInfo: info.causeInfo,
+            donarInfo,
+          };
+          return AllInfoOfDonar;
+        });
+    }
+    res.json(allDonars);
+  } catch (error) {
+    next(error);
+  }
+};
+
 // exports all module
 
 module.exports = {
@@ -166,4 +222,5 @@ module.exports = {
   updateACause,
   getAllPayments,
   takeDonations,
+  getAllDonarInfo,
 };
