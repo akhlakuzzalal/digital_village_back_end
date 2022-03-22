@@ -1,19 +1,15 @@
 const express = require('express');
 const {
-  getAllDevelopment,
-  handleAddNewDevelopment,
-  handleDeleteDevelopment,
-  handleUpvote,
-  handleDownvote,
+  getAllDevelopmentProposal,
+  addNewDevelopmentProposal,
+  removeDevelopmentProposal,
 } = require('../../controller/DevelopmentProposal/developmentProposalController');
 const upload = require('../../middlewares/upload');
 
 const router = express.Router();
 
-router.get('/allDevelopment', getAllDevelopment);
-router.post('/addDevelopment', upload.single('file'), handleAddNewDevelopment);
-router.delete('/deleteDevelopment/:id', handleDeleteDevelopment);
-router.put('/upvote', handleUpvote);
-router.put('/downvote', handleDownvote);
+router.get('/all', getAllDevelopmentProposal);
+router.post('/add', upload.single('file'), addNewDevelopmentProposal);
+router.delete('/remove', removeDevelopmentProposal);
 
 module.exports = router;

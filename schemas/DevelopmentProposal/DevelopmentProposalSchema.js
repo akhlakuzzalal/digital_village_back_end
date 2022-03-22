@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const DevelopmentSchema = new mongoose.Schema({
+const DevelopmentProposalSchema = new mongoose.Schema({
   title: {
     type: String,
     required: true,
@@ -9,10 +9,13 @@ const DevelopmentSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  bannerImg: Object,
+  image: Object,
   proposalDate: String,
   upvotes: Array,
   downvotes: Array,
 });
 
-module.exports = mongoose.model('Development', DevelopmentSchema);
+module.exports = mongoose.model(
+  'DevelopmentProposal',
+  DevelopmentProposalSchema
+);
