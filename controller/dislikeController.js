@@ -41,7 +41,7 @@ const addDisLike = async (req, res, next) => {
     disLike.save((err, dislikeResult) => {
       if (err) return res.json({ success: false, err });
       // if like button is allready clicked then decrease it
-      Like.findOneAndDelete(data).exec((err, likeResult) => {
+      Like.deleteMany(data).exec((err, likeResult) => {
         if (err) return res.status(400).json({ success: false, err });
         res.status(200).json({ success: true });
       });
@@ -64,7 +64,7 @@ const removeDisLike = async (req, res, next) => {
       query = { commentId, uId };
     }
 
-    DisLike.findOneAndDelete(query).exec((err, result) => {
+    DisLike.deleteMany(query).exec((err, result) => {
       if (err) return res.status(400).json({ success: false, err });
       res.status(200).json({ success: true });
     });

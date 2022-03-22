@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-const DownpvoteSchema = Schema(
+const DownvoteSchema = Schema(
   {
     uId: {
       type: Schema.Types.ObjectId,
@@ -15,4 +15,4 @@ const DownpvoteSchema = Schema(
   { versionKey: false }
 );
 
-module.exports = mongoose.model('downvote', DownpvoteSchema);
+module.exports = mongoose.model('downvote', DownvoteSchema);
