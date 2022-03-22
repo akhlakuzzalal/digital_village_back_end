@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/static/css/main.6907ff1b.css",
-    "main.js": "/static/js/main.c2486206.js",
+    "main.css": "/static/css/main.644ed906.css",
+    "main.js": "/static/js/main.4ed91148.js",
     "static/js/498.0226d81e.chunk.js": "/static/js/498.0226d81e.chunk.js",
     "static/js/703.41b888e5.chunk.js": "/static/js/703.41b888e5.chunk.js",
     "static/js/513.e88946e3.chunk.js": "/static/js/513.e88946e3.chunk.js",
@@ -33,19 +33,18 @@
     "static/media/e-g-5.jpg": "/static/media/e-g-5.ee2777c8f0b58e8694ee.jpg",
     "static/media/contact.jpg": "/static/media/contact.eda293f56e17569aefd6.jpg",
     "static/media/hepatitis.jpg": "/static/media/hepatitis.1c73fee152da98fc9151.jpg",
-    "static/media/laptop_logo.png": "/static/media/laptop_logo.9e12d988a6bfeb0ed84a.png",
     "static/media/review.jpg": "/static/media/review.058940d89f72b3a25ee0.jpg",
     "static/media/logo.png": "/static/media/logo.05ff88cd21b64e34144e.png",
     "index.html": "/index.html",
-    "main.6907ff1b.css.map": "/static/css/main.6907ff1b.css.map",
-    "main.c2486206.js.map": "/static/js/main.c2486206.js.map",
+    "main.644ed906.css.map": "/static/css/main.644ed906.css.map",
+    "main.4ed91148.js.map": "/static/js/main.4ed91148.js.map",
     "498.0226d81e.chunk.js.map": "/static/js/498.0226d81e.chunk.js.map",
     "703.41b888e5.chunk.js.map": "/static/js/703.41b888e5.chunk.js.map",
     "513.e88946e3.chunk.js.map": "/static/js/513.e88946e3.chunk.js.map",
     "787.31f30833.chunk.js.map": "/static/js/787.31f30833.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.6907ff1b.css",
-    "static/js/main.c2486206.js"
+    "static/css/main.644ed906.css",
+    "static/js/main.4ed91148.js"
   ]
 }
