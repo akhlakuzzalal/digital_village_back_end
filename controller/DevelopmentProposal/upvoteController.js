@@ -3,10 +3,10 @@ const Downvote = require('../../schemas/DevelopmentProposal/DownvoteSchema');
 
 const getAllUpvotes = async (req, res, next) => {
   try {
-    const { developmentProposalId } = req.body;
-
-    const allUpvotes = await Upvote.find({ developmentProposalId });
-    res.json(allUpvotes);
+    Upvote.find(query).exec((err, upvotes) => {
+      if (err) return res.status(400).send(err);
+      res.status(200).json({ success: true, upvotes });
+    });
   } catch (error) {
     next(error);
   }

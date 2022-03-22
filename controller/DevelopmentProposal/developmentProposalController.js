@@ -29,7 +29,7 @@ const addNewDevelopmentProposal = async (req, res, next) => {
   }
 
   try {
-    const response = await DevelopmentProposal.insertMany(newDevelopment);
+    const response = await DevelopmentProposal.create(newDevelopmentProposal);
     res.json(response);
   } catch (error) {
     next(error);
