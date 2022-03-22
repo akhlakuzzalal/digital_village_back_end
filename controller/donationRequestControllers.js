@@ -4,7 +4,7 @@ const User = require('../schemas/UserSchema');
                     // Donation Request Apply
 // add a new help Request Apply a user Post == not try
 const helpRequestApply = async (req, res, next) => {
-    console.log('hitted');
+    console.log(req.body);
     try {
       const helpRequest = req.body;
       const result = await DonationRequest.insertMany(helpRequest);

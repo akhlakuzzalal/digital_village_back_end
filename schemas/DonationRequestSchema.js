@@ -5,7 +5,7 @@ const DonationRequestSchema = new mongoose.Schema(
   {
     requesterName: String,
     requesterEmail: String,
-    title: {
+    name: {
       type: String,
       required: true,
     },
@@ -17,25 +17,22 @@ const DonationRequestSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    pay: {
-      type: String,
+    phone: {
+      type: Number,
       required: true,
     },
     amount: {
       type: Number,
       required: true,
     },
-    requesters: [
-      {
-        requesterId: String,
-        amount: Number,
-      },
-    ],
     date: {
       type: String,
       required: true,
     },
-    isVerified: Boolean,
+    pay: {
+      type: String,
+      // required: true,
+    },
   },
   { versionKey: false }
 );
