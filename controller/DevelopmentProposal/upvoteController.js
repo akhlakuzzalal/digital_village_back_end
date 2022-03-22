@@ -1,4 +1,5 @@
 const Upvote = require('../../schemas/DevelopmentProposal/UpvoteSchema');
+const Downvote = require('../../schemas/DevelopmentProposal/DownvoteSchema');
 
 const getAllUpvotes = async (req, res, next) => {
   try {
@@ -23,8 +24,8 @@ const addUpvote = async (req, res, next) => {
     upvote.save((err, result) => {
       if (err) return res.json({ success: false, err });
 
-      // decrease the upVote by 1 if it is allready upvoted
-      Upvote.findOneAndDelete(data).exec((err, result) => {
+      // decrease the downVote by 1 if it is allready downvoted
+      Downvote.findOneAndDelete(data).exec((err, result) => {
         if (err) return res.status(400).json({ success: false, err });
         res.status(200).json({ success: true });
       });
