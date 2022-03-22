@@ -13,8 +13,18 @@ const handleAddEvent = async (req, res, next) => {
 
 const getAllEvent = async (req, res, next) => {
   try {
-    const allEvent = await Event.find({});
-    res.json(allEvent);
+    let { page, size } = req.query;
+
+    const count = await Event.count();
+
+    const allEvents = await Event.find()
+      .skip(parseInt(page) * parseInt(size))
+      .limit(parseInt(size));
+
+    res.json({
+      count,
+      allEvents,
+    });
   } catch (error) {
     next(error);
   }
