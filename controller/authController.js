@@ -208,7 +208,7 @@ const handleLogout = async (req, res, next) => {
   try {
     const user = await User.find({ refreshToken });
 
-    if (!user[0].name) {
+    if (user && user.length >= 1 && !user[0].name) {
       res.clearCookie('jwt', {
         httpOnly: true,
         sameSite: 'None',
