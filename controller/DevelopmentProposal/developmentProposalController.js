@@ -1,10 +1,10 @@
-const Development = require('../schemas/DevelopmentSchema');
-const fileSizeFormatter = require('../utilities/fileSizeFormatter');
+const Development = require('../../schemas/Development/DevelopmentSchema');
+const fileSizeFormatter = require('../../utilities/fileSizeFormatter');
 
 const getAllDevelopment = async (req, res, next) => {
   try {
     const response = await Development.find({});
-    response.sort((a, b) => a?.upvotes?.length - b?.price?.length);
+    response.sort((a, b) => a?.upvotes?.length - b?.upvotes?.length);
     res.json(response);
   } catch (error) {
     next(error);
@@ -56,10 +56,10 @@ const handleUpvote = async (req, res, next) => {
     ) {
       return res.json({ alert: 'Already voted' });
     } else {
-      const responce = await Development.updateOne(query, {
+      const response = await Development.updateOne(query, {
         upvotes: [...proposal[0].upvotes, email],
       });
-      res.json(responce);
+      res.json(response);
     }
   } catch (error) {
     next(error);

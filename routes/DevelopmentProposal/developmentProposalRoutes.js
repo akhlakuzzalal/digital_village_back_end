@@ -5,8 +5,8 @@ const {
   handleDeleteDevelopment,
   handleUpvote,
   handleDownvote,
-} = require('../controller/DevelopmentController');
-const upload = require('../middlewares/upload');
+} = require('../../controller/DevelopmentProposal/developmentProposalController');
+const upload = require('../../middlewares/upload');
 
 const router = express.Router();
 
