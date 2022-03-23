@@ -25,17 +25,6 @@ const handleAddDonateCuase = async (req, res, next) => {
   }
 };
 
-// add a new donation cuase payment a donar Post == not try
-const AddDonarPayment = async (req, res, next) => {
-  try {
-    const newDonarPayment = req.body;
-    const result = await DonationCause.insertMany(newDonarPayment);
-    res.json(result);
-  } catch (error) {
-    next(error);
-  }
-};
-
 // Get All Cuases ==ok
 const getAllCuases = async (req, res, next) => {
   try {
@@ -120,6 +109,7 @@ const takeDonations = async (req, res, next) => {
             _id: d._id,
             donarId: d.donarId,
             amount: d.amount + Number(amount),
+            isPaid: d.isPaid,
           }; //increase the previous given amount of donars
         } else {
           // return {donarId: d.donarId, amount: d.amount, _id: d._id};
@@ -134,7 +124,10 @@ const takeDonations = async (req, res, next) => {
     } else {
       // add the new donar in donars array and increase the raised amount
       updateFields = {
-        donars: [...cause?.donars, { donarId, amount: Number(amount) }],
+        donars: [
+          ...cause?.donars,
+          { donarId, amount: Number(amount), isPaid: false },
+        ],
         raised: cause?.raised + Number(amount),
       };
     }
@@ -143,6 +136,51 @@ const takeDonations = async (req, res, next) => {
     if (updateFields?.raised >= 50000) {
       return res.json({
         message: 'goal allready achieved',
+      });
+    }
+
+    const updatedCause = await DonationCause.findOneAndUpdate(
+      { _id: causeId },
+      updateFields,
+      { new: true }
+    );
+    res.json(updatedCause);
+  } catch (error) {
+    next(error);
+  }
+};
+
+const updateDonarPaymentStatus = async (req, res, next) => {
+  const { donarId, causeId, isPaid } = req.body;
+  try {
+    const cause = await DonationCause.findOne({ _id: causeId });
+    let updateFields = {}; // field inside this object will be udpated
+
+    // check if the donar is available or not
+    const isDonarAvailAble =
+      cause?.donars && cause?.donars.find((d) => d.donarId === donarId);
+
+    if (isDonarAvailAble) {
+      // update the payment status of donars
+      const mapDonars = cause.donars.map((d) => {
+        if (d.donarId === donarId) {
+          return {
+            _id: d._id,
+            donarId: d.donarId,
+            amount: d.amount,
+            isPaid,
+          }; //increase the previous given amount of donars
+        } else {
+          return d;
+        }
+      });
+
+      updateFields = {
+        donars: mapDonars,
+      };
+    } else {
+      return res.json({
+        message: "user donesn't exist",
       });
     }
 
@@ -167,8 +205,7 @@ const getAllDonarInfo = async (req, res, next) => {
         .map((cause) => {
           if (cause?.donars && cause?.donars.length >= 1) {
             const causeInfo = {
-              requesterName: cause?.requesterName,
-              requesterEmail: cause?.requesterEmail,
+              _id: cause?._id,
               title: cause?.title,
               image: cause?.image,
               description: cause?.description,
@@ -176,7 +213,6 @@ const getAllDonarInfo = async (req, res, next) => {
               goal: cause?.goal,
               raised: cause?.raised,
               date: cause?.date,
-              isVerified: false,
             };
             return { causeInfo, donarInfo: cause?.donars };
           } else {
@@ -195,6 +231,7 @@ const getAllDonarInfo = async (req, res, next) => {
               donar,
               _id: d.donarId,
               amount: d.amount,
+              isPaid: d.isPaid,
             };
             return infoOfDonarWithAll;
           });
@@ -212,15 +249,13 @@ const getAllDonarInfo = async (req, res, next) => {
   }
 };
 
-// exports all module
-
 module.exports = {
   handleAddDonateCuase,
   getAllCuases,
-  AddDonarPayment,
   deleteCuase,
   updateACause,
   getAllPayments,
   takeDonations,
   getAllDonarInfo,
+  updateDonarPaymentStatus,
 };
