@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 
 const availableAppointmentSchema = new mongoose.Schema(
   {
-    appointment: {
+    service: {
       type: String,
       required: true,
     },
