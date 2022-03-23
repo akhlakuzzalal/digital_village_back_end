@@ -36,7 +36,6 @@ const addUpvote = async (req, res, next) => {
 
 const removeUpvote = (req, res, next) => {
   try {
-    console.log(req.body);
     Upvote.deleteMany(req.body).exec((err, result) => {
       if (err) return res.status(400).json({ success: false, err });
       res.status(200).json({ success: true });
