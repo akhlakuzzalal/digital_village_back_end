@@ -3,8 +3,6 @@ const Schema = mongoose.Schema;
 
 const donationCauseSchema = new mongoose.Schema(
   {
-    requesterName: String,
-    requesterEmail: String,
     title: {
       type: String,
       required: true,
@@ -30,13 +28,13 @@ const donationCauseSchema = new mongoose.Schema(
       {
         donarId: String,
         amount: Number,
+        isPaid: Boolean,
       },
     ],
     date: {
       type: String,
       required: true,
     },
-    isVerified: Boolean,
   },
   { versionKey: false }
 );
