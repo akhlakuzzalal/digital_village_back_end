@@ -21,10 +21,6 @@ const teacherSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  isVerified: {
-    type: Boolean,
-    required: true,
-  },
 });
 
 module.exports = mongoose.model('Teacher', teacherSchema);
