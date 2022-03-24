@@ -1,0 +1,48 @@
+[
+  {
+    "Service": " Consultation",
+
+    "description": "Any types of routine checkups and screening tests, give you flu and immunization shots.",
+    "time": "11am to 5pm",
+    "Cost": "10$"
+  },
+  {
+    "Service": " dental ",
+
+    "description": "Any of a variety of treatments of the teeth and adjacent tissues to restore or maintain normal oral",
+    "time": "10am to 5pm",
+    "Cost": "15$"
+  },
+  {
+    "id": 3,
+    "Service": "eye care",
+
+    "description": "Any types of  checkups prevention or minimization of threats to eye or visual integrity.",
+    "time": "11am to 8pm",
+    "Cost": "15$"
+  },
+  {
+    "id": 4,
+    "Service": "ENT physician",
+
+    "description": "concerned with the treatment of disorders of the ears, nose, and throat.",
+    "time": "10am to 11pm",
+    "Cost": "20$"
+  },
+  {
+    "id": 5,
+    "Service": "Maternity care",
+
+    "description": "the health services provided to women, babies, and families throughout the whole pregnancy",
+    "time": "8qm to 12pm",
+    "Cost": "10$"
+  },
+  {
+    "id": 6,
+    "Service": "Orthopedic ",
+
+    "description": "specialize in injuries of the musculoskeletal system — which includes bones.",
+    "time": "10am to 5pm",
+    "Cost": "10$"
+  }
+]
