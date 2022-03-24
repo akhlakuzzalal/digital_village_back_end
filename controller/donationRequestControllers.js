@@ -1,12 +1,14 @@
 const DonationRequest = require('../schemas/DonationRequestSchema');
-const User = require('../schemas/UserSchema');
 
                     // Donation Request Apply
 // add a new help Request Apply a user Post == not try
 const helpRequestApply = async (req, res, next) => {
-    console.log(req.body);
+    console.log(req.body, 'hitte apply');
+    const helpRequest = {
+      ...JSON.parse(req.body.request),
+    };
     try {
-      const helpRequest = req.body;
+      // const helpRequest = req.body;
       const result = await DonationRequest.insertMany(helpRequest);
       res.json(result);
     } catch (error) {
