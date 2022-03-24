@@ -1,5 +1,5 @@
 const { ObjectID } = require('bson');
-const Event = require('../schemas/EventSchema/Event');
+const Event = require('../schemas/Event');
 
 const handleAddEvent = async (req, res, next) => {
   try {
@@ -13,8 +13,18 @@ const handleAddEvent = async (req, res, next) => {
 
 const getAllEvent = async (req, res, next) => {
   try {
-    const allEvent = await Event.find({});
-    res.json(allEvent);
+    let { page, size } = req.query;
+
+    const count = await Event.count();
+
+    const allEvents = await Event.find()
+      .skip(parseInt(page) * parseInt(size))
+      .limit(parseInt(size));
+
+    res.json({
+      count,
+      allEvents,
+    });
   } catch (error) {
     next(error);
   }
@@ -60,6 +70,37 @@ const handleParticipants = async (req, res, next) => {
   }
 };
 
+const getEventWithEmail = async (req, res, next) => {
+  try {
+    const { email } = req.query;
+    const allBookingEvents = await Event.find({});
+    const myBookingEvents = allBookingEvents.filter((event) =>
+      event.participants.includes(email)
+    );
+    res.json(myBookingEvents);
+  } catch (error) {
+    next(error);
+  }
+};
+
+const handleDeleteMyBookingEvents = async (req, res, next) => {
+  try {
+    const { email, id } = req.query;
+    const myBooking = await Event.find({ _id: id });
+    const newParticipantArray = myBooking[0].participants.filter(
+      (e) => e !== email
+    );
+    const response = await Event.findOneAndUpdate(
+      { _id: id },
+      { participants: newParticipantArray }
+    );
+
+    res.json(response);
+  } catch (error) {
+    next(error);
+  }
+};
+
 module.exports = {
   handleAddEvent,
   getAllEvent,
@@ -67,4 +108,6 @@ module.exports = {
   getUpcomingEvents,
   handleDeleteEvents,
   handleParticipants,
+  getEventWithEmail,
+  handleDeleteMyBookingEvents,
 };

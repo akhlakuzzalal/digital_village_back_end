@@ -1,5 +1,4 @@
-const { response } = require('express');
-const AvailableAppointment = require('../schemas/AppointmentSchema/AvailableAppointment');
+const AvailableAppointment = require('../schemas/AvailableAppointment');
 
 const handleSaveAppointment = async (req, res, next) => {
   try {
@@ -11,6 +10,16 @@ const handleSaveAppointment = async (req, res, next) => {
   }
 };
 
+const handleGetAppointment = async (req, res, next) => {
+  try {
+    const response = await AvailableAppointment.find({});
+    res.json(response);
+  } catch (error) {
+    next(error);
+  }
+};
+
 module.exports = {
   handleSaveAppointment,
+  handleGetAppointment,
 };

@@ -3,11 +3,16 @@ const {
   getAllNews,
   handleAddNews,
   handleDeleteNews,
+  getSingleNews,
+  handleEditNews,
 } = require('../controller/NewsController');
+const upload = require('../middlewares/upload');
 const router = express.Router();
 
 router.get('/allNews', getAllNews);
-router.post('/addNews', handleAddNews);
-router.delete('/deleteNews', handleDeleteNews);
+router.get('/getSingleNews', getSingleNews);
+router.post('/addNews', upload.single('file'), handleAddNews);
+router.delete('/deleteNews/:id', handleDeleteNews);
+router.put('/editNews', upload.single('file'),handleEditNews);
 
 module.exports = router;
