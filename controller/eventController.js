@@ -101,6 +101,22 @@ const handleDeleteMyBookingEvents = async (req, res, next) => {
   }
 };
 
+// Update a Product
+const updateEvent = async (req, res, next) => {
+  try {
+    const id = req.params.id;
+    const updateEvent = req.body;
+    const filter = { _id: id };
+
+    const response = await Event.updateOne(filter, {
+      $set: updateEvent,
+    });
+    res.json(response);
+  } catch (error) {
+    next(error);
+  }
+};
+
 module.exports = {
   handleAddEvent,
   getAllEvent,
@@ -110,4 +126,5 @@ module.exports = {
   handleParticipants,
   getEventWithEmail,
   handleDeleteMyBookingEvents,
+  updateEvent,
 };

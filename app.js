@@ -24,6 +24,7 @@ const developmentProposalRoutes = require('./routes/DevelopmentProposal/developm
 const upvoteRoutes = require('./routes/DevelopmentProposal/upvoteRoutes');
 const downvoteRoutes = require('./routes/DevelopmentProposal/downvoteRoutes');
 const donationCauseRoutes = require('./routes/donationCauseRoutes');
+const donationRequestRoutes = require('./routes/DonationRequestRoutes');
 const favouriteRoutes = require('./routes/favouriteRoutes');
 const errorhandler = require('./middlewares/errorhandler');
 const vaccineRegistrationRoutes = require('./routes/vaccineRegistrationRoutes');
@@ -69,6 +70,7 @@ app.use('/downvote', downvoteRoutes);
 app.use('/vaccine', vaccineRegistrationRoutes);
 app.use('/availableAppointment', availableAppointmentRoutes);
 app.use('/donationCause', donationCauseRoutes);
+app.use('/donationRequest', donationRequestRoutes);
 app.use('/comment', commentRoutes);
 app.use('/like', likeRoutes);
 app.use('/disLike', dislikeRoutes);
