@@ -1,10 +1,10 @@
 {
   "files": {
-    "main.css": "/static/css/main.644ed906.css",
-    "main.js": "/static/js/main.26ab87d0.js",
-    "static/js/498.0226d81e.chunk.js": "/static/js/498.0226d81e.chunk.js",
-    "static/js/703.41b888e5.chunk.js": "/static/js/703.41b888e5.chunk.js",
-    "static/js/513.e88946e3.chunk.js": "/static/js/513.e88946e3.chunk.js",
+    "main.css": "/static/css/main.f4e55c59.css",
+    "main.js": "/static/js/main.6ea4161e.js",
+    "static/js/498.56cf3c8a.chunk.js": "/static/js/498.56cf3c8a.chunk.js",
+    "static/js/703.26df448e.chunk.js": "/static/js/703.26df448e.chunk.js",
+    "static/js/513.7c61961e.chunk.js": "/static/js/513.7c61961e.chunk.js",
     "static/js/787.31f30833.chunk.js": "/static/js/787.31f30833.chunk.js",
     "static/media/development.png": "/static/media/development.3cd8fbc5375a6adb9c35.png",
     "static/media/education.png": "/static/media/education.1548e6b383314d260026.png",
@@ -33,18 +33,18 @@
     "static/media/e-g-5.jpg": "/static/media/e-g-5.ee2777c8f0b58e8694ee.jpg",
     "static/media/contact.jpg": "/static/media/contact.eda293f56e17569aefd6.jpg",
     "static/media/hepatitis.jpg": "/static/media/hepatitis.1c73fee152da98fc9151.jpg",
+    "static/media/digital_village_logo.png": "/static/media/digital_village_logo.21be8059f2a1c424e1ca.png",
     "static/media/review.jpg": "/static/media/review.058940d89f72b3a25ee0.jpg",
-    "static/media/logo.png": "/static/media/logo.05ff88cd21b64e34144e.png",
     "index.html": "/index.html",
-    "main.644ed906.css.map": "/static/css/main.644ed906.css.map",
-    "main.26ab87d0.js.map": "/static/js/main.26ab87d0.js.map",
-    "498.0226d81e.chunk.js.map": "/static/js/498.0226d81e.chunk.js.map",
-    "703.41b888e5.chunk.js.map": "/static/js/703.41b888e5.chunk.js.map",
-    "513.e88946e3.chunk.js.map": "/static/js/513.e88946e3.chunk.js.map",
+    "main.f4e55c59.css.map": "/static/css/main.f4e55c59.css.map",
+    "main.6ea4161e.js.map": "/static/js/main.6ea4161e.js.map",
+    "498.56cf3c8a.chunk.js.map": "/static/js/498.56cf3c8a.chunk.js.map",
+    "703.26df448e.chunk.js.map": "/static/js/703.26df448e.chunk.js.map",
+    "513.7c61961e.chunk.js.map": "/static/js/513.7c61961e.chunk.js.map",
     "787.31f30833.chunk.js.map": "/static/js/787.31f30833.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.644ed906.css",
-    "static/js/main.26ab87d0.js"
+    "static/css/main.f4e55c59.css",
+    "static/js/main.6ea4161e.js"
   ]
 }

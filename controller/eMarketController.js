@@ -71,7 +71,7 @@ const getAllProducts = async (req, res, next) => {
 
     if (isAdmin) {
       if (page !== 'undefined' && size !== 'undefined') {
-        products = await Products.find() // admin can access all products
+        products = await Products.find({}) // admin can access all products
           .skip(parseInt(page) * parseInt(size))
           .limit(parseInt(size));
       } else {
@@ -97,6 +97,15 @@ const getAllProducts = async (req, res, next) => {
     });
   } catch (error) {
     next(error);
+  }
+};
+
+const getProductsForAdmin = async (req, res, next) => {
+  try {
+    const allProducts = await Products.find({});
+    res.json(allProducts);
+  } catch (err) {
+    next(err);
   }
 };
 
@@ -168,4 +177,5 @@ module.exports = {
   deleteProduct,
   updeteProduct,
   getAllMedicine,
+  getProductsForAdmin,
 };

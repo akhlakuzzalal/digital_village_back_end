@@ -183,11 +183,11 @@ const addTeacher = async (req, res, next) => {
     const teacher = req.body;
     const findUser = await User.find({ email: teacher?.email });
     const user = findUser[0];
-    const addNewRole = { ...user.roles, Teacher: 2000 };
+    const addNewRole = { ...user.roles, Teacher: 3000 };
 
     // add the new roles of user
     await User.updateOne({ email: teacher?.email }, { roles: addNewRole });
-    const response = await Teacher.insertMany(teacher);
+    const response = await Teacher.create(teacher);
 
     res.json(response);
   } catch (error) {

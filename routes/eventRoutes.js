@@ -10,6 +10,7 @@ const {
   handleParticipants,
   getEventWithEmail,
   handleDeleteMyBookingEvents,
+  updateEvent,
 } = require('../controller/eventController.js');
 
 router.post('/addEvent', handleAddEvent);
@@ -20,5 +21,6 @@ router.delete('/deleteEvent', handleDeleteEvents);
 router.put('/participant', handleParticipants);
 router.get('/myBookingEvents', getEventWithEmail);
 router.put('/deleteMyBooking', handleDeleteMyBookingEvents);
+router.put('/updateEvent/:id', updateEvent);
 
 module.exports = router;
