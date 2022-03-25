@@ -4,11 +4,8 @@ const DonationRequest = require('../schemas/DonationRequestSchema');
 // add a new help Request Apply a user Post == not try
 const helpRequestApply = async (req, res, next) => {
     console.log(req.body, 'hitte apply');
-    const helpRequest = {
-      ...JSON.parse(req.body.request),
-    };
     try {
-      // const helpRequest = req.body;
+      const helpRequest = req.body;
       const result = await DonationRequest.insertMany(helpRequest);
       res.json(result);
     } catch (error) {
@@ -17,6 +14,7 @@ const helpRequestApply = async (req, res, next) => {
   };
   // Get All apply == not try
   const getAllApply = async (req, res, next) => {
+    console.log("get all");
     try {
       const allApply = await DonationRequest.find({});
       res.json(allApply);
@@ -26,6 +24,7 @@ const helpRequestApply = async (req, res, next) => {
   };
   // Get sigle apply == not try
   const getSigleApply = async (req, res, next) => {
+    console.log("get single");
     try {
       const id = req.query.id;
       const query = { _id: id };
@@ -42,7 +41,7 @@ const helpRequestApply = async (req, res, next) => {
     try {
       const id = req.query.id;
       const filter = { _id: id };
-      const updateRequest = { $set: { isVerified: 'true', pay: 'success' } }
+      const updateRequest = { $set: { isVerified: 'true', pay: true } }
   
       const response = await DonationRequest.findOneAndReplace(filter, updateRequest);
       res.json(response);
