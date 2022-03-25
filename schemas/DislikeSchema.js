@@ -19,6 +19,10 @@ const DislikeSchema = Schema(
       type: Schema.Types.ObjectId,
       ref: 'Blog',
     },
+    socialPostId: {
+      type: Schema.Types.ObjectId,
+      ref: 'Post',
+    },
   },
   { timestamps: true, versionKey: false }
 );
