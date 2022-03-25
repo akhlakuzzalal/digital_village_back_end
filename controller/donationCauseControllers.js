@@ -1,7 +1,6 @@
 const DonationCause = require('../schemas/DonationCauseSchema');
 const fileSizeFormatter = require('../utilities/fileSizeFormatter');
 const User = require('../schemas/UserSchema');
-// const ObjectId = require('mongodb').ObjectId;
 
 // add a new donation cuase administrator Post == ok
 const handleAddDonateCuase = async (req, res, next) => {
@@ -25,21 +24,11 @@ const handleAddDonateCuase = async (req, res, next) => {
   }
 };
 
-// Get All Cuases ==ok
+// Get All Cuases
 const getAllCuases = async (req, res, next) => {
   try {
     const allCuases = await DonationCause.find({});
     res.json(allCuases);
-  } catch (error) {
-    next(error);
-  }
-};
-
-// Get All Payments == not try
-const getAllPayments = async (req, res, next) => {
-  try {
-    const allPayments = await DonationCause.find({});
-    res.json(allPayments);
   } catch (error) {
     next(error);
   }
@@ -249,13 +238,39 @@ const getAllDonarInfo = async (req, res, next) => {
   }
 };
 
+const getSpecificUserDonationInfo = async (req, res, next) => {
+  try {
+    const { uId } = req.query;
+    const allCauses = await DonationCause.find();
+    const allCausesWithMyDonation = allCauses.map((cause) => {
+      let UserDonations = cause.donars.filter((d) => d.donarId === uId);
+
+      return {
+        _id: cause?._id,
+        title: cause?.title,
+        image: cause?.image,
+        description: cause?.description,
+        category: cause?.category,
+        goal: cause?.goal,
+        raised: cause?.raised,
+        date: cause?.date,
+        donars: UserDonations,
+      };
+    });
+
+    res.json(allCausesWithMyDonation);
+  } catch (error) {
+    next(error);
+  }
+};
+
 module.exports = {
   handleAddDonateCuase,
   getAllCuases,
   deleteCuase,
   updateACause,
-  getAllPayments,
   takeDonations,
   getAllDonarInfo,
   updateDonarPaymentStatus,
+  getSpecificUserDonationInfo,
 };

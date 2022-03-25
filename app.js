@@ -31,6 +31,7 @@ const vaccineRegistrationRoutes = require('./routes/vaccineRegistrationRoutes');
 const availableAppointmentRoutes = require('./routes/availableAppointmentRoutes');
 const UserReviewRoutes = require('./routes/UserReviewRoutes');
 const socialRoutes = require('./routes/socialRoutes');
+const AnalyticsRoutes = require('./routes/AnalyticsRoutes');
 
 const app = express();
 
@@ -77,6 +78,7 @@ app.use('/disLike', dislikeRoutes);
 app.use('/favourites', favouriteRoutes);
 app.use('/userReview', UserReviewRoutes);
 app.use('/social', socialRoutes);
+app.use('/analytics', AnalyticsRoutes);
 
 // Handles any requests that don't match the ones above
 app.get('*', (req, res) => {
