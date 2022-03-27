@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/static/css/main.b78e1ec3.css",
-    "main.js": "/static/js/main.2fe60a77.js",
+    "main.css": "/static/css/main.d1d7eca3.css",
+    "main.js": "/static/js/main.15c0d8f6.js",
     "static/js/498.56cf3c8a.chunk.js": "/static/js/498.56cf3c8a.chunk.js",
     "static/js/703.26df448e.chunk.js": "/static/js/703.26df448e.chunk.js",
     "static/js/513.7c61961e.chunk.js": "/static/js/513.7c61961e.chunk.js",
@@ -24,27 +24,34 @@
     "static/media/mediBanner.png": "/static/media/mediBanner.5c1b5ec8dcada2e6bef0.png",
     "static/media/e-g-1.jpg": "/static/media/e-g-1.d73f73f036a279b9dabb.jpg",
     "static/media/study.png": "/static/media/study.fd96f4b2d4665a0a6523.png",
+    "static/media/medical_time_table.png": "/static/media/medical_time_table.8f75cc23d222ccdde7da.png",
     "static/media/Add events.PNG": "/static/media/Add events.e9894cdf9c5448adf769.PNG",
     "static/media/StudentFooter.png": "/static/media/StudentFooter.1ed606fe8093f6636f81.png",
     "static/media/donatebanner.jpg": "/static/media/donatebanner.b12bf1bdaa8a8b4a3578.jpg",
     "static/media/polio.jpg": "/static/media/polio.6d69198714422802dbe3.jpg",
     "static/media/COVAX.jpg": "/static/media/COVAX.2d7614473e09feff1661.jpg",
+    "static/media/doctor1.jpg": "/static/media/doctor1.54bb2773d8643e94c2fb.jpg",
+    "static/media/doctor4.jpg": "/static/media/doctor4.63b20531f7241b98dd36.jpg",
+    "static/media/doctor2.jpg": "/static/media/doctor2.053133b58274594b4a41.jpg",
     "static/media/who we are.jpg": "/static/media/who we are.7bf090b2f9e4ebdef7be.jpg",
     "static/media/event.png": "/static/media/event.6a532e097c3856cded41.png",
+    "static/media/doctor5.jpg": "/static/media/doctor5.7d2cbc5187d50993b064.jpg",
+    "static/media/doctor6.jpg": "/static/media/doctor6.f0aa570c32d31c4ab5c4.jpg",
     "static/media/e-g-5.jpg": "/static/media/e-g-5.ee2777c8f0b58e8694ee.jpg",
     "static/media/contact.jpg": "/static/media/contact.eda293f56e17569aefd6.jpg",
     "static/media/hepatitis.jpg": "/static/media/hepatitis.1c73fee152da98fc9151.jpg",
+    "static/media/doctor3.jpg": "/static/media/doctor3.091dbaa1c011eac2a4e4.jpg",
     "static/media/digital_village_logo.png": "/static/media/digital_village_logo.21be8059f2a1c424e1ca.png",
     "index.html": "/index.html",
-    "main.b78e1ec3.css.map": "/static/css/main.b78e1ec3.css.map",
-    "main.2fe60a77.js.map": "/static/js/main.2fe60a77.js.map",
+    "main.d1d7eca3.css.map": "/static/css/main.d1d7eca3.css.map",
+    "main.15c0d8f6.js.map": "/static/js/main.15c0d8f6.js.map",
     "498.56cf3c8a.chunk.js.map": "/static/js/498.56cf3c8a.chunk.js.map",
     "703.26df448e.chunk.js.map": "/static/js/703.26df448e.chunk.js.map",
     "513.7c61961e.chunk.js.map": "/static/js/513.7c61961e.chunk.js.map",
     "787.31f30833.chunk.js.map": "/static/js/787.31f30833.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.b78e1ec3.css",
-    "static/js/main.2fe60a77.js"
+    "static/css/main.d1d7eca3.css",
+    "static/js/main.15c0d8f6.js"
   ]
 }
