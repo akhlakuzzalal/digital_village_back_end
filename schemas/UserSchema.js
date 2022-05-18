@@ -39,7 +39,7 @@ const userSchema = new mongoose.Schema(
     about: String,
     occupation: String,
     roles: Object,
-    photo: Object,
+    photo: String,
     refreshToken: String,
     requested: Array,
     requesting: Array,

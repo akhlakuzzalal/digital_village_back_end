@@ -36,17 +36,8 @@ const getASingleUser = async (req, res, next) => {
 
 const updateUser = async (req, res, next) => {
   const { id } = req.query;
-  const file = {
-    name: req.file.originalname,
-    path: req.file.path,
-    type: req.file.mimetype,
-    size: fileSizeFormatter(req.file.size, 2), // 0.00
-  };
 
-  const userInfo = {
-    ...JSON.parse(req.body.user),
-    photo: file,
-  };
+  const userInfo = req.body;
 
   try {
     const response = await User.findOneAndUpdate({ _id: id }, userInfo, {
