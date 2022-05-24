@@ -14,29 +14,6 @@ const addPost = async (req, res, next) => {
   }
 };
 
-// add post with image
-// const addPostwithImage = async (req, res, next) => {
-//   // set Up file
-//   const file = {
-//     name: req.file.originalname,
-//     path: req.file.path,
-//     type: req.file.mimetype,
-//     size: fileSizeFormatter(req.file.size, 2), // 0.00
-//   };
-//   // post data
-//   const postData = {
-//     ...JSON.parse(req.body.post),
-//     photo: file,
-//   };
-//   // addPost
-//   try {
-//     const responce = await Post.insertMany(postData);
-//     res.json(responce);
-//   } catch (err) {
-//     next(err);
-//   }
-// };
-
 // get All Post
 const getPost = async (req, res, next) => {
   try {

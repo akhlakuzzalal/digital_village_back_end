@@ -7,7 +7,7 @@ const donationCauseSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    image: Object,
+    image: { type: String },
     description: {
       type: String,
       required: true,

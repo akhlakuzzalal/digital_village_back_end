@@ -78,19 +78,7 @@ const deleteAVideo = async (req, res, next) => {
 };
 
 const publishBlog = async (req, res, next) => {
-  const file = {
-    name: req.file.originalname,
-    path: req.file.path,
-    type: req.file.mimetype,
-    size: fileSizeFormatter(req.file.size, 2), // 0.00
-  };
-
-  const newBlog = {
-    ...JSON.parse(req.body.blog),
-    bannerImg: file,
-    isVerified: false,
-  };
-
+  const newBlog = { ...req.body, isVerified: false };
   try {
     const response = await Blog.insertMany(newBlog);
     res.json(response);
