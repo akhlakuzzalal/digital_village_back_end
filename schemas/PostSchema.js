@@ -8,7 +8,7 @@ const PostSchema = new mongoose.Schema(
     },
     post: String,
     loves: Array,
-    photo: Object,
+    photo: { type: String },
     time: String,
   },
   { versionKey: false }

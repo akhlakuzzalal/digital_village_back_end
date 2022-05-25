@@ -18,7 +18,7 @@ const UserReviewSchema = new mongoose.Schema(
       type: Number,
       required: true,
     },
-    photo: Object,
+    photo: { type: String },
   },
   { versionKey: false }
 );

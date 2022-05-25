@@ -5,7 +5,6 @@ const {
   updatePost,
   deletePost,
   getPostByUser,
-  addPostwithImage,
 } = require('../controller/postController');
 const {
   findAllUser,
@@ -28,7 +27,7 @@ router.get('/message', socketController);
 // post Crud
 router.get('/allPost', getPost);
 router.post('/addPost', addPost);
-router.post('/addPostwithImage', upload.single('file'), addPostwithImage);
+// router.post('/addPostwithImage', upload.single('file'), addPostwithImage);
 router.put('/updatePost', updatePost);
 router.delete('/deletePost', deletePost);
 router.get('/postsByUser', getPostByUser);

@@ -5,29 +5,7 @@ const fileSizeFormatter = require('../utilities/fileSizeFormatter');
 // add Post
 const addPost = async (req, res, next) => {
   const postData = req.body;
-  try {
-    const responce = await Post.insertMany(postData);
-    res.json(responce);
-  } catch (err) {
-    next(err);
-  }
-};
-
-// add post with image
-const addPostwithImage = async (req, res, next) => {
-  // set Up file
-  const file = {
-    name: req.file.originalname,
-    path: req.file.path,
-    type: req.file.mimetype,
-    size: fileSizeFormatter(req.file.size, 2), // 0.00
-  };
-  // post data
-  const postData = {
-    ...JSON.parse(req.body.post),
-    photo: file,
-  };
-  // addPost
+  console.log(postData);
   try {
     const responce = await Post.insertMany(postData);
     res.json(responce);
@@ -88,7 +66,6 @@ const getPostByUser = async (req, res, next) => {
 
 module.exports = {
   addPost,
-  addPostwithImage,
   getPost,
   updatePost,
   deletePost,

@@ -4,17 +4,7 @@ const User = require('../schemas/UserSchema');
 
 // add a new donation cuase administrator Post == ok
 const handleAddDonateCuase = async (req, res, next) => {
-  const file = {
-    name: req.file.originalname,
-    path: req.file.path,
-    type: req.file.mimetype,
-    size: fileSizeFormatter(req.file.size, 2), // 0.00
-  };
-
-  const newDonationCause = {
-    ...JSON.parse(req.body.cause),
-    image: file,
-  };
+  const newDonationCause = req.body;
 
   try {
     const response = await DonationCause.create(newDonationCause);
