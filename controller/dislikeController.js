@@ -3,15 +3,17 @@ const Like = require('../schemas/LikeSchema');
 
 const getDisLikes = async (req, res, next) => {
   try {
-    const { videoId, commentId, blogId } = req.body;
+    const { videoId, commentId, blogId, socialPostId } = req.body;
     let query = {};
 
     if (videoId) {
       query = { videoId };
     } else if (blogId) {
       query = { blogId };
-    } else {
+    } else if (commentId) {
       query = { commentId };
+    } else {
+      query = { socialPostId };
     }
 
     DisLike.find(query).exec((err, dislikes) => {
@@ -25,15 +27,17 @@ const getDisLikes = async (req, res, next) => {
 
 const addDisLike = async (req, res, next) => {
   try {
-    const { videoId, uId, commentId, blogId } = req.body;
+    const { videoId, uId, commentId, blogId, socialPostId } = req.body;
     let data = {};
 
     if (videoId) {
       data = { videoId, uId };
     } else if (blogId) {
       data = { blogId, uId };
-    } else {
+    } else if (commentId) {
       data = { commentId, uId };
+    } else {
+      data = { socialPostId, uId };
     }
 
     const disLike = new DisLike(data);
@@ -54,14 +58,16 @@ const addDisLike = async (req, res, next) => {
 const removeDisLike = async (req, res, next) => {
   try {
     let query = {};
-    const { videoId, uId, commentId, blogId } = req.body;
+    const { videoId, uId, commentId, blogId, socialPostId } = req.body;
 
     if (videoId) {
       query = { videoId, uId };
     } else if (blogId) {
       query = { blogId, uId };
-    } else {
+    } else if (commentId) {
       query = { commentId, uId };
+    } else {
+      query = { socialPostId, uId };
     }
 
     DisLike.deleteMany(query).exec((err, result) => {

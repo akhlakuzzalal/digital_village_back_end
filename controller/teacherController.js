@@ -145,17 +145,24 @@ const getSingleBlog = async (req, res, next) => {
 
 const editABlog = async (req, res, next) => {
   const { id } = req.query;
-  const file = {
-    name: req.file.originalname,
-    path: req.file.path,
-    type: req.file.mimetype,
-    size: fileSizeFormatter(req.file.size, 2), // 0.00
-  };
+  let editedBlog = {};
+  if (req.file) {
+    const file = {
+      name: req.file.originalname,
+      path: req.file.path,
+      type: req.file.mimetype,
+      size: fileSizeFormatter(req.file.size, 2), // 0.00
+    };
 
-  const editedBlog = {
-    ...JSON.parse(req.body.blog),
-    bannerImg: file,
-  };
+    editedBlog = {
+      ...JSON.parse(req.body.blog),
+      bannerImg: file,
+    };
+  } else {
+    editedBlog = {
+      ...JSON.parse(req.body.blog),
+    };
+  }
 
   try {
     const response = await Blog.findOneAndUpdate({ _id: id }, editedBlog);

@@ -13,18 +13,9 @@ const handleAddEvent = async (req, res, next) => {
 
 const getAllEvent = async (req, res, next) => {
   try {
-    let { page, size } = req.query;
+    const allEvents = await Event.find();
 
-    const count = await Event.count();
-
-    const allEvents = await Event.find()
-      .skip(parseInt(page) * parseInt(size))
-      .limit(parseInt(size));
-
-    res.json({
-      count,
-      allEvents,
-    });
+    res.json(allEvents);
   } catch (error) {
     next(error);
   }
@@ -101,6 +92,22 @@ const handleDeleteMyBookingEvents = async (req, res, next) => {
   }
 };
 
+// Update a Product
+const updateEvent = async (req, res, next) => {
+  try {
+    const id = req.params.id;
+    const updateEvent = req.body;
+    const filter = { _id: id };
+
+    const response = await Event.findOneAndUpdate(filter, updateEvent, {
+      new: true,
+    });
+    res.json(response);
+  } catch (error) {
+    next(error);
+  }
+};
+
 module.exports = {
   handleAddEvent,
   getAllEvent,
@@ -110,4 +117,5 @@ module.exports = {
   handleParticipants,
   getEventWithEmail,
   handleDeleteMyBookingEvents,
+  updateEvent,
 };

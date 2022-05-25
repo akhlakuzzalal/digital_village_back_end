@@ -1,5 +1,6 @@
 const Roles = require('../config/roles');
 const Products = require('../schemas/ProductsSchema');
+const Order = require('../schemas/OrderSchema');
 const { filterProducts } = require('../utilities/Filter');
 
 // get all Products
@@ -42,7 +43,7 @@ const getAllProducts = async (req, res, next) => {
         size !== 'undefined'
       ) {
         const allVerifiedProducts = await Products.find({
-          isMedecine: false,
+          isMedicine: false,
         });
         const allVerifiedFilteredProducts = filterProducts(
           allVerifiedProducts,
@@ -81,13 +82,12 @@ const getAllProducts = async (req, res, next) => {
       if (page !== 'undefined' && size !== 'undefined') {
         products = await Products.find({
           isVerified: true,
-
-          cata,
+          isMedicine: false,
         })
           .skip(parseInt(page) * parseInt(size))
           .limit(parseInt(size)); // a normal user can only see products that are verified
       } else {
-        products = await Products.find({ isVerified: true, isMedecine: false }); // send all if pagination query is not avialble
+        products = await Products.find({ isVerified: true, isMedicine: false }); // send all if pagination query is not avialble
       }
     }
 
@@ -112,7 +112,7 @@ const getProductsForAdmin = async (req, res, next) => {
 // Get medecines
 const getAllMedicine = async (req, res, next) => {
   try {
-    const allMedicine = await Products.find({ isMedecine: true });
+    const allMedicine = await Products.find({ isMedicine: true });
     res.json(allMedicine);
   } catch (err) {
     next(err);
@@ -128,12 +128,13 @@ const addProducts = async (req, res, next) => {
       response = await Products.insertMany({
         ...newProducts,
         isVerified: true,
+        isMedicine: false,
       });
     } else {
       response = await Products.insertMany({
         ...newProducts,
         isVerified: true,
-        isMedecine: true,
+        isMedicine: true,
       });
     }
     res.json(response);
@@ -170,6 +171,29 @@ const updeteProduct = async (req, res, next) => {
   }
 };
 
+// get User Order
+const getUserOrder = async (req, res, next) => {
+  const { email } = req.query;
+  console.log(email, 'Email from order hitting');
+  try {
+    const response = await Order.find({ email: email });
+    res.json(response);
+  } catch (err) {
+    next(err);
+  }
+};
+
+// add User Order
+const addUserOrder = async (req, res, next) => {
+  const data = req.body;
+  try {
+    await Order.insertMany(data);
+    res.json('addOrder');
+  } catch (err) {
+    next(err);
+  }
+};
+
 //  export controllers
 module.exports = {
   getAllProducts,
@@ -178,4 +202,6 @@ module.exports = {
   updeteProduct,
   getAllMedicine,
   getProductsForAdmin,
+  addUserOrder,
+  getUserOrder,
 };

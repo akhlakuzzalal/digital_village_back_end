@@ -24,13 +24,6 @@ const getAllUsers = async (req, res, next) => {
   }
 };
 
-const updateRoles = () => {
-  try {
-  } catch (error) {
-    next(error);
-  }
-};
-
 const getASingleUser = async (req, res, next) => {
   try {
     const { email } = req.query;
@@ -78,8 +71,25 @@ const updateUserWithoutProfileImg = async (req, res, next) => {
   }
 };
 
+const changeRole = async (req, res, next) => {
+  try {
+    const { id } = req.query;
+    const roles = req.body;
+    const response = await User.findOneAndUpdate(
+      { _id: id },
+      { roles },
+      {
+        new: true,
+      }
+    );
+    res.json(response);
+  } catch (error) {
+    next(error);
+  }
+};
+
 module.exports = {
-  updateRoles,
+  changeRole,
   getAllUsers,
   updateUser,
   getASingleUser,
