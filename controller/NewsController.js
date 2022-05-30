@@ -1,5 +1,5 @@
 const News = require('../schemas/NewsSchema');
-const fileSizeFormatter = require('../utilities/fileSizeFormatter');
+const deleteFile = require('../utilities/deleteFile');
 
 const getAllNews = async (req, res, next) => {
   try {
@@ -12,8 +12,6 @@ const getAllNews = async (req, res, next) => {
 
 const handleAddNews = async (req, res, next) => {
   const newNews = { ...req.body, isVerified: false };
-  console.log(newNews);
-
   try {
     const response = await News.insertMany(newNews);
     res.json(response);
@@ -44,22 +42,18 @@ const handleDeleteNews = async (req, res, next) => {
 };
 
 const handleEditNews = async (req, res, next) => {
-  const { id } = req.query;
-  let editNews = {};
-  if (req.file) {
-    const file = {
-      name: req.file.originalname,
-      path: req.file.path,
-      type: req.file.mimetype,
-      size: fileSizeFormatter(req.file.size, 2), // 0.00
-    };
-    editNews = { ...JSON.parse(req.body.news), bannerImg: file };
-  } else {
-    editNews = { ...JSON.parse(req.body.news) };
-  }
+  const { id, public_id } = req.query;
+
+  const updatedNews = req.body;
+
+  console.log(public_id);
+
+  console.log(updatedNews);
+
+  deleteFile(public_id);
 
   try {
-    const response = await News.findOneAndUpdate({ _id: id }, editNews);
+    const response = await News.findOneAndUpdate({ _id: id }, updatedNews);
     res.json({
       success: true,
       response,
