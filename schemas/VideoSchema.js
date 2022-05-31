@@ -8,8 +8,8 @@ const videoSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    video: {
-      type: Object,
+    videoInfo: {
+      type: { public_id: String, url: String },
       required: true,
     },
     about: {

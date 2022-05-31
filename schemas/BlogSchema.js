@@ -14,7 +14,10 @@ const BlogSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    bannerImg: { type: String },
+    imageInfo: {
+      type: { public_id: String, url: String },
+      required: true,
+    },
     about: {
       type: String,
       required: true,

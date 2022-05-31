@@ -46,10 +46,6 @@ const handleEditNews = async (req, res, next) => {
 
   const updatedNews = req.body;
 
-  console.log(public_id);
-
-  console.log(updatedNews);
-
   deleteFile(public_id);
 
   try {
