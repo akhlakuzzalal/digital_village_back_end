@@ -2,21 +2,14 @@ const Video = require('../schemas/VideoSchema');
 const Blog = require('../schemas/BlogSchema');
 const User = require('../schemas/UserSchema');
 const Teacher = require('../schemas/TeacherSchema');
-const fileSizeFormatter = require('../utilities/fileSizeFormatter');
+const deleteFile = require('../utilities/deleteFile');
 
 const publishVideo = async (req, res, next) => {
-  const file = {
-    name: req.file.originalname,
-    path: req.file.path,
-    type: req.file.mimetype,
-    size: fileSizeFormatter(req.file.size, 2), // 0.00
-  };
-
   const newVideo = {
-    ...JSON.parse(req.body.video),
-    video: file,
+    ...req.body,
     isVerified: false,
   };
+
   try {
     const response = await Video.insertMany(newVideo);
     res.json(response);
@@ -132,28 +125,14 @@ const getSingleBlog = async (req, res, next) => {
 };
 
 const editABlog = async (req, res, next) => {
-  const { id } = req.query;
-  let editedBlog = {};
-  if (req.file) {
-    const file = {
-      name: req.file.originalname,
-      path: req.file.path,
-      type: req.file.mimetype,
-      size: fileSizeFormatter(req.file.size, 2), // 0.00
-    };
+  const { id, public_id } = req.query;
 
-    editedBlog = {
-      ...JSON.parse(req.body.blog),
-      bannerImg: file,
-    };
-  } else {
-    editedBlog = {
-      ...JSON.parse(req.body.blog),
-    };
-  }
+  const updatedBlog = req.body;
+
+  deleteFile(public_id);
 
   try {
-    const response = await Blog.findOneAndUpdate({ _id: id }, editedBlog);
+    const response = await Blog.findOneAndUpdate({ _id: id }, updatedBlog);
     res.json({
       success: true,
       response,

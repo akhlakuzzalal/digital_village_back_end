@@ -6,8 +6,8 @@ const NewsSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    bannerImg: {
-      type: String,
+    imageInfo: {
+      type: { public_id: String, url: String },
       required: true,
     },
     description: {
