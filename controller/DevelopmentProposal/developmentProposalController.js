@@ -2,6 +2,7 @@ const DevelopmentProposal = require('../../schemas/DevelopmentProposal/Developme
 const fileSizeFormatter = require('../../utilities/fileSizeFormatter');
 const Upvotes = require('../../schemas/DevelopmentProposal/UpvoteSchema');
 const Downvotes = require('../../schemas/DevelopmentProposal/DownvoteSchema');
+const deleteFile = require('../../utilities/deleteFile');
 
 const getAllDevelopmentProposal = async (req, res, next) => {
   try {
@@ -28,7 +29,7 @@ const getAllDevelopmentProposal = async (req, res, next) => {
           email: d.email,
           title: d.title,
           description: d.description,
-          image: d.image,
+          imageInfo: d.imageInfo,
           proposalDate: d.proposalDate,
           isAccepted: d.isAccepted,
           isRejected: d.isRejected,
@@ -45,31 +46,7 @@ const getAllDevelopmentProposal = async (req, res, next) => {
 };
 
 const addNewDevelopmentProposal = async (req, res, next) => {
-  let newDevelopmentProposal = {};
-  if (req.file) {
-    const file = {
-      name: req.file.originalname,
-      path: req.file.path,
-      type: req.file.mimetype,
-      size: fileSizeFormatter(req.file.size, 2), // 0.00
-    };
-
-    newDevelopmentProposal = {
-      ...JSON.parse(req.body.developmentProposal),
-      image: file,
-      isAccepted: false,
-      isRejected: false,
-      proposalDate: new Date().toLocaleDateString(),
-    };
-  } else {
-    newDevelopmentProposal = {
-      ...JSON.parse(req.body.developmentProposal),
-      isAccepted: false,
-      isRejected: false,
-      proposalDate: new Date().toLocaleDateString(),
-    };
-  }
-
+  let newDevelopmentProposal = req.body;
   try {
     const response = await DevelopmentProposal.create(newDevelopmentProposal);
     res.json(response);
@@ -130,8 +107,10 @@ const updateDevelopmentProposalStatus = async (req, res, next) => {
 
 const removeDevelopmentProposal = async (req, res, next) => {
   try {
-    const { id } = req.query;
-    console.log(id);
+    const { id, public_id } = req.query;
+
+    deleteFile(public_id);
+
     const query = { _id: id };
     const response = await DevelopmentProposal.deleteOne(query);
     res.json(response);

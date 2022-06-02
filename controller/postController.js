@@ -1,5 +1,6 @@
 const Post = require('../schemas/PostSchema');
 const User = require('../schemas/UserSchema');
+const deleteFile = require('../utilities/deleteFile');
 const fileSizeFormatter = require('../utilities/fileSizeFormatter');
 
 // add Post
@@ -41,8 +42,11 @@ const updatePost = async (req, res, next) => {
 
 // delete a Post
 const deletePost = async (req, res, next) => {
-  const { id, email } = req.query;
+  const { id, email, public_id } = req.query;
   const post = await Post.find({ _id: id });
+
+  deleteFile(public_id);
+
   if (post[0]?.userEmail === email) {
     try {
       const responce = await Post.deleteOne({ _id: id });

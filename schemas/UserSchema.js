@@ -39,10 +39,15 @@ const userSchema = new mongoose.Schema(
     about: String,
     occupation: String,
     roles: Object,
-    photo: {
-      type: String,
-      default:
-        'https://cdn.pixabay.com/photo/2020/07/01/12/58/icon-5359553_1280.png',
+    imageInfo: {
+      type: {
+        url: String,
+        public_id: String,
+      },
+      default: {
+        url: 'https://cdn.pixabay.com/photo/2020/07/01/12/58/icon-5359553_1280.png',
+        public_id: '',
+      },
     },
     refreshToken: String,
     requested: Array,

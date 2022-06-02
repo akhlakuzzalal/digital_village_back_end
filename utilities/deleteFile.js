@@ -9,7 +9,6 @@ cloudinary.config({
 });
 
 function deleteFile(public_id) {
-  console.log(public_id);
   cloudinary.uploader.destroy(public_id, function (result) {
     console.log(result);
   });
