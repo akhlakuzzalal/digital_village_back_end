@@ -1,13 +1,13 @@
 const DonationCause = require('../schemas/DonationCauseSchema');
-const fileSizeFormatter = require('../utilities/fileSizeFormatter');
 const User = require('../schemas/UserSchema');
+const deleteFile = require('../utilities/deleteFile');
 
 // add a new donation cuase administrator Post == ok
 const handleAddDonateCuase = async (req, res, next) => {
-  const newDonationCause = req.body;
+  const donationCause = req.body;
 
   try {
-    const response = await DonationCause.create(newDonationCause);
+    const response = await DonationCause.create(donationCause);
     res.json(response);
   } catch (error) {
     next(error);
@@ -24,46 +24,36 @@ const getAllCuases = async (req, res, next) => {
   }
 };
 
-// Delete sigle Cuase
-const deleteCuase = async (req, res, next) => {
+//Update sigle Cause
+const updateACause = async (req, res, next) => {
+  const { id, public_id } = req.query;
+
+  deleteFile(public_id);
+
+  const updatedCause = req.body;
+
   try {
-    const id = req.query.id;
-    const query = { _id: id };
-    const sigleCuasedelete = await DonationCause.findOneAndDelete(query);
-    res.json(sigleCuasedelete);
+    const response = await DonationCause.findOneAndUpdate(
+      { _id: id },
+      updatedCause,
+      { new: true }
+    );
+    res.json(response);
   } catch (error) {
     next(error);
   }
 };
 
-//Update sigle Cause
-const updateACause = async (req, res, next) => {
-  const { id } = req.query;
-  let editedDonationCause = {};
-  if (req.file) {
-    const file = {
-      name: req.file.originalname,
-      path: req.file.path,
-      type: req.file.mimetype,
-      size: fileSizeFormatter(req.file.size, 2), // 0.00
-    };
-    editedDonationCause = {
-      ...JSON.parse(req.body.cause),
-      image: file,
-    };
-  } else {
-    editedDonationCause = {
-      ...JSON.parse(req.body.cause),
-    };
-  }
-
+// Delete sigle Cuase
+const deleteCuase = async (req, res, next) => {
   try {
-    const response = await DonationCause.findOneAndUpdate(
-      { _id: id },
-      editedDonationCause,
-      { new: true }
-    );
-    res.json(response);
+    const { id, public_id } = req.query;
+
+    deleteFile(public_id);
+
+    const query = { _id: id };
+    const sigleCuasedelete = await DonationCause.findOneAndDelete(query);
+    res.json(sigleCuasedelete);
   } catch (error) {
     next(error);
   }

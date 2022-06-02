@@ -12,7 +12,7 @@ const router = express.Router();
 router.get('/allNews', getAllNews);
 router.get('/getSingleNews', getSingleNews);
 router.post('/addNews', upload.single('file'), handleAddNews);
-router.delete('/deleteNews/:id', handleDeleteNews);
-router.put('/editNews', upload.single('file'),handleEditNews);
+router.delete('/deleteNews', handleDeleteNews);
+router.put('/editNews', upload.single('file'), handleEditNews);
 
 module.exports = router;
