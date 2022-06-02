@@ -32,9 +32,11 @@ const getSingleNews = async (req, res, next) => {
 
 const handleDeleteNews = async (req, res, next) => {
   try {
-    const id = req.params.id;
-    const data = { _id: id };
-    const response = await News.deleteOne(data);
+    const { id, public_id } = req.query;
+
+    deleteFile(public_id);
+
+    const response = await News.deleteOne({ _id: id });
     res.json(response);
   } catch (error) {
     next(error);

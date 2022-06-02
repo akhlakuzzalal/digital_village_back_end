@@ -62,7 +62,10 @@ const editAVideo = async (req, res, next) => {
 
 const deleteAVideo = async (req, res, next) => {
   try {
-    const { id } = req.query;
+    const { id, public_id } = req.query;
+
+    deleteFile(public_id);
+
     const response = await Video.findOneAndDelete({ _id: id });
     res.json(response);
   } catch (error) {
@@ -144,7 +147,10 @@ const editABlog = async (req, res, next) => {
 
 const deleteABlog = async (req, res, next) => {
   try {
-    const { id } = req.query;
+    const { id, public_id } = req.query;
+
+    deleteFile(public_id);
+
     const response = await Blog.findOneAndDelete({ _id: id });
     res.json(response);
   } catch (error) {
