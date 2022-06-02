@@ -1,5 +1,5 @@
 const User = require('../schemas/UserSchema');
-const fileSizeFormatter = require('../utilities/fileSizeFormatter');
+const deleteFile = require('../utilities/deleteFile');
 
 const getAllUsers = async (req, res, next) => {
   let { page, size } = req.query;
@@ -35,7 +35,9 @@ const getASingleUser = async (req, res, next) => {
 };
 
 const updateUser = async (req, res, next) => {
-  const { id } = req.query;
+  const { id, public_id } = req.query;
+
+  deleteFile(public_id);
 
   const userInfo = req.body;
 

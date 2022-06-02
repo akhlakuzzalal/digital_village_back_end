@@ -64,6 +64,8 @@ const deleteAVideo = async (req, res, next) => {
   try {
     const { id, public_id } = req.query;
 
+    console.log('this is video public_id', public_id);
+
     deleteFile(public_id);
 
     const response = await Video.findOneAndDelete({ _id: id });

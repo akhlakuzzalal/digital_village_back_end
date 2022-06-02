@@ -2,6 +2,7 @@ const Roles = require('../config/roles');
 const Products = require('../schemas/ProductsSchema');
 const Order = require('../schemas/OrderSchema');
 const { filterProducts } = require('../utilities/Filter');
+const deleteFile = require('../utilities/deleteFile');
 
 // get all Products
 const getAllProducts = async (req, res, next) => {
@@ -146,7 +147,10 @@ const addProducts = async (req, res, next) => {
 // Delete Product
 const deleteProduct = async (req, res, next) => {
   try {
-    const id = req.params.id;
+    const { id, public_id } = req.query;
+
+    deleteFile(public_id);
+
     const query = { _id: id };
     const responce = await Products.findOneAndDelete(query);
     res.json(responce);

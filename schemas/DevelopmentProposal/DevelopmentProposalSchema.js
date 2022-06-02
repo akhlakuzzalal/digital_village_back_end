@@ -18,7 +18,10 @@ const DevelopmentProposalSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    image: Object,
+    imageInfo: {
+      type: { url: String, public_id: String },
+      required: true,
+    },
     proposalDate: String,
     isAccepted: Boolean,
     isRejected: Boolean,

@@ -18,7 +18,7 @@ router.get('/admin', getProductsForAdmin);
 router.get('/order', getUserOrder);
 router.post('/products', addProducts);
 router.post('/order', addUserOrder);
-router.delete('/delete/:id', deleteProduct);
+router.delete('/delete', deleteProduct);
 router.put('/update/:id', updeteProduct);
 
 module.exports = router;

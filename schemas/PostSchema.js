@@ -8,7 +8,10 @@ const PostSchema = new mongoose.Schema(
     },
     post: String,
     loves: Array,
-    photo: { type: String },
+    imageInfo: {
+      type: { public_id: String, url: String },
+      required: true,
+    },
     time: String,
   },
   { versionKey: false }
