@@ -1,0 +1,58 @@
+[
+  {
+    "id": 1,
+    "title": "Notification1",
+    "email": "user1@gmail.com",
+    "date": "02/02/2022",
+    "description": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Illum ad sed, dolorum beatae asperiores corporis vero quam harum officia culpa delectus nulla pariatur possimus error quo voluptates provident. Molestiae, facilis. Nobis quam atque, culpa odit ad eaque quidem totam cumque. Obcaecati consectetur voluptate fugit aspernatur amet voluptatem harum consequatur minima!"
+  },
+  {
+    "id": 2,
+    "title": "Notification2",
+    "email": "user1@gmail.com",
+    "date": "02/02/2022",
+    "description": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Illum ad sed, dolorum beatae asperiores corporis vero quam harum officia culpa delectus nulla pariatur possimus error quo voluptates provident. Molestiae, facilis. Nobis quam atque, culpa odit ad eaque quidem totam cumque. Obcaecati consectetur voluptate fugit aspernatur amet voluptatem harum consequatur minima!"
+  },
+  {
+    "id": 3,
+    "title": "Notification3",
+    "email": "user1@gmail.com",
+    "date": "02/02/2022",
+    "description": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Illum ad sed, dolorum beatae asperiores corporis vero quam harum officia culpa delectus nulla pariatur possimus error quo voluptates provident. Molestiae, facilis. Nobis quam atque, culpa odit ad eaque quidem totam cumque. Obcaecati consectetur voluptate fugit aspernatur amet voluptatem harum consequatur minima!"
+  },
+  {
+    "id": 4,
+    "title": "Notification4",
+    "email": "user5@gmail.com",
+    "date": "02/02/2022",
+    "description": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Illum ad sed, dolorum beatae asperiores corporis vero quam harum officia culpa delectus nulla pariatur possimus error quo voluptates provident. Molestiae, facilis. Nobis quam atque, culpa odit ad eaque quidem totam cumque. Obcaecati consectetur voluptate fugit aspernatur amet voluptatem harum consequatur minima!"
+  },
+  {
+    "id": 5,
+    "title": "Notification5",
+    "email": "user1@gmail.com",
+    "date": "02/02/2022",
+    "description": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Illum ad sed, dolorum beatae asperiores corporis vero quam harum officia culpa delectus nulla pariatur possimus error quo voluptates provident. Molestiae, facilis. Nobis quam atque, culpa odit ad eaque quidem totam cumque. Obcaecati consectetur voluptate fugit aspernatur amet voluptatem harum consequatur minima!"
+  },
+  {
+    "id": 6,
+    "title": "Notification6",
+    "email": "user4@gmail.com",
+    "date": "02/02/2022",
+    "description": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Illum ad sed, dolorum beatae asperiores corporis vero quam harum officia culpa delectus nulla pariatur possimus error quo voluptates provident. Molestiae, facilis. Nobis quam atque, culpa odit ad eaque quidem totam cumque. Obcaecati consectetur voluptate fugit aspernatur amet voluptatem harum consequatur minima!"
+  },
+  {
+    "id": 7,
+    "title": "Notification7",
+    "email": "user3@gmail.com",
+    "date": "02/02/2022",
+    "description": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Illum ad sed, dolorum beatae asperiores corporis vero quam harum officia culpa delectus nulla pariatur possimus error quo voluptates provident. Molestiae, facilis. Nobis quam atque, culpa odit ad eaque quidem totam cumque. Obcaecati consectetur voluptate fugit aspernatur amet voluptatem harum consequatur minima!"
+  },
+  {
+    "id": 8,
+    "title": "Notification8",
+    "email": "user2@gmail.com",
+    "date": "02/02/2022",
+    "description": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Illum ad sed, dolorum beatae asperiores corporis vero quam harum officia culpa delectus nulla pariatur possimus error quo voluptates provident. Molestiae, facilis. Nobis quam atque, culpa odit ad eaque quidem totam cumque. Obcaecati consectetur voluptate fugit aspernatur amet voluptatem harum consequatur minima!"
+  }
+]

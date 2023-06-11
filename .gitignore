@@ -2,3 +2,4 @@ node_modules
 ENV
 .env
 my.js
+./frontend

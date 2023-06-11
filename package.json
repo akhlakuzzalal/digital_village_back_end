@@ -4,12 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "cross-env NODE_ENV=production node index.js",
+    "start": "node index.js",
     "start-dev": "cross-env NODE_ENV=development nodemon index.js",
-    "build:ui": "rm -rf build && cd ../digital_village_front-end/ && npm run build && cp -r build ../digital_village_back_end",
-    "deploy": "git push heroku akhlak_branch:main",
-    "deploy:full": "npm run build:ui && git add . && git commit -m uibuild && git push && npm run deploy",
-    "logs:prod": "heroku logs --tail",
+    "build:ui": "rm -rf build && cd ./frontend/ && npm run build && cp -r build ../",
     "test": "jest --runInBand --detectOpenHandles --force-exit"
   },
   "keywords": [],
@@ -28,7 +25,6 @@
     "multer": "^1.4.4",
     "nodemon": "^2.0.15",
     "shortid": "^2.2.16",
-    "socket.io": "^4.4.1",
     "stripe": "^8.204.0",
     "uuid": "^8.3.2"
   },
